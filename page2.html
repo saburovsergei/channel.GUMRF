@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина: Общие знания | channel.GUMRF</title>
+    <style>
+        /* Копируем все стили из index.html (секцию <style>) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .quiz-container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 10;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            backdrop-filter: blur(5px);
+            transition: background 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .quiz-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .quiz-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .quiz-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .quiz-content {
+            padding: 40px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+        }
+        
+        .question-number {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .question-text {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .answers-container {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .answer-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1.1em;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .answer-btn:hover:not(:disabled) {
+            background: #f0f0f0;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .answer-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .answer-btn.correct {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .answer-btn.wrong {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+        }
+        
+        .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .quiz-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .next-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .next-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .next-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .score-display {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .result-title {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .result-score {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+        
+        .result-message {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .restart-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 15px;
+        }
+        
+        .restart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .menu-btn {
+            padding: 15px 40px;
+            background: #f0f0f0;
+            color: #333;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .menu-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .quiz-header h1 {
+                font-size: 2em;
+            }
+            
+            .quiz-content {
+                padding: 20px;
+            }
+            
+            .question-text {
+                font-size: 1.2em;
+            }
+            
+            .answer-btn {
+                padding: 12px 15px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container" id="quizContainer">
+        <!-- Контент будет заполняться через JavaScript -->
+    </div>
+
+    <script>
+        // Вопросы для страницы 1 (Общие знания)
+        const quizData = [
+            {
+                question: "Сколько планет в Солнечной системе?",
+                options: ["7", "8", "9", "10"],
+                correct: 1
+            },
+            {
+                question: "Какой самый большой океан на Земле?",
+                options: ["Атлантический", "Индийский", "Северный Ледовитый", "Тихий"],
+                correct: 3
+            },
+            {
+                question: "Кто написал 'Евгений Онегин'?",
+                options: ["Лермонтов", "Пушкин", "Толстой", "Достоевский"],
+                correct: 1
+            },
+            {
+                question: "Сколько дней в високосном году?",
+                options: ["365", "366", "364", "367"],
+                correct: 1
+            },
+            {
+                question: "Какая самая высокая гора в мире?",
+                options: ["Эльбрус", "Монблан", "Эверест", "Килиманджаро"],
+                correct: 2
+            },
+            {
+                question: "Сколько цветов в радуге?",
+                options: ["5", "6", "7", "8"],
+                correct: 2
+            },
+            {
+                question: "Какая столица Франции?",
+                options: ["Лондон", "Берлин", "Париж", "Мадрид"],
+                correct: 2
+            },
+            {
+                question: "Кто изобрел электричество?",
+                options: ["Эдисон", "Тесла", "Франклин", "Вольт"],
+                correct: 2
+            },
+            {
+                question: "Сколько костей в теле человека?",
+                options: ["206", "215", "198", "220"],
+                correct: 0
+            },
+            {
+                question: "Какая самая маленькая страна в мире?",
+                options: ["Монако", "Сан-Марино", "Ватикан", "Люксембург"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+        let answered = false;
+
+        const quizContainer = document.getElementById('quizContainer');
+
+        function renderQuestion() {
+            const question = quizData[currentQuestion];
+            const progress = ((currentQuestion) / quizData.length) * 100;
+            
+            let html = `
+                <a href="index.html" class="back-btn">← На главную</a>
+                <div class="quiz-header">
+                    <h1>📚 Общие знания</h1>
+                    <p>Страница 1</p>
+                </div>
+                <div class="quiz-content">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${progress}%"></div>
+                    </div>
+                    <div class="question-container">
+                        <div class="question-number">Вопрос ${currentQuestion + 1} из ${quizData.length}</div>
+                        <div class="question-text">${question.question}</div>
+                    </div>
+                    <div class="answers-container" id="answersContainer">
+            `;
+            
+            question.options.forEach((option, index) => {
+                let buttonClass = 'answer-btn';
+                if (answered) {
+                    if (index === question.correct) {
+                        buttonClass += ' correct';
+                    } else if (index === selectedAnswer && selectedAnswer !== question.correct) {
+                        buttonClass += ' wrong';
+                    }
+                } else if (selectedAnswer === index) {
+                    buttonClass += ' selected';
+                }
+                
+                html += `<button class="${buttonClass}" onclick="selectAnswer(${index})" ${answered ? 'disabled' : ''}>${option}</button>`;
+            });
+            
+            html += `
+                    </div>
+                    <div class="quiz-footer">
+                        <div class="score-display">⭐ Счёт: ${score}</div>
+                        <button class="next-btn" onclick="nextQuestion()" ${!answered ? 'disabled' : ''}>${currentQuestion === quizData.length - 1 ? 'Завершить' : 'Следующий вопрос'}</button>
+                    </div>
+                </div>
+            `;
+            
+            quizContainer.innerHTML = html;
+        }
+
+        function selectAnswer(index) {
+            if (answered) return;
+            
+            selectedAnswer = index;
+            const question = quizData[currentQuestion];
+            
+            if (index === question.correct) {
+                score++;
+            }
+            
+            answered = true;
+            renderQuestion();
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                selectedAnswer = null;
+                answered = false;
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const percentage = (score / quizData.length) * 100;
+            let message = '';
+            
+            if (percentage === 100) {
+                message = 'Потрясающе! Вы настоящий эрудит! 🌟';
+            } else if (percentage >= 80) {
+                message = 'Отличный результат! Вы очень много знаете! 📚';
+            } else if (percentage >= 60) {
+                message = 'Хороший результат! Но есть куда расти! 💪';
+            } else if (percentage >= 40) {
+                message = 'Неплохо, но стоит подтянуть знания! 📖';
+            } else {
+                message = 'Ничего страшного! Попробуйте ещё раз! 😊';
+            }
+            
+            const html = `
+                <a href="index.html" class="back-btn">← На главную</a>
+                <div class="quiz-header">
+                    <h1>🏆 Общие знания</h1>
+                    <p>Страница 1</p>
+                </div>
+                <div class="result-container">
+                    <div class="result-title">Игра завершена!</div>
+                    <div class="result-score">Ваш результат: ${score} из ${quizData.length}</div>
+                    <div class="result-message">${message}</div>
+                    <button class="restart-btn" onclick="restartQuiz()">Начать заново</button>
+                    <a href="index.html" class="menu-btn">В меню</a>
+                </div>
+            `;
+            
+            quizContainer.innerHTML = html;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            selectedAnswer = null;
+            answered = false;
+            renderQuestion();
+        }
+
+        // Запускаем викторину
+        renderQuestion();
+    </script>
+</body>
+</html>
