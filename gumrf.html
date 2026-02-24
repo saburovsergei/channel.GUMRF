@@ -33,20 +33,9 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .header h1 {
-            color: #333;
-            font-size: 2em;
+        .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .header h1 span {
-            background: #9b59b6;
-            color: white;
-            font-size: 0.5em;
-            padding: 5px 15px;
-            border-radius: 30px;
         }
         
         .back-btn {
@@ -63,6 +52,30 @@
         .back-btn:hover {
             background: #764ba2;
             transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #9b59b6;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
         }
         
         .content {
@@ -158,9 +171,8 @@
                 text-align: center;
             }
             
-            .header h1 {
-                font-size: 1.5em;
-                flex-wrap: wrap;
+            .nav-left, .nav-right {
+                width: 100%;
                 justify-content: center;
             }
             
@@ -181,11 +193,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>
-                ⚓ ГУМРФ
-                <span>студентам</span>
-            </h1>
-            <a href="index.html" class="back-btn">← На главную</a>
+            <div class="nav-left">
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    ⚓ ГУМРФ <span>студентам</span>
+                </div>
+            </div>
         </div>
         
         <div class="content">
@@ -194,7 +209,7 @@
             <div class="materials-grid">
                 <!-- Карточка 1: ФОЭ -->
                 <div class="material-card">
-                    <div class="material-icon">🔌</div>
+                    <div class="material-icon">▶️</div>
                     <h3>ФОЭ</h3>
                     <p>Физические основы электроники: полупроводники, диоды, транзисторы, микросхемы. Теория и лабораторные работы.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
@@ -210,7 +225,7 @@
                 
                 <!-- Карточка 3: Силовая электроника -->
                 <div class="material-card">
-                    <div class="material-icon">⚙️</div>
+                    <div class="material-icon">🔲</div>
                     <h3>Силовая электроника</h3>
                     <p>Преобразователи, инверторы, выпрямители, тиристорные преобразователи. Схемы и принципы работы.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
