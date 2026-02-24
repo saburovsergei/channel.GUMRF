@@ -93,6 +93,9 @@
             border-radius: 15px;
             transition: all 0.3s ease;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .material-card:hover {
@@ -101,10 +104,16 @@
             box-shadow: 0 15px 30px rgba(231, 76, 60, 0.15);
         }
         
+        .material-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+        
         .material-card h3 {
             color: #333;
             margin-bottom: 15px;
             font-size: 1.4em;
+            font-weight: 600;
         }
         
         .material-card p {
@@ -112,21 +121,25 @@
             font-size: 0.95em;
             margin-bottom: 20px;
             line-height: 1.5;
+            flex-grow: 1;
         }
         
         .material-link {
             display: inline-block;
-            color: #e74c3c;
+            color: #27ae60;
             text-decoration: none;
             font-weight: 600;
-            padding: 8px 20px;
-            border: 2px solid #e74c3c;
+            padding: 10px 25px;
+            border: 2px solid #27ae60;
             border-radius: 30px;
             transition: all 0.3s ease;
+            align-self: center;
+            margin-top: auto;
+            background: white;
         }
         
         .material-link:hover {
-            background: #e74c3c;
+            background: #27ae60;
             color: white;
             text-decoration: none;
         }
@@ -169,7 +182,7 @@
             <div class="materials-grid">
                 <!-- Карточка 1: Физика -->
                 <div class="material-card">
-                    <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
+                    <div class="material-icon">⚡</div>
                     <h3>Физика</h3>
                     <p>Лабораторные работы, теория, задачи, подготовка к экспериментальным заданиям</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
@@ -177,7 +190,7 @@
                 
                 <!-- Карточка 2: Математика -->
                 <div class="material-card">
-                    <div style="font-size: 3em; margin-bottom: 10px;">📐</div>
+                    <div class="material-icon">📐</div>
                     <h3>Математика</h3>
                     <p>Алгебра, геометрия, теория вероятностей, разбор заданий 2-й части</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
@@ -185,17 +198,11 @@
                 
                 <!-- Карточка 3: Информатика -->
                 <div class="material-card">
-                    <div style="font-size: 3em; margin-bottom: 10px;">💻</div>
+                    <div class="material-icon">💻</div>
                     <h3>Информатика</h3>
                     <p>Программирование на Python, алгоритмы, задания по логике и работе с данными</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
-            </div>
-            
-            <div style="margin-top: 40px;">
-                <div class="section-title">📅 Расписание консультаций</div>
-                <p style="color: #666; margin-bottom: 15px;">Здесь будет таблица с расписанием из Google Таблиц</p>
-                <!-- Сюда можно вставить iframe с Google Таблицей -->
             </div>
         </div>
     </div>
