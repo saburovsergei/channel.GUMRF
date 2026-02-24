@@ -83,33 +83,35 @@
         
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
         }
         
         .material-card {
-            padding: 20px;
+            padding: 25px 20px;
             border: 2px solid #e0e0e0;
             border-radius: 15px;
             transition: all 0.3s ease;
+            text-align: center;
         }
         
         .material-card:hover {
             border-color: #e74c3c;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(231, 76, 60, 0.15);
         }
         
         .material-card h3 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-size: 1.4em;
         }
         
         .material-card p {
             color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            line-height: 1.5;
         }
         
         .material-link {
@@ -117,10 +119,16 @@
             color: #e74c3c;
             text-decoration: none;
             font-weight: 600;
+            padding: 8px 20px;
+            border: 2px solid #e74c3c;
+            border-radius: 30px;
+            transition: all 0.3s ease;
         }
         
         .material-link:hover {
-            text-decoration: underline;
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
         }
         
         @media (max-width: 600px) {
@@ -136,6 +144,11 @@
             
             .content {
                 padding: 20px;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
         }
     </style>
@@ -154,31 +167,27 @@
             <div class="section-title">📚 Учебные материалы</div>
             
             <div class="materials-grid">
-                <!-- Карточка 1: Математика -->
+                <!-- Карточка 1: Физика -->
                 <div class="material-card">
-                    <h3>📐 Математика</h3>
-                    <p>Демоверсии, спецификации, кодификаторы</p>
+                    <div style="font-size: 3em; margin-bottom: 10px;">⚡</div>
+                    <h3>Физика</h3>
+                    <p>Лабораторные работы, теория, задачи, подготовка к экспериментальным заданиям</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 2: Русский язык -->
+                <!-- Карточка 2: Математика -->
                 <div class="material-card">
-                    <h3>📝 Русский язык</h3>
-                    <p>Тесты, изложения, сочинения</p>
+                    <div style="font-size: 3em; margin-bottom: 10px;">📐</div>
+                    <h3>Математика</h3>
+                    <p>Алгебра, геометрия, теория вероятностей, разбор заданий 2-й части</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 3: Физика -->
+                <!-- Карточка 3: Информатика -->
                 <div class="material-card">
-                    <h3>⚡ Физика</h3>
-                    <p>Лабораторные работы, теория, задачи</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
-                
-                <!-- Карточка 4: Информатика -->
-                <div class="material-card">
-                    <h3>💻 Информатика</h3>
-                    <p>Программирование, алгоритмы, задания</p>
+                    <div style="font-size: 3em; margin-bottom: 10px;">💻</div>
+                    <h3>Информатика</h3>
+                    <p>Программирование на Python, алгоритмы, задания по логике и работе с данными</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
             </div>
