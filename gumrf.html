@@ -19,7 +19,7 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -83,33 +83,45 @@
         
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
         
         .material-card {
-            padding: 20px;
+            padding: 30px 25px;
             border: 2px solid #e0e0e0;
             border-radius: 15px;
             transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .material-card:hover {
             border-color: #9b59b6;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(155, 89, 182, 0.15);
+        }
+        
+        .material-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
         }
         
         .material-card h3 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: 600;
         }
         
         .material-card p {
             color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
         }
         
         .material-link {
@@ -117,10 +129,25 @@
             color: #9b59b6;
             text-decoration: none;
             font-weight: 600;
+            padding: 10px 25px;
+            border: 2px solid #9b59b6;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            align-self: center;
+            margin-top: auto;
         }
         
         .material-link:hover {
-            text-decoration: underline;
+            background: #9b59b6;
+            color: white;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
         }
         
         @media (max-width: 600px) {
@@ -132,10 +159,20 @@
             
             .header h1 {
                 font-size: 1.5em;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
             .content {
                 padding: 20px;
+            }
+            
+            .material-card {
+                padding: 25px 20px;
+            }
+            
+            .material-card h3 {
+                font-size: 1.3em;
             }
         }
     </style>
@@ -151,34 +188,38 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Учебные материалы</div>
+            <div class="section-title">📚 Электротехнические дисциплины</div>
             
             <div class="materials-grid">
-                <!-- Карточка 1: Судовождение -->
+                <!-- Карточка 1: ФОЭ -->
                 <div class="material-card">
-                    <h3>🧭 Судовождение</h3>
-                    <p>Лекции, пособия, навигационные карты</p>
+                    <div class="material-icon">🔌</div>
+                    <h3>ФОЭ</h3>
+                    <p>Физические основы электроники: полупроводники, диоды, транзисторы, микросхемы. Теория и лабораторные работы.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 2: Механика -->
+                <!-- Карточка 2: ТОЭ (3 часть) -->
                 <div class="material-card">
-                    <h3>⚙️ Судовые механизмы</h3>
-                    <p>Чертежи, расчеты, инструкции</p>
+                    <div class="material-icon">⚡</div>
+                    <h3>ТОЭ (3 часть)</h3>
+                    <p>Теоретические основы электротехники: трехфазные цепи, нелинейные цепи, переходные процессы. Расчеты и примеры.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 3: Электрооборудование -->
+                <!-- Карточка 3: Силовая электроника -->
                 <div class="material-card">
-                    <h3>⚡ Электрооборудование</h3>
-                    <p>Схемы, теория, практические работы</p>
+                    <div class="material-icon">⚙️</div>
+                    <h3>Силовая электроника</h3>
+                    <p>Преобразователи, инверторы, выпрямители, тиристорные преобразователи. Схемы и принципы работы.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 4: Безопасность -->
+                <!-- Карточка 4: Электроснабжение и электробезопасность -->
                 <div class="material-card">
-                    <h3>🛟 Безопасность на море</h3>
-                    <p>Регламенты, инструктажи, проверки</p>
+                    <div class="material-icon">🛟</div>
+                    <h3>Электроснабжение и электробезопасность<br>объектов водного транспорта</h3>
+                    <p>Судовые электростанции, распределительные сети, защита, правила безопасности на судах.</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
             </div>
