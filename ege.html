@@ -83,44 +83,65 @@
         
         .materials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
         }
         
         .material-card {
-            padding: 20px;
+            padding: 30px 25px;
             border: 2px solid #e0e0e0;
             border-radius: 15px;
             transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .material-card:hover {
             border-color: #3498db;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15);
+        }
+        
+        .material-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
         }
         
         .material-card h3 {
             color: #333;
-            margin-bottom: 10px;
-            font-size: 1.2em;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: 600;
         }
         
         .material-card p {
             color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
         }
         
         .material-link {
             display: inline-block;
-            color: #3498db;
+            color: #27ae60;
             text-decoration: none;
             font-weight: 600;
+            padding: 10px 25px;
+            border: 2px solid #27ae60;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            align-self: center;
+            margin-top: auto;
+            background: white;
         }
         
         .material-link:hover {
-            text-decoration: underline;
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
         }
         
         @media (max-width: 600px) {
@@ -136,6 +157,11 @@
             
             .content {
                 padding: 20px;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
         }
     </style>
@@ -156,37 +182,35 @@
             <div class="materials-grid">
                 <!-- Карточка 1: Профильная математика -->
                 <div class="material-card">
-                    <h3>📐 Математика (профиль)</h3>
-                    <p>Задания 2-й части, теория, варианты</p>
+                    <div class="material-icon">📐</div>
+                    <h3>Математика (профиль)</h3>
+                    <p>Задания 2-й части, теория, варианты, разбор сложных задач</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
                 <!-- Карточка 2: Базовая математика -->
                 <div class="material-card">
-                    <h3>🧮 Математика (база)</h3>
-                    <p>Тренировочные варианты, разборы</p>
+                    <div class="material-icon">🧮</div>
+                    <h3>Математика (база)</h3>
+                    <p>Тренировочные варианты, разборы, теория вероятностей</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
                 <!-- Карточка 3: Физика -->
                 <div class="material-card">
-                    <h3>⚡ Физика</h3>
-                    <p>Сложные задачи, теория, формулы</p>
+                    <div class="material-icon">⚡</div>
+                    <h3>Физика</h3>
+                    <p>Сложные задачи, теория, формулы, подготовка к олимпиадам</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
                 
                 <!-- Карточка 4: Информатика -->
                 <div class="material-card">
-                    <h3>💻 Информатика</h3>
-                    <p>Задания 25-27, алгоритмы, Python</p>
+                    <div class="material-icon">💻</div>
+                    <h3>Информатика</h3>
+                    <p>Задания 25-27, алгоритмы, программирование на Python</p>
                     <a href="#" class="material-link">Открыть материалы →</a>
                 </div>
-            </div>
-            
-            <div style="margin-top: 40px;">
-                <div class="section-title">📅 Расписание консультаций</div>
-                <p style="color: #666; margin-bottom: 15px;">Здесь будет таблица с расписанием из Google Таблиц</p>
-                <!-- Сюда можно вставить iframe с Google Таблицей -->
             </div>
         </div>
     </div>
