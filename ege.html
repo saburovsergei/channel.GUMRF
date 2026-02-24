@@ -33,20 +33,9 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .header h1 {
-            color: #333;
-            font-size: 2em;
+        .nav-left {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-        
-        .header h1 span {
-            background: #3498db;
-            color: white;
-            font-size: 0.5em;
-            padding: 5px 15px;
-            border-radius: 30px;
         }
         
         .back-btn {
@@ -63,6 +52,30 @@
         .back-btn:hover {
             background: #764ba2;
             transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #3498db;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
         }
         
         .content {
@@ -151,8 +164,9 @@
                 text-align: center;
             }
             
-            .header h1 {
-                font-size: 1.5em;
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
             }
             
             .content {
@@ -169,11 +183,14 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>
-                📗 ЕГЭ
-                <span>11 класс</span>
-            </h1>
-            <a href="index.html" class="back-btn">← На главную</a>
+            <div class="nav-left">
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    📗 ЕГЭ <span>11 класс</span>
+                </div>
+            </div>
         </div>
         
         <div class="content">
