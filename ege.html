@@ -1,1 +1,194 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ | Сайт преподавателя</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .header h1 span {
+            background: #3498db;
+            color: white;
+            font-size: 0.5em;
+            padding: 5px 15px;
+            border-radius: 30px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+            min-height: 500px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .material-card {
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .material-card:hover {
+            border-color: #3498db;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.1);
+        }
+        
+        .material-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .material-card p {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .material-link {
+            display: inline-block;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .material-link:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                📗 ЕГЭ
+                <span>11 класс</span>
+            </h1>
+            <a href="index.html" class="back-btn">← На главную</a>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Учебные материалы</div>
+            
+            <div class="materials-grid">
+                <!-- Карточка 1: Профильная математика -->
+                <div class="material-card">
+                    <h3>📐 Математика (профиль)</h3>
+                    <p>Задания 2-й части, теория, варианты</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 2: Базовая математика -->
+                <div class="material-card">
+                    <h3>🧮 Математика (база)</h3>
+                    <p>Тренировочные варианты, разборы</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 3: Физика -->
+                <div class="material-card">
+                    <h3>⚡ Физика</h3>
+                    <p>Сложные задачи, теория, формулы</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 4: Информатика -->
+                <div class="material-card">
+                    <h3>💻 Информатика</h3>
+                    <p>Задания 25-27, алгоритмы, Python</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <div class="section-title">📅 Расписание консультаций</div>
+                <p style="color: #666; margin-bottom: 15px;">Здесь будет таблица с расписанием из Google Таблиц</p>
+                <!-- Сюда можно вставить iframe с Google Таблицей -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>
