@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Программирование | Сайт преподавателя</title>
+    <style>
+        /* --- Стили полностью скопированы из gumrf.html --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #f39c12; /* Немного изменил цвет под тематику */
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+            min-height: 500px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f39c12; /* Цвет под тематику */
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .material-card {
+            padding: 30px 25px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .material-card:hover {
+            border-color: #f39c12; /* Цвет под тематику */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(243, 156, 18, 0.15);
+        }
+        
+        .material-icon {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+        }
+        
+        .material-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        
+        .material-card p {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .material-link {
+            display: inline-block;
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 25px;
+            border: 2px solid #27ae60;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            align-self: center;
+            margin-top: auto;
+            background: white;
+        }
+        
+        .material-link:hover {
+            background: #27ae60;
+            color: white;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .material-card {
+                padding: 25px 20px;
+            }
+            
+            .material-card h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="index.html" class="back-btn">← На главную</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    💻 Программирование <span>языки</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Языки программирования и материалы</div>
+            
+            <div class="materials-grid">
+                <!-- Карточка 1: ST (Structured Text) -->
+                <div class="material-card">
+                    <div class="material-icon">🏭</div>
+                    <h3>ST (Structured Text)</h3>
+                    <p>Язык программирования промышленных контроллеров (ПЛК) по стандарту МЭК 61131-3. Синтаксис, алгоритмы, примеры для задач автоматизации.</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 2: Python -->
+                <div class="material-card">
+                    <div class="material-icon">🐍</div>
+                    <h3>Python</h3>
+                    <p>Основы синтаксиса, структуры данных, функции, ООП. Решение задач, работа с библиотеками, примеры для анализа данных и автоматизации.</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 3: C (Си) -->
+                <div class="material-card">
+                    <div class="material-icon">⚙️</div>
+                    <h3>C (Си)</h3>
+                    <p>Процедурное программирование, указатели, работа с памятью. Основы для микроконтроллеров, системного программирования и драйверов.</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+                
+                <!-- Карточка 4: C# -->
+                <div class="material-card">
+                    <div class="material-icon">🎯</div>
+                    <h3>C# (Си Шарп)</h3>
+                    <p>Объектно-ориентированное программирование, .NET, Windows Forms, WPF. Примеры создания приложений, включая учебные и инженерные.</p>
+                    <a href="#" class="material-link">Открыть материалы →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
