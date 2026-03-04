@@ -1,1 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика ОГЭ | Теория</title>
+    <style>
+        /* Копируем стили из oge_math_theory.html, меняем цвета на #f39c12 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #f39c12;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f39c12;
+        }
+        
+        .pdf-container {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .theory-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .theory-btn {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #f39c12;
+            border-radius: 50px;
+            color: #f39c12;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theory-btn:hover {
+            background: #f39c12;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .theory-btn.active {
+            background: #f39c12;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .pdf-container {
+                height: 500px;
+            }
+            
+            .theory-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .theory-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="oge_informatics.html" class="back-btn">← Назад к разделам</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    Информатика 📖 <span>теория</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Теоретические материалы по информатике</div>
+            
+            <div class="pdf-container">
+                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
+            </div>
+            
+            <div class="theory-buttons">
+                <button class="theory-btn active" onclick="loadPDF('theory1')">Основы информатики</button>
+                <button class="theory-btn" onclick="loadPDF('theory2')">Алгоритмы</button>
+                <button class="theory-btn" onclick="loadPDF('theory3')">Программирование</button>
+                <button class="theory-btn" onclick="loadPDF('theory4')">Кодирование</button>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ PDF ФАЙЛОВ С ТЕОРИЕЙ !!!
+        const theoryFiles = {
+            theory1: { id: 'ID_ФАЙЛА_ОСНОВЫ', name: 'Основы информатики' },
+            theory2: { id: 'ID_ФАЙЛА_АЛГОРИТМЫ', name: 'Алгоритмы' },
+            theory3: { id: 'ID_ФАЙЛА_ПРОГРАММИРОВАНИЕ', name: 'Программирование' },
+            theory4: { id: 'ID_ФАЙЛА_КОДИРОВАНИЕ', name: 'Кодирование' }
+        };
+        
+        function loadPDF(topic) {
+            const fileId = theoryFiles[topic].id;
+            const viewer = document.getElementById('pdfViewer');
+            
+            if (fileId && !fileId.startsWith('ID_')) {
+                viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            } else {
+                alert(`Файл "${theoryFiles[topic].name}" еще не добавлен.`);
+                return;
+            }
+            
+            document.querySelectorAll('.theory-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        window.onload = function() {
+            if (theoryFiles.theory1.id !== 'ID_ФАЙЛА_ОСНОВЫ') {
+                loadPDF('theory1');
+            }
+        };
+    </script>
+</body>
+</html>
