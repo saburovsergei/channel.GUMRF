@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ГУМРФ | Сайт преподавателя</title>
+    <title>ГУМРФ | Учебные материалы</title>
     <style>
         * {
             margin: 0;
@@ -71,7 +71,7 @@
         }
         
         .page-title span {
-            background: #9b59b6;
+            background: #9b59b6; /* Фиолетовый для ГУМРФ */
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -89,18 +89,18 @@
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #9b59b6;
+            border-bottom: 3px solid #9b59b6; /* Фиолетовый */
         }
         
-        .materials-grid {
+        .disciplines-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
         
-        .material-card {
+        .discipline-card {
             padding: 30px 25px;
             border: 2px solid #e0e0e0;
             border-radius: 15px;
@@ -109,40 +109,41 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            text-decoration: none;
+            color: inherit;
         }
         
-        .material-card:hover {
-            border-color: #9b59b6;
+        .discipline-card:hover {
+            border-color: #9b59b6; /* Фиолетовый */
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(155, 89, 182, 0.15);
         }
         
-        .material-icon {
+        .card-icon {
             font-size: 3.5em;
             margin-bottom: 15px;
         }
         
-        .material-card h3 {
+        .discipline-card h3 {
             color: #333;
             margin-bottom: 15px;
             font-size: 1.5em;
             font-weight: 600;
         }
         
-        .material-card p {
+        .discipline-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.6;
             flex-grow: 1;
         }
         
-        .material-link {
+        .card-link {
             display: inline-block;
             color: #27ae60;
-            text-decoration: none;
             font-weight: 600;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border: 2px solid #27ae60;
             border-radius: 30px;
             transition: all 0.3s ease;
@@ -151,14 +152,13 @@
             background: white;
         }
         
-        .material-link:hover {
+        .discipline-card:hover .card-link {
             background: #27ae60;
             color: white;
-            text-decoration: none;
         }
         
         @media (max-width: 768px) {
-            .materials-grid {
+            .disciplines-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -180,11 +180,11 @@
                 padding: 20px;
             }
             
-            .material-card {
+            .discipline-card {
                 padding: 25px 20px;
             }
             
-            .material-card h3 {
+            .discipline-card h3 {
                 font-size: 1.3em;
             }
         }
@@ -198,7 +198,7 @@
             </div>
             <div class="nav-right">
                 <div class="page-title">
-                    ⚓ ГУМРФ <span>студентам</span>
+                    ⚓ ГУМРФ <span>дисциплины</span>
                 </div>
             </div>
         </div>
@@ -206,46 +206,46 @@
         <div class="content">
             <div class="section-title">📚 Электротехнические дисциплины</div>
             
-            <div class="materials-grid">
-                <!-- Карточка 1: ФОЭ -->
-                <div class="material-card">
-                    <div class="material-icon">💡</div>
+            <div class="disciplines-grid">
+                <!-- Карточка ФОЭ -->
+                <a href="gumrf_foe.html" class="discipline-card">
+                    <div class="card-icon">💡</div>
                     <h3>ФОЭ</h3>
                     <p>Физические основы электроники: полупроводники, диоды, транзисторы, микросхемы. Теория и лабораторные работы.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                    <span class="card-link">Перейти к материалам →</span>
+                </a>
                 
-                <!-- Карточка 2: ТОЭ (3 часть) -->
-                <div class="material-card">
-                    <div class="material-icon">📈🧲</div>
+                <!-- Карточка ТОЭ -->
+                <a href="gumrf_Toe.html" class="discipline-card">
+                    <div class="card-icon">📈🧲</div>
                     <h3>ТОЭ (3 часть)</h3>
                     <p>Теоретические основы электротехники: переходные процессы, электрические и магнитные поля. Теория и лабораторные работы.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                    <span class="card-link">Перейти к материалам →</span>
+                </a>
                 
-                <!-- Карточка 3: Силовая электроника -->
-                <div class="material-card">
-                    <div class="material-icon">⚡</div>
+                <!-- Карточка Силовая электроника -->
+                <a href="gumrf_SilEl.html" class="discipline-card">
+                    <div class="card-icon">⚡</div>
                     <h3>Силовая электроника</h3>
                     <p>Преобразователи, инверторы, выпрямители, тиристорные преобразователи. Теория и лабораторные работы.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                    <span class="card-link">Перейти к материалам →</span>
+                </a>
                 
-                <!-- Карточка 4: Электроснабжение и электробезопасность -->
-                <div class="material-card">
-                    <div class="material-icon">🏭</div>
-                    <h3>Электроснабжение и электробезопасность<br>объектов водного транспорта</h3>
+                <!-- Карточка Электроснабжение -->
+                <a href="gumrf_EISn.html" class="discipline-card">
+                    <div class="card-icon">🏭</div>
+                    <h3>Электроснабжение и электробезопасность объектов водного транспорта</h3>
                     <p>Судовые электростанции, распределительные сети, защита, правила безопасности на судах. Теория и лабораторные работы.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
-
-                <!-- Новая карточка 5: Программирование -->
-                <div class="material-card">
-                    <div class="material-icon">💻</div>
-                    <h3>Примеры расчетных и лабораторных работ</h3>
-                    <p>Основы алгоритмизации и программирования на MATLAB SIMULINK. Решение задач, примеры кода, учебные проекты.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                    <span class="card-link">Перейти к материалам →</span>
+                </a>
+                
+                <!-- Карточка МАТЛАБ (вместо математической логики) -->
+                <a href="gumrf_ML.html" class="discipline-card">
+                    <div class="card-icon">📊</div>
+                    <h3>МАТЛАБ</h3>
+                    <p>Основы алгоритмизации и программирования в MATLAB/SIMULINK. Решение задач, примеры кода, учебные проекты.</p>
+                    <span class="card-link">Перейти к материалам →</span>
+                </a>
             </div>
         </div>
     </div>
