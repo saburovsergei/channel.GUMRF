@@ -1,1 +1,218 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МАТЛАБ | ГУМРФ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #9b59b6; /* Фиолетовый для ГУМРФ */
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #9b59b6;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .nav-cards {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .nav-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 50px 30px;
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-10px);
+            border-color: #9b59b6;
+            box-shadow: 0 20px 40px rgba(155, 89, 182, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 5em;
+        }
+        
+        .card-title {
+            font-size: 2em;
+            font-weight: 600;
+            color: #9b59b6;
+        }
+        
+        .card-desc {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-cards {
+                gap: 20px;
+            }
+            
+            .nav-card {
+                min-width: 200px;
+                padding: 30px 20px;
+            }
+            
+            .card-icon {
+                font-size: 4em;
+            }
+            
+            .card-title {
+                font-size: 1.6em;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="gumrf.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    📊 МАТЛАБ <span>ГУМРФ</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Выберите раздел</div>
+            
+            <div class="nav-cards">
+                <!-- Карточка ТЕОРИЯ -->
+                <a href="gumrf_ML_theory.html" class="nav-card">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">ТЕОРИЯ</div>
+                    <div class="card-desc">Основы MATLAB,<br>синтаксис, функции</div>
+                </a>
+                
+                <!-- Карточка ПРАКТИКА -->
+                <a href="gumrf_ML_practice.html" class="nav-card">
+                    <div class="card-icon">💻</div>
+                    <div class="card-title">ПРАКТИКА</div>
+                    <div class="card-desc">Примеры кода,<br>лабораторные работы</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
