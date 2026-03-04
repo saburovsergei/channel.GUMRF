@@ -27,5 +27,5 @@
 Тема 27|ID_ТЕМЫ_27
 Тема 28|ID_ТЕМЫ_28
 Тема 29|ID_ТЕМЫ_29
-Тема 30|ID_ТЕМЫ_30
+Тема Второй закон Ньютона|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
 Тема Третий закон Ньютона|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
