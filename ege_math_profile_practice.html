@@ -1,1 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Математика (профиль) ЕГЭ | Практика</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 6px 16px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .page-title span {
+            background: #3498db; /* Синий для ЕГЭ */
+            color: white;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 20px 15px;
+            margin-top: 2px;
+        }
+        
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .example-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .example-header {
+            padding: 15px 15px 10px 15px;
+            background: white;
+        }
+        
+        .example-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            padding-left: 5px;
+            word-break: break-word;
+        }
+        
+        .example-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 5px;
+            background: white;
+            border: 2px solid #3498db; /* Синий для заданий */
+            border-radius: 50px;
+            color: #3498db;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            width: 100%;
+        }
+        
+        .action-btn.solution {
+            border-color: #27ae60; /* Зеленый для решений */
+            color: #27ae60;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .action-btn.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .action-btn.solution.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-triangle {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .action-btn.active .btn-triangle {
+            transform: rotate(90deg);
+        }
+        
+        .pdf-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+        
+        .pdf-container.open {
+            max-height: 85vh;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .pdf-wrapper {
+            width: 100%;
+            height: 85vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            background: #f0f0f0;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .refresh-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            
+            .pdf-container.open {
+                max-height: 80vh;
+            }
+            
+            .pdf-wrapper {
+                height: 80vh;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .example-name {
+                font-size: 1.1em;
+            }
+            
+            .action-btn {
+                font-size: 0.85em;
+                padding: 10px 3px;
+                gap: 5px;
+            }
+            
+            .btn-triangle {
+                font-size: 1em;
+            }
+            
+            .refresh-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="ege_math_profile.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    Математика (профиль) 📐 <span>практика</span>
+                </div>
+                <button class="refresh-btn" onclick="forceReloadExamples()">
+                    <span>🔄</span> Обновить
+                </button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div id="examples-list-container" class="examples-list">
+                <div class="loading">Загрузка примеров...</div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        let currentOpenContainer = null;
+        let currentActiveButton = null;
+        let currentExampleKey = null;
+        let currentFileKey = null;
+        let currentCacheBuster = Date.now();
+        
+        async function loadExamples() {
+            try {
+                const url = `ege_math_profile_practice_themes.txt?t=${currentCacheBuster}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить файл с примерами');
+                }
+                
+                const text = await response.text();
+                console.log('Загруженные данные практики:', text);
+                
+                const lines = text.trim().split('\n');
+                
+                const examplesData = {};
+                const container = document.getElementById('examples-list-container');
+                container.innerHTML = '';
+                
+                let hasValidLines = false;
+                
+                lines.forEach((line, index) => {
+                    if (!line.trim()) return;
+                    
+                    const [name, taskId, solutionId] = line.split('|');
+                    if (name && taskId && solutionId) {
+                        hasValidLines = true;
+                        const exampleKey = `example${index + 1}`;
+                        
+                        examplesData[`${exampleKey}_task`] = { 
+                            id: taskId.trim(), 
+                            name: `Задание ${name.trim()}`,
+                            exampleKey: exampleKey,
+                            displayName: name.trim()
+                        };
+                        examplesData[`${exampleKey}_solution`] = { 
+                            id: solutionId.trim(), 
+                            name: `Решение ${name.trim()}`,
+                            exampleKey: exampleKey,
+                            displayName: name.trim()
+                        };
+                        
+                        const exampleElement = createExampleElement(
+                            exampleKey, 
+                            name.trim(),
+                            taskId.trim(),
+                            solutionId.trim()
+                        );
+                        container.appendChild(exampleElement);
+                        
+                        console.log(`Добавлен пример: ${name.trim()}`);
+                    }
+                });
+                
+                window.examplesData = examplesData;
+                
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Файл с примерами пуст или имеет неверный формат</div>';
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки примеров:', error);
+                const container = document.getElementById('examples-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки примеров. Проверьте файл ege_math_profile_practice_themes.txt<br>${error.message}</div>`;
+            }
+        }
+        
+        function forceReloadExamples() {
+            currentCacheBuster = Date.now();
+            loadExamples();
+            
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        function createExampleElement(exampleKey, exampleName, taskId, solutionId) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'example-item';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'example-header';
+            
+            headerDiv.innerHTML = `
+                <div class="example-name">${exampleName}</div>
+                <div class="example-buttons">
+                    <button class="action-btn" onclick="togglePDF('${exampleKey}', 'task', this)">
+                        <span class="btn-triangle">▶</span> Задание
+                    </button>
+                    <button class="action-btn solution" onclick="togglePDF('${exampleKey}', 'solution', this)">
+                        <span class="btn-triangle">▶</span> Решение
+                    </button>
+                </div>
+            `;
+            
+            // ЕДИНСТВЕННЫЙ контейнер для PDF на весь пример
+            const pdfContainer = document.createElement('div');
+            pdfContainer.className = 'pdf-container';
+            pdfContainer.id = `pdf-${exampleKey}`;
+            
+            const pdfWrapper = document.createElement('div');
+            pdfWrapper.className = 'pdf-wrapper';
+            
+            const pdfViewer = document.createElement('iframe');
+            pdfViewer.className = 'pdf-viewer';
+            pdfViewer.id = `viewer-${exampleKey}`;
+            pdfViewer.src = '';
+            pdfViewer.setAttribute('seamless', 'seamless');
+            pdfViewer.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
+            
+            pdfWrapper.appendChild(pdfViewer);
+            pdfContainer.appendChild(pdfWrapper);
+            
+            itemDiv.appendChild(headerDiv);
+            itemDiv.appendChild(pdfContainer);
+            
+            return itemDiv;
+        }
+        
+        function togglePDF(exampleKey, type, button) {
+            const fileKey = `${exampleKey}_${type}`;
+            const fileData = window.examplesData[fileKey];
+            
+            if (!fileData) {
+                alert(`Данные не найдены`);
+                return;
+            }
+            
+            if (!fileData.id || fileData.id.startsWith('ID_')) {
+                alert(`Файл "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле ege_math_profile_practice_themes.txt`);
+                return;
+            }
+            
+            const container = document.getElementById(`pdf-${exampleKey}`);
+            const viewer = document.getElementById(`viewer-${exampleKey}`);
+            
+            // Если кликнули на ту же кнопку (тот же файл того же примера)
+            if (currentActiveButton === button && currentFileKey === fileKey) {
+                // Закрываем
+                container.classList.remove('open');
+                button.classList.remove('active');
+                currentActiveButton = null;
+                currentOpenContainer = null;
+                currentExampleKey = null;
+                currentFileKey = null;
+                return;
+            }
+            
+            // Если открыт другой пример
+            if (currentOpenContainer && currentExampleKey !== exampleKey) {
+                // Закрываем старый контейнер
+                currentOpenContainer.classList.remove('open');
+                if (currentActiveButton) {
+                    currentActiveButton.classList.remove('active');
+                }
+            }
+            
+            // Загружаем PDF (даже если это тот же пример, но другой тип)
+            viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview?rm=minimal&embedded=true`;
+            
+            // Открываем контейнер
+            container.classList.add('open');
+            
+            // Убираем активный класс с предыдущей кнопки
+            if (currentActiveButton && currentActiveButton !== button) {
+                currentActiveButton.classList.remove('active');
+            }
+            
+            // Добавляем активный класс на текущую кнопку
+            button.classList.add('active');
+            
+            currentOpenContainer = container;
+            currentActiveButton = button;
+            currentExampleKey = exampleKey;
+            currentFileKey = fileKey;
+            
+            // Плавно прокручиваем
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadExamples);
+        
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                forceReloadExamples();
+            }
+        });
+    </script>
+</body>
+</html>
