@@ -78,77 +78,88 @@
             border-radius: 0 0 20px 20px;
             padding: 30px;
             margin-top: 2px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 25px;
+            margin-bottom: 40px;
             padding-bottom: 10px;
             border-bottom: 3px solid #e74c3c;
-        }
-        
-        .pdf-container {
-            width: 100%;
-            height: 800px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        .pdf-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Максимально простые кнопки для примеров */
-        .examples {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        
-        .example-btn {
-            padding: 15px 40px;
-            background: white;
-            border: 2px solid #e74c3c;
-            border-radius: 50px;
-            color: #e74c3c;
-            font-size: 1.3em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
             text-align: center;
+            width: 100%;
         }
         
-        .example-btn:hover {
-            background: #e74c3c;
-            color: white;
-            transform: translateY(-2px);
+        .nav-cards {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            width: 100%;
         }
         
-        .example-btn.active {
-            background: #e74c3c;
-            color: white;
+        .nav-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 50px 30px;
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-10px);
+            border-color: #e74c3c;
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 5em;
+        }
+        
+        .card-title {
+            font-size: 2em;
+            font-weight: 600;
+            color: #e74c3c;
+        }
+        
+        .card-desc {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.5;
         }
         
         @media (max-width: 768px) {
-            .pdf-container {
-                height: 500px;
+            .nav-cards {
+                gap: 20px;
             }
             
-            .examples {
-                flex-direction: column;
-                align-items: center;
+            .nav-card {
+                min-width: 200px;
+                padding: 30px 20px;
             }
             
-            .example-btn {
-                width: 100%;
-                max-width: 300px;
+            .card-icon {
+                font-size: 4em;
+            }
+            
+            .card-title {
+                font-size: 1.6em;
             }
         }
     </style>
@@ -167,60 +178,24 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Физика - тренировочные работы</div>
+            <div class="section-title">📚 Выберите раздел</div>
             
-            <!-- Контейнер для предпросмотра PDF -->
-            <div class="pdf-container">
-                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
-            </div>
-            
-            <!-- Максимально простые кнопки: Пример A, Пример B, Пример C -->
-            <div class="examples">
-                <button class="example-btn active" onclick="loadFile('file1')" id="btn1">Пример A</button>
-                <button class="example-btn" onclick="loadFile('file2')" id="btn2">Пример B</button>
-                <button class="example-btn" onclick="loadFile('file3')" id="btn3">Пример C</button>
+            <div class="nav-cards">
+                <!-- Карточка ТЕОРИЯ -->
+                <a href="oge_physics_theory.html" class="nav-card">
+                    <div class="card-icon">📖</div>
+                    <div class="card-title">ТЕОРИЯ</div>
+                    <div class="card-desc">Лекции, формулы,<br>законы и определения</div>
+                </a>
+                
+                <!-- Карточка ПРАКТИКА -->
+                <a href="oge_physics_practice.html" class="nav-card">
+                    <div class="card-icon">🔬</div>
+                    <div class="card-title">ПРАКТИКА</div>
+                    <div class="card-desc">Задачи, тесты,<br>лабораторные работы</div>
+                </a>
             </div>
         </div>
     </div>
-
-    <script>
-        // ID ваших файлов с Google Drive
-        const files = {
-            file1: {
-                id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv',  // Пример A
-                name: 'Пример A'
-            },
-            file2: {
-                id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs',  // Пример B
-                name: 'Пример B'
-            },
-            file3: {
-                id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J',  // Пример C
-                name: 'Пример C'
-            }
-        };
-        
-        let currentFile = 'file1';
-        
-        function loadFile(fileKey) {
-            currentFile = fileKey;
-            const fileId = files[fileKey].id;
-            const viewer = document.getElementById('pdfViewer');
-            
-            // Ссылка для встраивания
-            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            
-            // Подсвечиваем активную кнопку
-            document.querySelectorAll('.example-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(`btn${fileKey.slice(-1)}`).classList.add('active');
-        }
-        
-        // Загружаем первый пример при открытии страницы
-        window.onload = function() {
-            loadFile('file1');
-        };
-    </script>
 </body>
 </html>
