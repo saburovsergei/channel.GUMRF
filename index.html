@@ -163,67 +163,30 @@
             margin-bottom: 20px;
         }
         
-        /* Блок с контактами */
+        /* Блок с контактами (упрощенный) */
         .contact-section {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 20px;
-            padding: 30px;
+            text-align: center;
             margin: 30px 0 20px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 15px;
-        }
-        
-        .contact-info p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 5px;
-        }
-        
-        .contact-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            padding: 20px;
         }
         
         .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
+            display: inline-block;
+            padding: 15px 40px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 1.2em;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
         }
         
         .contact-link:hover {
             background: #764ba2;
             transform: translateY(-2px);
-        }
-        
-        .contact-link.discuss {
-            background: #27ae60;
-        }
-        
-        .contact-link.discuss:hover {
-            background: #219a52;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
         }
         
         .footer {
@@ -291,13 +254,11 @@
                 font-size: 1.1em;
             }
             
-            .contact-section {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .contact-links {
-                justify-content: center;
+            .contact-link {
+                padding: 12px 30px;
+                font-size: 1.1em;
+                width: 100%;
+                max-width: 300px;
             }
         }
         
@@ -361,21 +322,9 @@
                 </div>
             </div>
             
-            <!-- Блок контактов -->
+            <!-- Только ссылка на контакты -->
             <div class="contact-section">
-                <div class="contact-info">
-                    <h3>📞 Контакты и обсуждение</h3>
-                    <p>Вопросы, предложения, обсуждение решений задач</p>
-                </div>
-                
-                <div class="contact-links">
-                    <a href="#" class="contact-link">
-                        <span>📧</span> Написать нам
-                    </a>
-                    <a href="#" class="contact-link discuss">
-                        <span>💬</span> Обсуждение решений
-                    </a>
-                </div>
+                <a href="#" class="contact-link">📞 Контакты и обсуждение</a>
             </div>
             
             <!-- Футер -->
