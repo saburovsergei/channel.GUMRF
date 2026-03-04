@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Математика ОГЭ | Теория</title>
     <style>
         * {
@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
@@ -26,7 +26,7 @@
         .header {
             background: white;
             border-radius: 20px 20px 0 0;
-            padding: 25px 30px;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,113 +40,212 @@
         
         .back-btn {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 0.9em;
             transition: all 0.3s ease;
         }
         
         .back-btn:hover {
             background: #764ba2;
-            transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
         
         .page-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 50px;
             color: #333;
             font-weight: 600;
+            font-size: 0.95em;
         }
         
         .page-title span {
             background: #3498db;
             color: white;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
         }
         
         .content {
             background: white;
             border-radius: 0 0 20px 20px;
-            padding: 30px;
+            padding: 20px 15px;
             margin-top: 2px;
         }
         
-        .section-title {
-            font-size: 1.5em;
+        .theory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .theory-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .theory-header {
+            padding: 12px 15px;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .theory-header:hover {
+            background: #f0f7ff;
+        }
+        
+        .expand-icon {
+            font-size: 1.2em;
+            color: #3498db;
+            transition: transform 0.3s ease;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .theory-name {
+            flex: 1;
+            font-size: 1.1em;
+            font-weight: 500;
             color: #333;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #3498db;
+        }
+        
+        .theory-header.active .expand-icon {
+            transform: rotate(90deg);
         }
         
         .pdf-container {
-            width: 100%;
-            height: 800px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            max-height: 0;
             overflow: hidden;
-            margin-bottom: 30px;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+        
+        .pdf-container.open {
+            max-height: 85vh;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .pdf-wrapper {
+            width: 100%;
+            height: 85vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            background: #f0f0f0;
         }
         
         .pdf-viewer {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         
-        .theory-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-        
-        .theory-btn {
-            padding: 15px 30px;
-            background: white;
-            border: 2px solid #3498db;
-            border-radius: 50px;
-            color: #3498db;
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
             font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
         
-        .theory-btn:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .theory-btn.active {
-            background: #3498db;
-            color: white;
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
         }
         
         @media (max-width: 768px) {
-            .pdf-container {
-                height: 500px;
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
             }
             
-            .theory-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .theory-btn {
+            .nav-right {
                 width: 100%;
-                max-width: 300px;
+                justify-content: space-between;
+            }
+            
+            .refresh-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            
+            .pdf-container.open {
+                max-height: 80vh;
+            }
+            
+            .pdf-wrapper {
+                height: 80vh;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .theory-name {
+                font-size: 1em;
+            }
+            
+            .theory-header {
+                padding: 10px 12px;
+            }
+            
+            .refresh-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
+            }
+            
+            .expand-icon {
+                font-size: 1em;
             }
         }
     </style>
@@ -155,82 +254,186 @@
     <div class="container">
         <div class="header">
             <div class="nav-left">
-                <a href="oge_math.html" class="back-btn">← Назад к разделам</a>
+                <a href="oge_math.html" class="back-btn">← Назад</a>
             </div>
             <div class="nav-right">
                 <div class="page-title">
                     Математика 📖 <span>теория</span>
                 </div>
+                <button class="refresh-btn" onclick="forceReloadThemes()">
+                    <span>🔄</span> Обновить
+                </button>
             </div>
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Теоретические материалы по математике</div>
-            
-            <div class="pdf-container">
-                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
-            </div>
-            
-            <div class="theory-buttons">
-                <button class="theory-btn active" onclick="loadPDF('algebra')">Алгебра</button>
-                <button class="theory-btn" onclick="loadPDF('geometry')">Геометрия</button>
-                <button class="theory-btn" onclick="loadPDF('functions')">Функции</button>
-                <button class="theory-btn" onclick="loadPDF('probability')">Теория вероятностей</button>
+            <div id="theory-list-container" class="theory-list">
+                <div class="loading">Загрузка тем...</div>
             </div>
         </div>
     </div>
 
     <script>
-        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ PDF ФАЙЛОВ С ТЕОРИЕЙ !!!
-        const theoryFiles = {
-            algebra: { 
-                id: 'ID_ФАЙЛА_АЛГЕБРА', 
-                name: 'Алгебра',
-                description: 'Формулы сокращенного умножения, уравнения, неравенства'
-            },
-            geometry: { 
-                id: 'ID_ФАЙЛА_ГЕОМЕТРИЯ', 
-                name: 'Геометрия',
-                description: 'Треугольники, окружности, площади фигур'
-            },
-            functions: { 
-                id: 'ID_ФАЙЛА_ФУНКЦИИ', 
-                name: 'Функции',
-                description: 'Линейные, квадратичные функции, графики'
-            },
-            probability: { 
-                id: 'ID_ФАЙЛА_ВЕРОЯТНОСТЬ', 
-                name: 'Теория вероятностей',
-                description: 'Комбинаторика, вероятность событий'
-            }
-        };
+        let currentOpenContainer = null;
+        let currentActiveHeader = null;
+        let currentCacheBuster = Date.now();
         
-        function loadPDF(topic) {
-            const fileId = theoryFiles[topic].id;
-            const viewer = document.getElementById('pdfViewer');
+        async function loadThemes() {
+            try {
+                const url = `oge_math_theory_themes.txt?t=${currentCacheBuster}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить файл с темами');
+                }
+                
+                const text = await response.text();
+                console.log('Загруженные данные:', text);
+                
+                const lines = text.trim().split('\n');
+                
+                const theoryFiles = {};
+                const container = document.getElementById('theory-list-container');
+                container.innerHTML = '';
+                
+                let hasValidLines = false;
+                
+                lines.forEach((line, index) => {
+                    if (!line.trim()) return;
+                    
+                    const [name, id] = line.split('|');
+                    if (name && id) {
+                        hasValidLines = true;
+                        const topicKey = `topic${index + 1}`;
+                        theoryFiles[topicKey] = { 
+                            id: id.trim(), 
+                            name: name.trim() 
+                        };
+                        
+                        const topicElement = createTopicElement(topicKey, name.trim());
+                        container.appendChild(topicElement);
+                        
+                        console.log(`Добавлена тема: ${name.trim()} с ID: ${id.trim()}`);
+                    }
+                });
+                
+                window.theoryFiles = theoryFiles;
+                
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Файл с темами пуст или имеет неверный формат</div>';
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки тем:', error);
+                const container = document.getElementById('theory-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки тем. Проверьте файл oge_math_theory_themes.txt<br>${error.message}</div>`;
+            }
+        }
+        
+        function forceReloadThemes() {
+            currentCacheBuster = Date.now();
+            loadThemes();
             
-            // Проверяем, что ID не пустой и не шаблонный
-            if (fileId && fileId !== 'ID_ФАЙЛА_АЛГЕБРА' && !fileId.startsWith('ID_')) {
-                viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            } else {
-                alert(`Файл "${theoryFiles[topic].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        function createTopicElement(topicKey, topicName) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'theory-item';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'theory-header';
+            headerDiv.setAttribute('onclick', `toggleTheory('${topicKey}', this)`);
+            
+            headerDiv.innerHTML = `
+                <div class="expand-icon">▶</div>
+                <div class="theory-name">${topicName}</div>
+            `;
+            
+            const pdfContainer = document.createElement('div');
+            pdfContainer.className = 'pdf-container';
+            pdfContainer.id = `pdf-${topicKey}`;
+            
+            const pdfWrapper = document.createElement('div');
+            pdfWrapper.className = 'pdf-wrapper';
+            
+            const pdfViewer = document.createElement('iframe');
+            pdfViewer.className = 'pdf-viewer';
+            pdfViewer.id = `viewer-${topicKey}`;
+            pdfViewer.src = '';
+            pdfViewer.setAttribute('seamless', 'seamless');
+            pdfViewer.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
+            
+            pdfWrapper.appendChild(pdfViewer);
+            pdfContainer.appendChild(pdfWrapper);
+            itemDiv.appendChild(headerDiv);
+            itemDiv.appendChild(pdfContainer);
+            
+            return itemDiv;
+        }
+        
+        function toggleTheory(topicKey, header) {
+            const fileData = window.theoryFiles[topicKey];
+            
+            if (!fileData) {
+                alert(`Данные для темы не найдены`);
                 return;
             }
             
-            // Подсвечиваем активную кнопку
-            document.querySelectorAll('.theory-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+            if (!fileData.id || fileData.id.startsWith('ID_')) {
+                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле oge_math_theory_themes.txt`);
+                return;
+            }
+            
+            const container = document.getElementById(`pdf-${topicKey}`);
+            const viewer = document.getElementById(`viewer-${topicKey}`);
+            
+            if (currentActiveHeader === header) {
+                container.classList.remove('open');
+                header.classList.remove('active');
+                currentActiveHeader = null;
+                currentOpenContainer = null;
+                return;
+            }
+            
+            if (currentOpenContainer) {
+                currentOpenContainer.classList.remove('open');
+            }
+            if (currentActiveHeader) {
+                currentActiveHeader.classList.remove('active');
+            }
+            
+            viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview?rm=minimal&embedded=true`;
+            container.classList.add('open');
+            header.classList.add('active');
+            
+            currentOpenContainer = container;
+            currentActiveHeader = header;
+            
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
         }
         
-        // Загружаем первую тему при открытии страницы
-        window.onload = function() {
-            // Проверяем, есть ли реальный ID для алгебры
-            if (theoryFiles.algebra.id !== 'ID_ФАЙЛА_АЛГЕБРА') {
-                loadPDF('algebra');
+        document.addEventListener('DOMContentLoaded', loadThemes);
+        
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                forceReloadThemes();
             }
-        };
+        });
     </script>
 </body>
 </html>
