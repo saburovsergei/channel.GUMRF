@@ -1,1 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математика ОГЭ | Практика</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #3498db;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .pdf-container {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .example-pair {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .example-pair:hover {
+            border-color: #3498db;
+            background: #f0f7ff;
+            transform: translateX(10px);
+        }
+        
+        .example-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            min-width: 100px;
+        }
+        
+        .example-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .example-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 50px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .example-link.solution {
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+        
+        .example-link:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .example-link.solution:hover {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .example-link.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .example-link.solution.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .link-icon {
+            font-size: 1.2em;
+        }
+        
+        @media (max-width: 768px) {
+            .pdf-container {
+                height: 500px;
+            }
+            
+            .example-pair {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .example-links {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .example-link {
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="oge_math.html" class="back-btn">← Назад к разделам</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    Математика ✏️ <span>практика</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Тренировочные задания с решениями</div>
+            
+            <!-- Контейнер для предпросмотра PDF -->
+            <div class="pdf-container">
+                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
+            </div>
+            
+            <!-- Список примеров с парными ссылками -->
+            <div class="examples-list">
+                <!-- Пример 1 -->
+                <div class="example-pair">
+                    <div class="example-name">Задание 1</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('task1'); return false;">
+                            <span class="link-icon">📋</span> Условие
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solution1'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример 2 -->
+                <div class="example-pair">
+                    <div class="example-name">Задание 2</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('task2'); return false;">
+                            <span class="link-icon">📋</span> Условие
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solution2'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример 3 -->
+                <div class="example-pair">
+                    <div class="example-name">Задание 3</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('task3'); return false;">
+                            <span class="link-icon">📋</span> Условие
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solution3'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример 4 -->
+                <div class="example-pair">
+                    <div class="example-name">Задание 4</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('task4'); return false;">
+                            <span class="link-icon">📋</span> Условие
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solution4'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример 5 -->
+                <div class="example-pair">
+                    <div class="example-name">Задание 5</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('task5'); return false;">
+                            <span class="link-icon">📋</span> Условие
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solution5'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ С GOOGLE DRIVE !!!
+        const files = {
+            // Задания (условия)
+            task1: { id: 'ID_ЗАДАНИЯ_1', name: 'Задание 1' },
+            task2: { id: 'ID_ЗАДАНИЯ_2', name: 'Задание 2' },
+            task3: { id: 'ID_ЗАДАНИЯ_3', name: 'Задание 3' },
+            task4: { id: 'ID_ЗАДАНИЯ_4', name: 'Задание 4' },
+            task5: { id: 'ID_ЗАДАНИЯ_5', name: 'Задание 5' },
+            
+            // Решения
+            solution1: { id: 'ID_РЕШЕНИЯ_1', name: 'Решение 1' },
+            solution2: { id: 'ID_РЕШЕНИЯ_2', name: 'Решение 2' },
+            solution3: { id: 'ID_РЕШЕНИЯ_3', name: 'Решение 3' },
+            solution4: { id: 'ID_РЕШЕНИЯ_4', name: 'Решение 4' },
+            solution5: { id: 'ID_РЕШЕНИЯ_5', name: 'Решение 5' }
+        };
+        
+        function loadPDF(fileKey) {
+            const fileId = files[fileKey].id;
+            const viewer = document.getElementById('pdfViewer');
+            
+            // Проверяем, что ID не пустой и не шаблонный
+            if (fileId && fileId !== 'ID_ЗАДАНИЯ_1' && !fileId.startsWith('ID_')) {
+                viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            } else {
+                alert(`Файл "${files[fileKey].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
+                return;
+            }
+            
+            // Подсвечиваем активную ссылку
+            document.querySelectorAll('.example-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        // Загружаем первое задание при открытии страницы
+        window.onload = function() {
+            // Проверяем, есть ли реальный ID для первого задания
+            if (files.task1.id !== 'ID_ЗАДАНИЯ_1') {
+                loadPDF('task1');
+            }
+        };
+    </script>
+</body>
+</html>
