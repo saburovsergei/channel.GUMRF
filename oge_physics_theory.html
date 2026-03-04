@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Физика ОГЭ | Теория</title>
     <style>
         * {
@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
@@ -26,10 +26,10 @@
         .header {
             background: white;
             border-radius: 20px 20px 0 0;
-            padding: 25px 30px;
+            padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
@@ -40,35 +40,41 @@
         
         .back-btn {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 0.9em;
             transition: all 0.3s ease;
         }
         
         .back-btn:hover {
             background: #764ba2;
-            transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            justify-content: center;
         }
         
         .page-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 50px;
             color: #333;
             font-weight: 600;
+            font-size: 0.95em;
         }
         
         .page-title span {
             background: #e74c3c;
             color: white;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-size: 0.8em;
         }
@@ -76,77 +82,103 @@
         .content {
             background: white;
             border-radius: 0 0 20px 20px;
-            padding: 30px;
+            padding: 20px 15px;
             margin-top: 2px;
         }
         
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #e74c3c;
-        }
-        
-        .pdf-container {
-            width: 100%;
-            height: 800px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        
-        .pdf-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .theory-buttons {
+        .theory-list {
             display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 100%;
+            margin: 0 auto;
         }
         
-        .theory-btn {
-            padding: 15px 30px;
+        .theory-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .theory-header {
+            padding: 15px 20px;
             background: white;
-            border: 2px solid #e74c3c;
-            border-radius: 50px;
-            color: #e74c3c;
-            font-size: 1.1em;
-            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .theory-btn:hover {
-            background: #e74c3c;
-            color: white;
-            transform: translateY(-2px);
+        .theory-header:hover {
+            background: #fef5f5;
         }
         
-        .theory-btn.active {
-            background: #e74c3c;
-            color: white;
+        .theory-icon {
+            font-size: 2em;
+            min-width: 50px;
+            text-align: center;
         }
         
-        @media (max-width: 768px) {
-            .pdf-container {
-                height: 500px;
+        .theory-name {
+            flex: 1;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .expand-icon {
+            font-size: 1.5em;
+            color: #e74c3c;
+            transition: transform 0.3s ease;
+        }
+        
+        .theory-header.active .expand-icon {
+            transform: rotate(180deg);
+        }
+        
+        .pdf-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+        
+        .pdf-container.open {
+            max-height: 70vh;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            display: block;
+        }
+        
+        .theory-description {
+            padding: 15px 20px;
+            background: #f0f7ff;
+            border-bottom: 2px solid #e0e0e0;
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 380px) {
+            .theory-name {
+                font-size: 1em;
             }
             
-            .theory-buttons {
-                flex-direction: column;
-                align-items: center;
+            .theory-icon {
+                font-size: 1.5em;
+                min-width: 40px;
             }
             
-            .theory-btn {
-                width: 100%;
-                max-width: 300px;
+            .theory-header {
+                padding: 12px 15px;
             }
         }
     </style>
@@ -155,7 +187,7 @@
     <div class="container">
         <div class="header">
             <div class="nav-left">
-                <a href="oge_physics.html" class="back-btn">← Назад к разделам</a>
+                <a href="oge_physics.html" class="back-btn">← Назад</a>
             </div>
             <div class="nav-right">
                 <div class="page-title">
@@ -165,45 +197,140 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Теоретические материалы</div>
-            
-            <div class="pdf-container">
-                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
-            </div>
-            
-            <div class="theory-buttons">
-                <button class="theory-btn active" onclick="loadPDF('mechanics')">Механика</button>
-                <button class="theory-btn" onclick="loadPDF('thermo')">Термодинамика</button>
-                <button class="theory-btn" onclick="loadPDF('electricity')">Электричество</button>
-                <button class="theory-btn" onclick="loadPDF('optics')">Оптика</button>
+            <div class="theory-list">
+                <!-- Тема 1: Механика -->
+                <div class="theory-item">
+                    <div class="theory-header" onclick="toggleTheory('mechanics', this)">
+                        <div class="theory-icon">⚡</div>
+                        <div class="theory-name">Механика</div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="theory-description">
+                        Законы Ньютона, движение тел, силы, энергия
+                    </div>
+                    <div class="pdf-container" id="pdf-mechanics">
+                        <iframe class="pdf-viewer" id="viewer-mechanics" src=""></iframe>
+                    </div>
+                </div>
+                
+                <!-- Тема 2: Термодинамика -->
+                <div class="theory-item">
+                    <div class="theory-header" onclick="toggleTheory('thermo', this)">
+                        <div class="theory-icon">🔥</div>
+                        <div class="theory-name">Термодинамика</div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="theory-description">
+                        Тепловые явления, газовые законы, энтропия
+                    </div>
+                    <div class="pdf-container" id="pdf-thermo">
+                        <iframe class="pdf-viewer" id="viewer-thermo" src=""></iframe>
+                    </div>
+                </div>
+                
+                <!-- Тема 3: Электричество -->
+                <div class="theory-item">
+                    <div class="theory-header" onclick="toggleTheory('electricity', this)">
+                        <div class="theory-icon">💡</div>
+                        <div class="theory-name">Электричество</div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="theory-description">
+                        Электрические цепи, законы Ома, мощность
+                    </div>
+                    <div class="pdf-container" id="pdf-electricity">
+                        <iframe class="pdf-viewer" id="viewer-electricity" src=""></iframe>
+                    </div>
+                </div>
+                
+                <!-- Тема 4: Оптика -->
+                <div class="theory-item">
+                    <div class="theory-header" onclick="toggleTheory('optics', this)">
+                        <div class="theory-icon">🔦</div>
+                        <div class="theory-name">Оптика</div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="theory-description">
+                        Свет, линзы, зеркала, оптические приборы
+                    </div>
+                    <div class="pdf-container" id="pdf-optics">
+                        <iframe class="pdf-viewer" id="viewer-optics" src=""></iframe>
+                    </div>
+                </div>
+                
+                <!-- Тема 5: Ядерная физика -->
+                <div class="theory-item">
+                    <div class="theory-header" onclick="toggleTheory('nuclear', this)">
+                        <div class="theory-icon">☢️</div>
+                        <div class="theory-name">Ядерная физика</div>
+                        <div class="expand-icon">▼</div>
+                    </div>
+                    <div class="theory-description">
+                        Строение атома, радиоактивность, ядерные реакции
+                    </div>
+                    <div class="pdf-container" id="pdf-nuclear">
+                        <iframe class="pdf-viewer" id="viewer-nuclear" src=""></iframe>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Здесь нужно будет вставить ID ваших PDF файлов с теорией
+        // !!! ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ С ТЕОРИЕЙ !!!
         const theoryFiles = {
-            mechanics: { id: 'ID_ФАЙЛА_МЕХАНИКА', name: 'Механика' },
-            thermo: { id: 'ID_ФАЙЛА_ТЕРМОДИНАМИКА', name: 'Термодинамика' },
-            electricity: { id: 'ID_ФАЙЛА_ЭЛЕКТРИЧЕСТВО', name: 'Электричество' },
-            optics: { id: 'ID_ФАЙЛА_ОПТИКА', name: 'Оптика' }
+            mechanics: { id: 'ID_МЕХАНИКА', name: 'Механика' },
+            thermo: { id: 'ID_ТЕРМОДИНАМИКА', name: 'Термодинамика' },
+            electricity: { id: 'ID_ЭЛЕКТРИЧЕСТВО', name: 'Электричество' },
+            optics: { id: 'ID_ОПТИКА', name: 'Оптика' },
+            nuclear: { id: 'ID_ЯДЕРНАЯ', name: 'Ядерная физика' }
         };
         
-        function loadPDF(topic) {
+        let currentOpenContainer = null;
+        let currentActiveHeader = null;
+        
+        function toggleTheory(topic, header) {
             const fileId = theoryFiles[topic].id;
-            document.getElementById('pdfViewer').src = `https://drive.google.com/file/d/${fileId}/preview`;
+            const container = document.getElementById(`pdf-${topic}`);
+            const viewer = document.getElementById(`viewer-${topic}`);
             
-            document.querySelectorAll('.theory-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-        
-        window.onload = function() {
-            if (theoryFiles.mechanics.id !== 'ID_ФАЙЛА_МЕХАНИКА') {
-                loadPDF('mechanics');
+            // Проверяем доступность файла
+            if (!fileId || fileId.startsWith('ID_')) {
+                alert(`Файл "${theoryFiles[topic].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
+                return;
             }
-        };
+            
+            // Если кликнули на ту же тему
+            if (currentActiveHeader === header) {
+                // Закрываем
+                container.classList.remove('open');
+                header.classList.remove('active');
+                currentActiveHeader = null;
+                currentOpenContainer = null;
+                return;
+            }
+            
+            // Закрываем предыдущую открытую тему
+            if (currentOpenContainer) {
+                currentOpenContainer.classList.remove('open');
+            }
+            if (currentActiveHeader) {
+                currentActiveHeader.classList.remove('active');
+            }
+            
+            // Загружаем PDF и открываем новую тему
+            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            container.classList.add('open');
+            header.classList.add('active');
+            
+            currentOpenContainer = container;
+            currentActiveHeader = header;
+            
+            // Прокручиваем к открытому материалу
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
     </script>
 </body>
 </html>
