@@ -1,5 +1,10 @@
-Пример А|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
-Пример Б|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
-Пример В|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J|14enFT_KXbB0olde8tMkWubr-aH9pvQln
-Пример Г|ID_ЗАДАНИЯ_Г|ID_РЕШЕНИЯ_Г
-Пример Д|ID_ЗАДАНИЯ_Д|ID_РЕШЕНИЯ_Д
+Тема 1|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
+Тема 2|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs
+Тема 3|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
+Тема 4|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+Тема 5|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
+Тема 6|14enFT_KXbB0olde8tMkWubr-aH9pvQln
+Тема 7|ID_ТЕМЫ_7
+Тема 8|ID_ТЕМЫ_8
+Тема 9|ID_ТЕМЫ_9
+Тема 10|ID_ТЕМЫ_10
