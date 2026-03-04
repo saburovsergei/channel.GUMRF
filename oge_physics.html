@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Физика ОГЭ | Материалы</title>
     <style>
-        /* --- СТИЛИ (аналогично странице математики) --- */
         * {
             margin: 0;
             padding: 0;
@@ -104,98 +103,52 @@
             border: none;
         }
         
-        .files-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .file-card {
-            padding: 25px 20px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-            text-align: center;
-            cursor: pointer;
-            background: white;
-        }
-        
-        .file-card:hover {
-            border-color: #e74c3c;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.15);
-        }
-        
-        .file-card.active {
-            border-color: #e74c3c;
-            background: #fff5f5;
-        }
-        
-        .file-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        
-        .file-card h3 {
-            color: #333;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-        
-        .file-card p {
-            color: #666;
-            font-size: 0.9em;
-        }
-        
-        .action-buttons {
+        /* Максимально простые кнопки для примеров */
+        .examples {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
+            margin: 20px 0;
         }
         
-        .action-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: #4285f4;
-            color: white;
-            text-decoration: none;
+        .example-btn {
+            padding: 15px 40px;
+            background: white;
+            border: 2px solid #e74c3c;
             border-radius: 50px;
+            color: #e74c3c;
+            font-size: 1.3em;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
             cursor: pointer;
-            font-size: 1em;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            text-align: center;
         }
         
-        .action-btn:hover {
-            background: #3367d6;
+        .example-btn:hover {
+            background: #e74c3c;
+            color: white;
             transform: translateY(-2px);
         }
         
-        .action-btn.download {
-            background: #27ae60;
-        }
-        
-        .action-btn.download:hover {
-            background: #219a52;
+        .example-btn.active {
+            background: #e74c3c;
+            color: white;
         }
         
         @media (max-width: 768px) {
-            .files-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .pdf-container {
                 height: 500px;
             }
             
-            .action-buttons {
+            .examples {
                 flex-direction: column;
+                align-items: center;
+            }
+            
+            .example-btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
     </style>
@@ -221,61 +174,34 @@
                 <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
             </div>
             
-            <!-- Карточки для выбора файлов -->
-            <div class="files-grid">
-                <!-- Карточка 1: Работа №1 -->
-                <div class="file-card active" onclick="loadFile('file1')" id="card1">
-                    <div class="file-icon">⚡</div>
-                    <h3>Работа № 1</h3>
-                    <p>Тренировочная работа по физике</p>
-                </div>
-                
-                <!-- Карточка 2: Работа №2 -->
-                <div class="file-card" onclick="loadFile('file2')" id="card2">
-                    <div class="file-icon">🔋</div>
-                    <h3>Работа № 2</h3>
-                    <p>Тренировочная работа по физике</p>
-                </div>
-                
-                <!-- Карточка 3: Работа №3 -->
-                <div class="file-card" onclick="loadFile('file3')" id="card3">
-                    <div class="file-icon">💡</div>
-                    <h3>Работа № 3</h3>
-                    <p>Тренировочная работа по физике</p>
-                </div>
-            </div>
-            
-            <!-- Кнопки действий -->
-            <div class="action-buttons">
-                <button class="action-btn" onclick="openInDrive()" id="openBtn">📂 Открыть в Google Диске</button>
-                <button class="action-btn download" onclick="downloadFile()" id="downloadBtn">⬇ Скачать PDF</button>
+            <!-- Максимально простые кнопки: Пример A, Пример B, Пример C -->
+            <div class="examples">
+                <button class="example-btn active" onclick="loadFile('file1')" id="btn1">Пример A</button>
+                <button class="example-btn" onclick="loadFile('file2')" id="btn2">Пример B</button>
+                <button class="example-btn" onclick="loadFile('file3')" id="btn3">Пример C</button>
             </div>
         </div>
     </div>
 
     <script>
-        // !!! СЮДА ВСТАВЬТЕ ID ФАЙЛОВ ПОСЛЕ ТОГО, КАК СДЕЛАЕТЕ ИХ ПУБЛИЧНЫМИ !!!
+        // ID ваших файлов с Google Drive
         const files = {
             file1: {
-                id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv',  // Замените на правильный ID
-                name: 'Физика - Работа №1',
-                icon: '⚡'
+                id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv',  // Пример A
+                name: 'Пример A'
             },
             file2: {
-                id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs',  // Замените на правильный ID
-                name: 'Физика - Работа №2',
-                icon: '🔋'
+                id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs',  // Пример B
+                name: 'Пример B'
             },
             file3: {
-                id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J',  // Замените на правильный ID
-                name: 'Физика - Работа №3',
-                icon: '💡'
+                id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J',  // Пример C
+                name: 'Пример C'
             }
         };
         
-        let currentFile = 'file1'; // Какой файл сейчас загружен
+        let currentFile = 'file1';
         
-        // Функция загрузки файла в просмотрщик
         function loadFile(fileKey) {
             currentFile = fileKey;
             const fileId = files[fileKey].id;
@@ -284,26 +210,14 @@
             // Ссылка для встраивания
             viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
             
-            // Обновляем активную карточку
-            document.querySelectorAll('.file-card').forEach(card => {
-                card.classList.remove('active');
+            // Подсвечиваем активную кнопку
+            document.querySelectorAll('.example-btn').forEach(btn => {
+                btn.classList.remove('active');
             });
-            document.getElementById(`card${fileKey.slice(-1)}`).classList.add('active');
+            document.getElementById(`btn${fileKey.slice(-1)}`).classList.add('active');
         }
         
-        // Функция открытия в Google Drive
-        function openInDrive() {
-            const fileId = files[currentFile].id;
-            window.open(`https://drive.google.com/file/d/${fileId}/view`, '_blank');
-        }
-        
-        // Функция скачивания
-        function downloadFile() {
-            const fileId = files[currentFile].id;
-            window.open(`https://drive.google.com/uc?export=download&id=${fileId}`, '_blank');
-        }
-        
-        // Загружаем первый файл при открытии страницы
+        // Загружаем первый пример при открытии страницы
         window.onload = function() {
             loadFile('file1');
         };
