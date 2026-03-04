@@ -1,0 +1,5 @@
+Пример А|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+Пример Б|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
+Пример В|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J|14enFT_KXbB0olde8tMkWubr-aH9pvQln
+Пример Г|ID_ЗАДАНИЯ_Г|ID_РЕШЕНИЯ_Г
+Пример Д|ID_ЗАДАНИЯ_Д|ID_РЕШЕНИЯ_Д
