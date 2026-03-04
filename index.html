@@ -55,7 +55,7 @@
         
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
         }
         
@@ -130,6 +130,11 @@
             color: #9b59b6;
         }
         
+        /* Стили для новой кнопки Программирование */
+        .btn-prog .btn-icon {
+            color: #f39c12; /* Яркий оранжевый */
+        }
+        
         @media (max-width: 600px) {
             .menu-header {
                 padding: 30px 20px;
@@ -188,6 +193,12 @@
                 <a href="gumrf.html" class="menu-btn btn-gumrf">
                     <span class="btn-icon">⚓</span>
                     <span class="btn-title">ГУМРФ</span>
+                </a>
+                
+                <!-- Новая кнопка Программирование -->
+                <a href="programming.html" class="menu-btn btn-prog">
+                    <span class="btn-icon">💻</span>
+                    <span class="btn-title">Программирование</span>
                 </a>
             </div>
         </div>
