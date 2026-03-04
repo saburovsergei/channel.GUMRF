@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Физика ОГЭ | Практика</title>
     <style>
         * {
@@ -15,7 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         
         .container {
@@ -26,10 +26,10 @@
         .header {
             background: white;
             border-radius: 20px 20px 0 0;
-            padding: 25px 30px;
+            padding: 15px 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
@@ -40,35 +40,41 @@
         
         .back-btn {
             display: inline-block;
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: #667eea;
             color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 0.9em;
             transition: all 0.3s ease;
         }
         
         .back-btn:hover {
             background: #764ba2;
-            transform: translateX(-5px);
+        }
+        
+        .nav-right {
+            display: flex;
+            justify-content: center;
         }
         
         .page-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 50px;
             color: #333;
             font-weight: 600;
+            font-size: 0.95em;
         }
         
         .page-title span {
             background: #27ae60;
             color: white;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 30px;
             font-size: 0.8em;
         }
@@ -76,57 +82,50 @@
         .content {
             background: white;
             border-radius: 0 0 20px 20px;
-            padding: 30px;
+            padding: 20px 15px;
             margin-top: 2px;
         }
         
         .examples-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
-            max-width: 900px;
+            gap: 12px;
+            max-width: 100%;
             margin: 0 auto;
         }
         
         .example-item {
             background: #f8f9fa;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
             border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
         }
         
         .example-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px;
+            padding: 12px 15px;
             background: white;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        
-        .example-header:hover {
-            background: #f0f7f0;
         }
         
         .example-name {
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: 600;
             color: #333;
-            min-width: 120px;
+            margin-bottom: 10px;
+            text-align: center;
         }
         
         .example-buttons {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
         }
         
         .action-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 25px;
+            justify-content: center;
+            gap: 5px;
+            padding: 12px 5px;
             background: white;
             border: 2px solid #3498db;
             border-radius: 50px;
@@ -134,7 +133,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 1em;
+            font-size: 0.95em;
+            width: 100%;
         }
         
         .action-btn.solution {
@@ -142,15 +142,8 @@
             color: #27ae60;
         }
         
-        .action-btn:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .action-btn.solution:hover {
-            background: #27ae60;
-            color: white;
+        .action-btn:active {
+            transform: scale(0.98);
         }
         
         .action-btn.active {
@@ -163,6 +156,10 @@
             color: white;
         }
         
+        .btn-icon {
+            font-size: 1.1em;
+        }
+        
         .pdf-container {
             max-height: 0;
             overflow: hidden;
@@ -171,45 +168,30 @@
         }
         
         .pdf-container.open {
-            max-height: 800px;
+            max-height: 70vh;
             border-top: 2px solid #e0e0e0;
         }
         
         .pdf-viewer {
             width: 100%;
-            height: 700px;
+            height: 70vh;
             border: none;
             display: block;
         }
         
-        .btn-icon {
-            font-size: 1.2em;
-        }
-        
-        @media (max-width: 768px) {
-            .example-header {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
-            }
-            
-            .example-buttons {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
+        /* Для очень маленьких экранов */
+        @media (max-width: 380px) {
             .action-btn {
-                flex: 1;
-                justify-content: center;
-                padding: 10px 15px;
+                font-size: 0.85em;
+                padding: 10px 3px;
             }
             
-            .pdf-viewer {
-                height: 500px;
+            .btn-icon {
+                font-size: 1em;
             }
             
-            .pdf-container.open {
-                max-height: 500px;
+            .example-name {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -218,7 +200,7 @@
     <div class="container">
         <div class="header">
             <div class="nav-left">
-                <a href="oge_physics.html" class="back-btn">← Назад к разделам</a>
+                <a href="oge_physics.html" class="back-btn">← Назад</a>
             </div>
             <div class="nav-right">
                 <div class="page-title">
@@ -229,7 +211,7 @@
         
         <div class="content">
             <div class="examples-list">
-                <!-- Пример A: Задание + Решение -->
+                <!-- Пример A -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример A</div>
@@ -250,7 +232,7 @@
                     </div>
                 </div>
                 
-                <!-- Пример B: Задание + Решение -->
+                <!-- Пример B -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример B</div>
@@ -271,7 +253,7 @@
                     </div>
                 </div>
                 
-                <!-- Пример C: Задание + Решение -->
+                <!-- Пример C -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример C</div>
@@ -296,14 +278,11 @@
     </div>
 
     <script>
-        // !!! ВАШИ ID ФАЙЛОВ (все 6 штук) !!!
+        // ВАШИ ID ФАЙЛОВ
         const files = {
-            // Задания
             exampleA: { id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs', name: 'Задание A' },
             exampleB: { id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv', name: 'Задание B' },
             exampleC: { id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J', name: 'Задание C' },
-            
-            // Решения
             solutionA: { id: '1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO', name: 'Решение A' },
             solutionB: { id: '1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD', name: 'Решение B' },
             solutionC: { id: '14enFT_KXbB0olde8tMkWubr-aH9pvQln', name: 'Решение C' }
@@ -317,15 +296,13 @@
             const container = document.getElementById(containerId);
             const viewer = document.getElementById(viewerId);
             
-            // Проверяем доступность файла
             if (!fileId) {
-                alert(`Файл "${files[fileKey].name}" не найден.`);
+                alert(`Файл не найден`);
                 return;
             }
             
-            // Если кликнули на ту же кнопку, что уже активна
+            // Если нажали на ту же кнопку
             if (currentActiveButton === button) {
-                // Закрываем этот контейнер
                 if (currentOpenContainer) {
                     currentOpenContainer.classList.remove('open');
                 }
@@ -335,8 +312,8 @@
                 return;
             }
             
-            // Если есть другой открытый контейнер, закрываем его
-            if (currentOpenContainer && currentOpenContainer !== container) {
+            // Закрываем предыдущий открытый контейнер
+            if (currentOpenContainer) {
                 currentOpenContainer.classList.remove('open');
             }
             
@@ -345,15 +322,18 @@
                 currentActiveButton.classList.remove('active');
             }
             
-            // Загружаем PDF в просмотрщик
+            // Загружаем и открываем новый
             viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            
-            // Открываем новый контейнер
             container.classList.add('open');
             button.classList.add('active');
             
             currentOpenContainer = container;
             currentActiveButton = button;
+            
+            // Плавно прокручиваем к открытому контейнеру
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
         }
     </script>
 </body>
