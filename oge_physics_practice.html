@@ -1,1 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физика ОГЭ | Практика</title>
+    <style>
+        /* Стили полностью копируем из theory, меняем только цвета на синие/зеленые для разнообразия */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #27ae60;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #27ae60;
+        }
+        
+        .pdf-container {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .practice-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .practice-btn {
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #27ae60;
+            border-radius: 50px;
+            color: #27ae60;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .practice-btn:hover {
+            background: #27ae60;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .practice-btn.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .pdf-container {
+                height: 500px;
+            }
+            
+            .practice-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .practice-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="oge_physics.html" class="back-btn">← Назад к разделам</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    Физика 🔬 <span>практика</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title">📚 Практические задания</div>
+            
+            <div class="pdf-container">
+                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
+            </div>
+            
+            <div class="practice-buttons">
+                <button class="practice-btn active" onclick="loadPDF('work1')">Работа №1</button>
+                <button class="practice-btn" onclick="loadPDF('work2')">Работа №2</button>
+                <button class="practice-btn" onclick="loadPDF('work3')">Работа №3</button>
+                <button class="practice-btn" onclick="loadPDF('work4')">Работа №4</button>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Здесь нужно будет вставить ID ваших PDF файлов с практикой
+        const practiceFiles = {
+            work1: { id: 'ID_ФАЙЛА_РАБОТА1', name: 'Работа №1' },
+            work2: { id: 'ID_ФАЙЛА_РАБОТА2', name: 'Работа №2' },
+            work3: { id: 'ID_ФАЙЛА_РАБОТА3', name: 'Работа №3' },
+            work4: { id: 'ID_ФАЙЛА_РАБОТА4', name: 'Работа №4' }
+        };
+        
+        function loadPDF(work) {
+            const fileId = practiceFiles[work].id;
+            document.getElementById('pdfViewer').src = `https://drive.google.com/file/d/${fileId}/preview`;
+            
+            document.querySelectorAll('.practice-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+        
+        window.onload = function() {
+            if (practiceFiles.work1.id !== 'ID_ФАЙЛА_РАБОТА1') {
+                loadPDF('work1');
+            }
+        };
+    </script>
+</body>
+</html>
