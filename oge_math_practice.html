@@ -312,7 +312,8 @@
     <script>
         let currentOpenContainer = null;
         let currentActiveButton = null;
-        let currentExampleKey = null; // Добавляем отслеживание текущего примера
+        let currentExampleKey = null;
+        let currentFileKey = null;
         let currentCacheBuster = Date.now();
         
         async function loadExamples() {
@@ -355,13 +356,13 @@
                             id: taskId.trim(), 
                             name: `Задание ${name.trim()}`,
                             exampleKey: exampleKey,
-                            type: 'task'
+                            displayName: name.trim()
                         };
                         examplesData[`${exampleKey}_solution`] = { 
                             id: solutionId.trim(), 
                             name: `Решение ${name.trim()}`,
                             exampleKey: exampleKey,
-                            type: 'solution'
+                            displayName: name.trim()
                         };
                         
                         const exampleElement = createExampleElement(
@@ -410,58 +411,41 @@
             headerDiv.innerHTML = `
                 <div class="example-name">${exampleName}</div>
                 <div class="example-buttons">
-                    <button class="action-btn" onclick="togglePDF('${exampleKey}_task', 'pdf-${exampleKey}-task', 'viewer-${exampleKey}-task', this, '${exampleKey}')">
+                    <button class="action-btn" onclick="togglePDF('${exampleKey}', 'task', this)">
                         <span class="btn-triangle">▶</span> Задание
                     </button>
-                    <button class="action-btn solution" onclick="togglePDF('${exampleKey}_solution', 'pdf-${exampleKey}-solution', 'viewer-${exampleKey}-solution', this, '${exampleKey}')">
+                    <button class="action-btn solution" onclick="togglePDF('${exampleKey}', 'solution', this)">
                         <span class="btn-triangle">▶</span> Решение
                     </button>
                 </div>
             `;
             
-            // Контейнеры для PDF
-            const pdfContainerTask = document.createElement('div');
-            pdfContainerTask.className = 'pdf-container';
-            pdfContainerTask.id = `pdf-${exampleKey}-task`;
+            // ЕДИНСТВЕННЫЙ контейнер для PDF на весь пример
+            const pdfContainer = document.createElement('div');
+            pdfContainer.className = 'pdf-container';
+            pdfContainer.id = `pdf-${exampleKey}`;
             
-            const pdfWrapperTask = document.createElement('div');
-            pdfWrapperTask.className = 'pdf-wrapper';
+            const pdfWrapper = document.createElement('div');
+            pdfWrapper.className = 'pdf-wrapper';
             
-            const pdfViewerTask = document.createElement('iframe');
-            pdfViewerTask.className = 'pdf-viewer';
-            pdfViewerTask.id = `viewer-${exampleKey}-task`;
-            pdfViewerTask.src = '';
-            pdfViewerTask.setAttribute('seamless', 'seamless');
-            pdfViewerTask.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
+            const pdfViewer = document.createElement('iframe');
+            pdfViewer.className = 'pdf-viewer';
+            pdfViewer.id = `viewer-${exampleKey}`;
+            pdfViewer.src = '';
+            pdfViewer.setAttribute('seamless', 'seamless');
+            pdfViewer.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
             
-            pdfWrapperTask.appendChild(pdfViewerTask);
-            pdfContainerTask.appendChild(pdfWrapperTask);
-            
-            const pdfContainerSolution = document.createElement('div');
-            pdfContainerSolution.className = 'pdf-container';
-            pdfContainerSolution.id = `pdf-${exampleKey}-solution`;
-            
-            const pdfWrapperSolution = document.createElement('div');
-            pdfWrapperSolution.className = 'pdf-wrapper';
-            
-            const pdfViewerSolution = document.createElement('iframe');
-            pdfViewerSolution.className = 'pdf-viewer';
-            pdfViewerSolution.id = `viewer-${exampleKey}-solution`;
-            pdfViewerSolution.src = '';
-            pdfViewerSolution.setAttribute('seamless', 'seamless');
-            pdfViewerSolution.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
-            
-            pdfWrapperSolution.appendChild(pdfViewerSolution);
-            pdfContainerSolution.appendChild(pdfWrapperSolution);
+            pdfWrapper.appendChild(pdfViewer);
+            pdfContainer.appendChild(pdfWrapper);
             
             itemDiv.appendChild(headerDiv);
-            itemDiv.appendChild(pdfContainerTask);
-            itemDiv.appendChild(pdfContainerSolution);
+            itemDiv.appendChild(pdfContainer);
             
             return itemDiv;
         }
         
-        function togglePDF(fileKey, containerId, viewerId, button, exampleKey) {
+        function togglePDF(exampleKey, type, button) {
+            const fileKey = `${exampleKey}_${type}`;
             const fileData = window.examplesData[fileKey];
             
             if (!fileData) {
@@ -474,53 +458,48 @@
                 return;
             }
             
-            const container = document.getElementById(containerId);
-            const viewer = document.getElementById(viewerId);
+            const container = document.getElementById(`pdf-${exampleKey}`);
+            const viewer = document.getElementById(`viewer-${exampleKey}`);
             
-            // Получаем ID второго контейнера этого же примера
-            const otherType = fileData.type === 'task' ? 'solution' : 'task';
-            const otherContainerId = `pdf-${exampleKey}-${otherType}`;
-            const otherButton = document.querySelector(`[onclick*="'${exampleKey}_${otherType}'"]`);
-            
-            // Если кликнули на ту же кнопку
-            if (currentActiveButton === button) {
-                // Закрываем текущий контейнер
+            // Если кликнули на ту же кнопку (тот же файл того же примера)
+            if (currentActiveButton === button && currentFileKey === fileKey) {
+                // Закрываем
                 container.classList.remove('open');
                 button.classList.remove('active');
                 currentActiveButton = null;
                 currentOpenContainer = null;
                 currentExampleKey = null;
+                currentFileKey = null;
                 return;
             }
             
-            // Если открыт другой контейнер этого же примера
-            if (currentExampleKey === exampleKey && currentOpenContainer) {
-                // Закрываем другой контейнер
-                const otherContainer = document.getElementById(otherContainerId);
-                if (otherContainer) {
-                    otherContainer.classList.remove('open');
-                }
-                if (otherButton) {
-                    otherButton.classList.remove('active');
-                }
-            }
-            
-            // Если открыт контейнер другого примера
+            // Если открыт другой пример
             if (currentOpenContainer && currentExampleKey !== exampleKey) {
+                // Закрываем старый контейнер
                 currentOpenContainer.classList.remove('open');
                 if (currentActiveButton) {
                     currentActiveButton.classList.remove('active');
                 }
             }
             
-            // Загружаем и открываем новый
+            // Загружаем PDF (даже если это тот же пример, но другой тип)
             viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview?rm=minimal&embedded=true`;
+            
+            // Открываем контейнер (если он уже открыт, но с другим файлом - он просто обновится)
             container.classList.add('open');
+            
+            // Убираем активный класс с предыдущей кнопки
+            if (currentActiveButton && currentActiveButton !== button) {
+                currentActiveButton.classList.remove('active');
+            }
+            
+            // Добавляем активный класс на текущую кнопку
             button.classList.add('active');
             
             currentOpenContainer = container;
             currentActiveButton = button;
             currentExampleKey = exampleKey;
+            currentFileKey = fileKey;
             
             // Плавно прокручиваем
             setTimeout(() => {
