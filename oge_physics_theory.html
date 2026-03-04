@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Физика ОГЭ | Теория</title>
     <style>
+        /* Стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -172,6 +173,24 @@
             font-size: 1.1em;
         }
         
+        .refresh-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
         @media (max-width: 380px) {
             .theory-name {
                 font-size: 1em;
@@ -202,6 +221,7 @@
         </div>
         
         <div class="content">
+            <button class="refresh-btn" onclick="forceReloadThemes()">🔄 Обновить темы</button>
             <div id="theory-list-container" class="theory-list">
                 <div class="loading">Загрузка тем...</div>
             </div>
@@ -211,21 +231,37 @@
     <script>
         let currentOpenContainer = null;
         let currentActiveHeader = null;
+        let currentCacheBuster = Date.now(); // Уникальное число для обновления кеша
         
-        // Загрузка данных из текстового файла
+        // Загрузка данных из текстового файла с отключением кеша
         async function loadThemes() {
             try {
-                const response = await fetch('oge_physics_theory_themes.txt');
+                // Добавляем параметр timestamp, чтобы браузер не кешировал файл
+                const url = `oge_physics_theory_themes.txt?t=${currentCacheBuster}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
                 if (!response.ok) {
                     throw new Error('Не удалось загрузить файл с темами');
                 }
                 
                 const text = await response.text();
+                console.log('Загруженные данные:', text); // Отладка
+                
                 const lines = text.trim().split('\n');
                 
                 const theoryFiles = {};
                 const container = document.getElementById('theory-list-container');
                 container.innerHTML = ''; // Очищаем контейнер
+                
+                let hasValidLines = false;
                 
                 lines.forEach((line, index) => {
                     // Пропускаем пустые строки
@@ -233,6 +269,7 @@
                     
                     const [name, id] = line.split('|');
                     if (name && id) {
+                        hasValidLines = true;
                         const topicKey = `topic${index + 1}`;
                         theoryFiles[topicKey] = { 
                             id: id.trim(), 
@@ -242,6 +279,8 @@
                         // Создаем элемент темы
                         const topicElement = createTopicElement(topicKey, name.trim());
                         container.appendChild(topicElement);
+                        
+                        console.log(`Добавлена тема: ${name.trim()} с ID: ${id.trim()}`);
                     }
                 });
                 
@@ -249,15 +288,21 @@
                 window.theoryFiles = theoryFiles;
                 
                 // Если нет тем, показываем сообщение
-                if (lines.length === 0) {
-                    container.innerHTML = '<div class="error">Файл с темами пуст</div>';
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Файл с темами пуст или имеет неверный формат</div>';
                 }
                 
             } catch (error) {
                 console.error('Ошибка загрузки тем:', error);
                 const container = document.getElementById('theory-list-container');
-                container.innerHTML = `<div class="error">Ошибка загрузки тем. Пожалуйста, проверьте файл oge_physics_theory_themes.txt</div>`;
+                container.innerHTML = `<div class="error">Ошибка загрузки тем. Пожалуйста, проверьте файл oge_physics_theory_themes.txt<br>${error.message}</div>`;
             }
+        }
+        
+        // Принудительная перезагрузка тем
+        function forceReloadThemes() {
+            currentCacheBuster = Date.now(); // Новый timestamp
+            loadThemes(); // Перезагружаем
         }
         
         // Создание HTML элемента для темы
@@ -341,6 +386,14 @@
         
         // Загружаем темы при загрузке страницы
         document.addEventListener('DOMContentLoaded', loadThemes);
+        
+        // Дополнительно: принудительно загружаем при каждом показе страницы
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                // Страница загружена из кеша (back/forward)
+                forceReloadThemes();
+            }
+        });
     </script>
 </body>
 </html>
