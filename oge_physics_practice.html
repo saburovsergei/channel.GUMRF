@@ -80,68 +80,49 @@
             margin-top: 2px;
         }
         
-        .section-title {
-            font-size: 1.5em;
-            color: #333;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #27ae60;
-        }
-        
-        .pdf-container {
-            width: 100%;
-            height: 800px;
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 40px;
-        }
-        
-        .pdf-viewer {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
         .examples-list {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
-        .example-pair {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            padding: 15px 20px;
+        .example-item {
             background: #f8f9fa;
             border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #e0e0e0;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
         
-        .example-pair:hover {
-            border-color: #27ae60;
-            background: #f0f9f0;
-            transform: translateX(10px);
+        .example-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 25px;
+            background: white;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .example-header:hover {
+            background: #f0f7f0;
         }
         
         .example-name {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
             color: #333;
-            min-width: 100px;
+            min-width: 120px;
         }
         
-        .example-links {
+        .example-buttons {
             display: flex;
             gap: 15px;
-            flex-wrap: wrap;
         }
         
-        .example-link {
+        .action-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -150,61 +131,85 @@
             border: 2px solid #3498db;
             border-radius: 50px;
             color: #3498db;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-weight: 600;
             cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
         }
         
-        .example-link.solution {
+        .action-btn.solution {
             border-color: #27ae60;
             color: #27ae60;
         }
         
-        .example-link:hover {
+        .action-btn:hover {
             background: #3498db;
             color: white;
             transform: translateY(-2px);
         }
         
-        .example-link.solution:hover {
+        .action-btn.solution:hover {
             background: #27ae60;
             color: white;
         }
         
-        .example-link.active {
+        .action-btn.active {
             background: #3498db;
             color: white;
         }
         
-        .example-link.solution.active {
+        .action-btn.solution.active {
             background: #27ae60;
             color: white;
         }
         
-        .link-icon {
+        .pdf-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+        
+        .pdf-container.open {
+            max-height: 800px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 700px;
+            border: none;
+            display: block;
+        }
+        
+        .btn-icon {
             font-size: 1.2em;
         }
         
         @media (max-width: 768px) {
-            .pdf-container {
-                height: 500px;
-            }
-            
-            .example-pair {
+            .example-header {
                 flex-direction: column;
+                gap: 15px;
                 align-items: flex-start;
-                gap: 10px;
             }
             
-            .example-links {
+            .example-buttons {
                 width: 100%;
                 justify-content: space-between;
             }
             
-            .example-link {
+            .action-btn {
                 flex: 1;
                 justify-content: center;
+                padding: 10px 15px;
+            }
+            
+            .pdf-viewer {
+                height: 500px;
+            }
+            
+            .pdf-container.open {
+                max-height: 500px;
             }
         }
     </style>
@@ -223,51 +228,58 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Задачи с решениями</div>
-            
-            <!-- Контейнер для предпросмотра PDF -->
-            <div class="pdf-container">
-                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
-            </div>
-            
-            <!-- Список примеров с парными ссылками -->
             <div class="examples-list">
                 <!-- Пример A -->
-                <div class="example-pair">
-                    <div class="example-name">Пример A</div>
-                    <div class="example-links">
-                        <a href="#" class="example-link" onclick="loadPDF('exampleA'); return false;">
-                            <span class="link-icon">📋</span> Задание
-                        </a>
-                        <a href="#" class="example-link solution" onclick="loadPDF('solutionA'); return false;">
-                            <span class="link-icon">✅</span> Решение
-                        </a>
+                <div class="example-item">
+                    <div class="example-header">
+                        <div class="example-name">Пример A</div>
+                        <div class="example-buttons">
+                            <button class="action-btn" onclick="togglePDF('exampleA', this)">
+                                <span class="btn-icon">📋</span> Задание
+                            </button>
+                            <button class="action-btn solution" onclick="togglePDF('solutionA', this)">
+                                <span class="btn-icon">✅</span> Решение
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pdf-container" id="pdf-exampleA">
+                        <iframe class="pdf-viewer" id="viewer-exampleA" src=""></iframe>
                     </div>
                 </div>
                 
                 <!-- Пример B -->
-                <div class="example-pair">
-                    <div class="example-name">Пример B</div>
-                    <div class="example-links">
-                        <a href="#" class="example-link" onclick="loadPDF('exampleB'); return false;">
-                            <span class="link-icon">📋</span> Задание
-                        </a>
-                        <a href="#" class="example-link solution" onclick="loadPDF('solutionB'); return false;">
-                            <span class="link-icon">✅</span> Решение
-                        </a>
+                <div class="example-item">
+                    <div class="example-header">
+                        <div class="example-name">Пример B</div>
+                        <div class="example-buttons">
+                            <button class="action-btn" onclick="togglePDF('exampleB', this)">
+                                <span class="btn-icon">📋</span> Задание
+                            </button>
+                            <button class="action-btn solution" onclick="togglePDF('solutionB', this)">
+                                <span class="btn-icon">✅</span> Решение
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pdf-container" id="pdf-exampleB">
+                        <iframe class="pdf-viewer" id="viewer-exampleB" src=""></iframe>
                     </div>
                 </div>
                 
                 <!-- Пример C -->
-                <div class="example-pair">
-                    <div class="example-name">Пример C</div>
-                    <div class="example-links">
-                        <a href="#" class="example-link" onclick="loadPDF('exampleC'); return false;">
-                            <span class="link-icon">📋</span> Задание
-                        </a>
-                        <a href="#" class="example-link solution" onclick="loadPDF('solutionC'); return false;">
-                            <span class="link-icon">✅</span> Решение
-                        </a>
+                <div class="example-item">
+                    <div class="example-header">
+                        <div class="example-name">Пример C</div>
+                        <div class="example-buttons">
+                            <button class="action-btn" onclick="togglePDF('exampleC', this)">
+                                <span class="btn-icon">📋</span> Задание
+                            </button>
+                            <button class="action-btn solution" onclick="togglePDF('solutionC', this)">
+                                <span class="btn-icon">✅</span> Решение
+                            </button>
+                        </div>
+                    </div>
+                    <div class="pdf-container" id="pdf-exampleC">
+                        <iframe class="pdf-viewer" id="viewer-exampleC" src=""></iframe>
                     </div>
                 </div>
             </div>
@@ -275,44 +287,68 @@
     </div>
 
     <script>
-        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ !!!
+        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ С GOOGLE DRIVE !!!
         const files = {
             // Задания (примеры)
-            exampleA: { id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv', name: 'Задание A' },
+            exampleA: { id: 'ID_ЗАДАНИЯ_A', name: 'Задание A' },
             exampleB: { id: 'ID_ЗАДАНИЯ_B', name: 'Задание B' },
             exampleC: { id: 'ID_ЗАДАНИЯ_C', name: 'Задание C' },
             
             // Решения
-            solutionA: { id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs', name: 'Решение A' },
+            solutionA: { id: 'ID_РЕШЕНИЯ_A', name: 'Решение A' },
             solutionB: { id: 'ID_РЕШЕНИЯ_B', name: 'Решение B' },
             solutionC: { id: 'ID_РЕШЕНИЯ_C', name: 'Решение C' }
         };
         
-        function loadPDF(fileKey) {
+        let currentOpenItem = null;
+        let currentActiveButton = null;
+        
+        function togglePDF(fileKey, button) {
             const fileId = files[fileKey].id;
-            const viewer = document.getElementById('pdfViewer');
+            const exampleId = fileKey.slice(0, -1); // exampleA -> example, solutionA -> solution
+            const container = document.getElementById(`pdf-${fileKey}`);
+            const viewer = document.getElementById(`viewer-${fileKey}`);
             
-            if (fileId && fileId !== 'ID_ЗАДАНИЯ_A' && !fileId.startsWith('ID_')) {
-                viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            } else {
-                alert('Файл еще не добавлен. Вставьте ID файла в код.');
+            // Проверяем доступность файла
+            if (!fileId || fileId.startsWith('ID_')) {
+                alert(`Файл "${files[fileKey].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
                 return;
             }
             
-            // Подсвечиваем активную ссылку
-            document.querySelectorAll('.example-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
-        
-        // Загружаем первый пример при открытии
-        window.onload = function() {
-            // Проверяем, есть ли реальные ID
-            if (files.exampleA.id !== 'ID_ЗАДАНИЯ_A') {
-                loadPDF('exampleA');
+            // Если кликнули на ту же кнопку, что уже активна
+            if (currentActiveButton === button) {
+                // Закрываем просмотрщик
+                container.classList.remove('open');
+                button.classList.remove('active');
+                currentActiveButton = null;
+                currentOpenItem = null;
+                return;
             }
-        };
+            
+            // Если есть другой открытый элемент, закрываем его
+            if (currentOpenItem && currentOpenItem !== fileKey) {
+                const oldContainer = document.getElementById(`pdf-${currentOpenItem}`);
+                if (oldContainer) {
+                    oldContainer.classList.remove('open');
+                }
+                if (currentActiveButton) {
+                    currentActiveButton.classList.remove('active');
+                }
+            }
+            
+            // Загружаем PDF и открываем
+            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            container.classList.add('open');
+            
+            // Убираем активный класс с предыдущей кнопки и ставим на новую
+            if (currentActiveButton) {
+                currentActiveButton.classList.remove('active');
+            }
+            button.classList.add('active');
+            
+            currentOpenItem = fileKey;
+            currentActiveButton = button;
+        }
     </script>
 </body>
 </html>
