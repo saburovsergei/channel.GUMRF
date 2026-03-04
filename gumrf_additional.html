@@ -1,1 +1,269 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дополнительная информация | В разработке</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #9b59b6;
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 60px 30px;
+            margin-top: 2px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .construction-icon {
+            font-size: 6em;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .message {
+            font-size: 1.3em;
+            color: #666;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            max-width: 500px;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        
+        .progress-fill {
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, #9b59b6, #667eea);
+            border-radius: 10px;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .info-blocks {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .info-block {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 150px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .info-block:hover {
+            border-color: #9b59b6;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        
+        .info-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .info-text {
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .info-text strong {
+            color: #9b59b6;
+        }
+        
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 40px 20px;
+            }
+            
+            h2 {
+                font-size: 2em;
+            }
+            
+            .message {
+                font-size: 1.1em;
+            }
+            
+            .construction-icon {
+                font-size: 5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="gumrf.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    📌 Дополнительная информация <span>ГУМРФ</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="construction-icon">🚧</div>
+            
+            <h2>Страница в разработке</h2>
+            
+            <div class="message">
+                Здесь скоро появятся методические указания, справочные материалы, 
+                нормативная документация и полезные ссылки для студентов ГУМРФ.
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            
+            <div class="info-blocks">
+                <div class="info-block">
+                    <div class="info-icon">📚</div>
+                    <div class="info-text"><strong>Методички</strong><br>В процессе</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-icon">📋</div>
+                    <div class="info-text"><strong>ГОСТы</strong><br>Подготовка</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-icon">🔗</div>
+                    <div class="info-text"><strong>Ссылки</strong><br>Скоро</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-icon">📢</div>
+                    <div class="info-text"><strong>Объявления</strong><br>Ожидайте</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; color: #999;">
+                ⏳ Примерная готовность: 70%
+            </div>
+        </div>
+    </div>
+</body>
+</html>
