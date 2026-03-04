@@ -129,36 +129,12 @@
             background: white;
         }
         
-        .example-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            padding: 5px 0;
-        }
-        
-        .example-title:hover {
-            background: #f0f7ff;
-        }
-        
-        .example-triangle {
-            font-size: 1.2em;
-            color: #3498db;
-            transition: transform 0.3s ease;
-            min-width: 20px;
-            text-align: center;
-        }
-        
-        .example-title.active .example-triangle {
-            transform: rotate(90deg);
-        }
-        
         .example-name {
             font-size: 1.2em;
             font-weight: 600;
             color: #333;
-            flex: 1;
+            margin-bottom: 12px;
+            padding-left: 5px;
             word-break: break-word;
         }
         
@@ -166,14 +142,13 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 8px;
-            margin-top: 5px;
         }
         
         .action-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 8px;
             padding: 12px 5px;
             background: white;
             border: 2px solid #3498db;
@@ -205,8 +180,14 @@
             color: white;
         }
         
-        .btn-icon {
-            font-size: 1.1em;
+        .btn-triangle {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .action-btn.active .btn-triangle {
+            transform: rotate(90deg);
         }
         
         .pdf-container {
@@ -267,19 +248,16 @@
             .action-btn {
                 font-size: 0.85em;
                 padding: 10px 3px;
+                gap: 5px;
             }
             
-            .btn-icon {
+            .btn-triangle {
                 font-size: 1em;
             }
             
             .refresh-btn {
                 padding: 5px 10px;
                 font-size: 0.8em;
-            }
-            
-            .example-triangle {
-                font-size: 1em;
             }
         }
     </style>
@@ -310,7 +288,6 @@
     <script>
         let currentOpenContainer = null;
         let currentActiveButton = null;
-        let currentActiveTitle = null; // Для отслеживания активного заголовка
         let currentCacheBuster = Date.now();
         
         async function loadExamples() {
@@ -401,30 +378,17 @@
             const headerDiv = document.createElement('div');
             headerDiv.className = 'example-header';
             
-            // Заголовок с треугольником
-            const titleDiv = document.createElement('div');
-            titleDiv.className = 'example-title';
-            titleDiv.setAttribute('onclick', `toggleExample('${exampleKey}', this)`);
-            
-            titleDiv.innerHTML = `
-                <div class="example-triangle">▶</div>
+            headerDiv.innerHTML = `
                 <div class="example-name">${exampleName}</div>
+                <div class="example-buttons">
+                    <button class="action-btn" onclick="togglePDF('${exampleKey}_task', 'pdf-${exampleKey}-task', 'viewer-${exampleKey}-task', this)">
+                        <span class="btn-triangle">▶</span> Задание
+                    </button>
+                    <button class="action-btn solution" onclick="togglePDF('${exampleKey}_solution', 'pdf-${exampleKey}-solution', 'viewer-${exampleKey}-solution', this)">
+                        <span class="btn-triangle">▶</span> Решение
+                    </button>
+                </div>
             `;
-            
-            // Кнопки Задание и Решение
-            const buttonsDiv = document.createElement('div');
-            buttonsDiv.className = 'example-buttons';
-            buttonsDiv.innerHTML = `
-                <button class="action-btn" onclick="togglePDF('${exampleKey}_task', 'pdf-${exampleKey}-task', 'viewer-${exampleKey}-task', this, '${exampleKey}')">
-                    <span class="btn-icon">📋</span> Задание
-                </button>
-                <button class="action-btn solution" onclick="togglePDF('${exampleKey}_solution', 'pdf-${exampleKey}-solution', 'viewer-${exampleKey}-solution', this, '${exampleKey}')">
-                    <span class="btn-icon">✅</span> Решение
-                </button>
-            `;
-            
-            headerDiv.appendChild(titleDiv);
-            headerDiv.appendChild(buttonsDiv);
             
             // Контейнеры для PDF
             const pdfContainerTask = document.createElement('div');
@@ -456,22 +420,7 @@
             return itemDiv;
         }
         
-        function toggleExample(exampleKey, titleElement) {
-            // Если кликнули на тот же заголовок
-            if (currentActiveTitle === titleElement) {
-                titleElement.classList.remove('active');
-                currentActiveTitle = null;
-            } else {
-                // Убираем активный класс с предыдущего заголовка
-                if (currentActiveTitle) {
-                    currentActiveTitle.classList.remove('active');
-                }
-                titleElement.classList.add('active');
-                currentActiveTitle = titleElement;
-            }
-        }
-        
-        function togglePDF(fileKey, containerId, viewerId, button, exampleKey) {
+        function togglePDF(fileKey, containerId, viewerId, button) {
             const fileData = window.examplesData[fileKey];
             
             if (!fileData) {
