@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Физика ОГЭ | Материалы</title>
     <style>
-        /* Копируем все стили из шаблона */
+        /* Копируем все стили из предыдущей версии */
         * {
             margin: 0;
             padding: 0;
@@ -104,114 +104,41 @@
             border: none;
         }
         
-        .pdf-controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 25px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 15px;
-        }
-        
-        .pdf-btn {
+        .drive-link {
             display: inline-block;
+            margin-top: 20px;
             padding: 15px 30px;
-            background: white;
-            border: 2px solid #e74c3c;
-            color: #e74c3c;
+            background: #4285f4;
+            color: white;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
-            cursor: pointer;
+            text-align: center;
         }
         
-        .pdf-btn:hover {
-            background: #e74c3c;
-            color: white;
+        .drive-link:hover {
+            background: #3367d6;
             transform: translateY(-2px);
-        }
-        
-        .pdf-btn.active {
-            background: #e74c3c;
-            color: white;
-        }
-        
-        .pdf-list {
-            list-style: none;
-            padding: 0;
-            margin-top: 30px;
-        }
-        
-        .pdf-list li {
-            margin-bottom: 10px;
-            padding: 15px 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .pdf-list li:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(66, 133, 244, 0.3);
         }
         
         .pdf-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            text-align: center;
         }
         
-        .pdf-icon {
-            font-size: 1.5em;
-            color: #e74c3c;
-        }
-        
-        .pdf-name {
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .pdf-size {
+        .pdf-info p {
             color: #666;
-            font-size: 0.9em;
-        }
-        
-        .open-pdf {
-            display: inline-block;
-            padding: 8px 20px;
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .open-pdf:hover {
-            background: #219a52;
-            transform: scale(1.05);
+            line-height: 1.6;
         }
         
         @media (max-width: 768px) {
             .pdf-container {
                 height: 500px;
-            }
-            
-            .pdf-list li {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-            
-            .pdf-info {
-                flex-direction: column;
-                text-align: center;
             }
         }
     </style>
@@ -232,84 +159,55 @@
         <div class="content">
             <div class="section-title">📚 Физика - материалы для подготовки к ОГЭ</div>
             
-            <!-- Встроенный PDF просмотрщик -->
+            <!-- Встроенный просмотрщик PDF с Google Drive -->
             <div class="pdf-container">
-                <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
+                <iframe 
+                    class="pdf-viewer" 
+                    src="https://drive.google.com/file/d/1vhdrKd4VHK5mvRY0rp9tpSmqQ9mE2PWb/preview" 
+                    allow="autoplay"
+                >
+                </iframe>
             </div>
             
-            <!-- Кнопки для переключения PDF -->
-            <div class="pdf-controls">
-                <button class="pdf-btn active" onclick="loadPDF('file1')">📄 Механика</button>
-                <button class="pdf-btn" onclick="loadPDF('file2')">📄 Термодинамика</button>
-                <button class="pdf-btn" onclick="loadPDF('file3')">📄 Электричество</button>
-                <button class="pdf-btn" onclick="loadPDF('file4')">📄 Оптика</button>
+            <!-- Информация о файле -->
+            <div class="pdf-info">
+                <h3 style="margin-bottom: 15px; color: #333;">Работа № 1 (ОГЭ 2025)</h3>
+                <p style="margin-bottom: 20px;">
+                    Тренировочная работа по математике для подготовки к ОГЭ 2025.<br>
+                    Включает задания с 1 по 14 с ответами.
+                </p>
+                
+                <!-- Кнопка для открытия в Google Drive -->
+                <a 
+                    href="https://drive.google.com/file/d/1vhdrKd4VHK5mvRY0rp9tpSmqQ9mE2PWb/view?usp=drive_link" 
+                    class="drive-link" 
+                    target="_blank"
+                >
+                    📂 Открыть в Google Диске
+                </a>
+                
+                <!-- Кнопка для скачивания -->
+                <a 
+                    href="https://drive.google.com/uc?export=download&id=1vhdrKd4VHK5mvRY0rp9tpSmqQ9mE2PWb" 
+                    class="drive-link" 
+                    style="background: #27ae60; margin-left: 15px;"
+                    target="_blank"
+                >
+                    ⬇ Скачать PDF
+                </a>
             </div>
             
-            <!-- Список всех PDF файлов -->
-            <ul class="pdf-list">
-                <li>
-                    <div class="pdf-info">
-                        <span class="pdf-icon">📕</span>
-                        <span class="pdf-name">Механика: законы Ньютона</span>
-                        <span class="pdf-size">PDF, 2.5 МБ</span>
-                    </div>
-                    <a href="#" class="open-pdf" onclick="loadPDF('file1'); return false;">Открыть</a>
-                </li>
-                <li>
-                    <div class="pdf-info">
-                        <span class="pdf-icon">📗</span>
-                        <span class="pdf-name">Термодинамика: тепловые явления</span>
-                        <span class="pdf-size">PDF, 3.1 МБ</span>
-                    </div>
-                    <a href="#" class="open-pdf" onclick="loadPDF('file2'); return false;">Открыть</a>
-                </li>
-                <li>
-                    <div class="pdf-info">
-                        <span class="pdf-icon">📘</span>
-                        <span class="pdf-name">Электричество: цепи и законы</span>
-                        <span class="pdf-size">PDF, 2.8 МБ</span>
-                    </div>
-                    <a href="#" class="open-pdf" onclick="loadPDF('file3'); return false;">Открыть</a>
-                </li>
-                <li>
-                    <div class="pdf-info">
-                        <span class="pdf-icon">📙</span>
-                        <span class="pdf-name">Оптика: линзы и зеркала</span>
-                        <span class="pdf-size">PDF, 2.3 МБ</span>
-                    </div>
-                    <a href="#" class="open-pdf" onclick="loadPDF('file4'); return false;">Открыть</a>
-                </li>
-            </ul>
+            <!-- Дополнительная информация -->
+            <div style="margin-top: 30px; padding: 20px; background: #fff3e0; border-radius: 15px;">
+                <h4 style="color: #e74c3c; margin-bottom: 10px;">📌 Как работать с материалом:</h4>
+                <ul style="color: #666; line-height: 1.8; margin-left: 20px;">
+                    <li>Используйте встроенный просмотрщик для быстрого просмотра</li>
+                    <li>Нажмите "Открыть в Google Диске" для полноэкранного режима</li>
+                    <li>Скачайте PDF для работы офлайн</li>
+                    <li>В просмотрщике доступны: печать, скачивание, масштабирование</li>
+                </ul>
+            </div>
         </div>
     </div>
-
-    <script>
-        // ЗДЕСЬ ВСТАВЬТЕ ССЫЛКИ НА ВАШИ ФАЙЛЫ ИЗ GOOGLE CLOUD
-        const pdfFiles = {
-            file1: 'https://drive.google.com/file/d/1vhdrKd4VHK5mvRY0rp9tpSmqQ9mE2PWb/view?usp=drive_link',
-            file2: 'https://drive.google.com/file/d/1vhdrKd4VHK5mvRY0rp9tpSmqQ9mE2PWb/view?usp=drive_link',
-            file3: 'https://storage.googleapis.com/your-bucket-name/oge_physics_electricity.pdf',
-            file4: 'https://storage.googleapis.com/your-bucket-name/oge_physics_optics.pdf'
-        };
-        
-        function loadPDF(fileKey) {
-            const viewer = document.getElementById('pdfViewer');
-            viewer.src = pdfFiles[fileKey];
-            
-            // Подсветка активной кнопки
-            document.querySelectorAll('.pdf-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Прокрутка к просмотрщику
-            viewer.scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        // Загружаем первый PDF при открытии страницы
-        window.onload = function() {
-            loadPDF('file1');
-        };
-    </script>
 </body>
 </html>
