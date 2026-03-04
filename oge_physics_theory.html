@@ -158,7 +158,20 @@
             display: block;
         }
         
-        /* Для очень маленьких экранов */
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
         @media (max-width: 380px) {
             .theory-name {
                 font-size: 1em;
@@ -189,422 +202,114 @@
         </div>
         
         <div class="content">
-            <div class="theory-list">
-                <!-- Тема 1 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic1', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 1</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic1">
-                        <iframe class="pdf-viewer" id="viewer-topic1" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 2 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic2', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 2</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic2">
-                        <iframe class="pdf-viewer" id="viewer-topic2" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 3 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic3', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 3</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic3">
-                        <iframe class="pdf-viewer" id="viewer-topic3" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 4 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic4', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 4</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic4">
-                        <iframe class="pdf-viewer" id="viewer-topic4" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 5 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic5', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 5</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic5">
-                        <iframe class="pdf-viewer" id="viewer-topic5" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 6 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic6', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 6</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic6">
-                        <iframe class="pdf-viewer" id="viewer-topic6" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 7 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic7', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 7</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic7">
-                        <iframe class="pdf-viewer" id="viewer-topic7" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 8 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic8', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 8</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic8">
-                        <iframe class="pdf-viewer" id="viewer-topic8" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 9 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic9', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 9</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic9">
-                        <iframe class="pdf-viewer" id="viewer-topic9" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 10 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic10', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 10</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic10">
-                        <iframe class="pdf-viewer" id="viewer-topic10" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 11 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic11', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 11</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic11">
-                        <iframe class="pdf-viewer" id="viewer-topic11" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 12 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic12', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 12</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic12">
-                        <iframe class="pdf-viewer" id="viewer-topic12" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 13 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic13', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 13</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic13">
-                        <iframe class="pdf-viewer" id="viewer-topic13" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 14 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic14', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 14</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic14">
-                        <iframe class="pdf-viewer" id="viewer-topic14" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 15 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic15', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 15</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic15">
-                        <iframe class="pdf-viewer" id="viewer-topic15" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 16 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic16', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 16</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic16">
-                        <iframe class="pdf-viewer" id="viewer-topic16" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 17 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic17', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 17</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic17">
-                        <iframe class="pdf-viewer" id="viewer-topic17" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 18 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic18', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 18</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic18">
-                        <iframe class="pdf-viewer" id="viewer-topic18" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 19 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic19', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 19</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic19">
-                        <iframe class="pdf-viewer" id="viewer-topic19" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 20 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic20', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 20</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic20">
-                        <iframe class="pdf-viewer" id="viewer-topic20" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 21 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic21', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 21</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic21">
-                        <iframe class="pdf-viewer" id="viewer-topic21" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 22 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic22', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 22</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic22">
-                        <iframe class="pdf-viewer" id="viewer-topic22" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 23 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic23', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 23</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic23">
-                        <iframe class="pdf-viewer" id="viewer-topic23" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 24 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic24', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 24</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic24">
-                        <iframe class="pdf-viewer" id="viewer-topic24" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 25 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic25', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 25</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic25">
-                        <iframe class="pdf-viewer" id="viewer-topic25" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 26 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic26', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 26</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic26">
-                        <iframe class="pdf-viewer" id="viewer-topic26" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 27 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic27', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 27</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic27">
-                        <iframe class="pdf-viewer" id="viewer-topic27" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 28 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic28', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 28</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic28">
-                        <iframe class="pdf-viewer" id="viewer-topic28" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 29 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic29', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 29</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic29">
-                        <iframe class="pdf-viewer" id="viewer-topic29" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Тема 30 -->
-                <div class="theory-item">
-                    <div class="theory-header" onclick="toggleTheory('topic30', this)">
-                        <div class="theory-icon">📘</div>
-                        <div class="theory-name">Тема 30</div>
-                        <div class="expand-icon">▼</div>
-                    </div>
-                    <div class="pdf-container" id="pdf-topic30">
-                        <iframe class="pdf-viewer" id="viewer-topic30" src=""></iframe>
-                    </div>
-                </div>
+            <div id="theory-list-container" class="theory-list">
+                <div class="loading">Загрузка тем...</div>
             </div>
         </div>
     </div>
 
     <script>
-        // !!! ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ ДЛЯ 30 ТЕМ !!!
-        const theoryFiles = {
-            topic1: { id: 'ID_ТЕМЫ_1', name: 'Тема 1' },
-            topic2: { id: 'ID_ТЕМЫ_2', name: 'Тема 2' },
-            topic3: { id: 'ID_ТЕМЫ_3', name: 'Тема 3' },
-            topic4: { id: 'ID_ТЕМЫ_4', name: 'Тема 4' },
-            topic5: { id: 'ID_ТЕМЫ_5', name: 'Тема 5' },
-            topic6: { id: 'ID_ТЕМЫ_6', name: 'Тема 6' },
-            topic7: { id: 'ID_ТЕМЫ_7', name: 'Тема 7' },
-            topic8: { id: 'ID_ТЕМЫ_8', name: 'Тема 8' },
-            topic9: { id: 'ID_ТЕМЫ_9', name: 'Тема 9' },
-            topic10: { id: 'ID_ТЕМЫ_10', name: 'Тема 10' },
-            topic11: { id: 'ID_ТЕМЫ_11', name: 'Тема 11' },
-            topic12: { id: 'ID_ТЕМЫ_12', name: 'Тема 12' },
-            topic13: { id: 'ID_ТЕМЫ_13', name: 'Тема 13' },
-            topic14: { id: 'ID_ТЕМЫ_14', name: 'Тема 14' },
-            topic15: { id: 'ID_ТЕМЫ_15', name: 'Тема 15' },
-            topic16: { id: 'ID_ТЕМЫ_16', name: 'Тема 16' },
-            topic17: { id: 'ID_ТЕМЫ_17', name: 'Тема 17' },
-            topic18: { id: 'ID_ТЕМЫ_18', name: 'Тема 18' },
-            topic19: { id: 'ID_ТЕМЫ_19', name: 'Тема 19' },
-            topic20: { id: 'ID_ТЕМЫ_20', name: 'Тема 20' },
-            topic21: { id: 'ID_ТЕМЫ_21', name: 'Тема 21' },
-            topic22: { id: 'ID_ТЕМЫ_22', name: 'Тема 22' },
-            topic23: { id: 'ID_ТЕМЫ_23', name: 'Тема 23' },
-            topic24: { id: 'ID_ТЕМЫ_24', name: 'Тема 24' },
-            topic25: { id: 'ID_ТЕМЫ_25', name: 'Тема 25' },
-            topic26: { id: 'ID_ТЕМЫ_26', name: 'Тема 26' },
-            topic27: { id: 'ID_ТЕМЫ_27', name: 'Тема 27' },
-            topic28: { id: 'ID_ТЕМЫ_28', name: 'Тема 28' },
-            topic29: { id: 'ID_ТЕМЫ_29', name: 'Тема 29' },
-            topic30: { id: 'ID_ТЕМЫ_30', name: 'Тема 30' }
-        };
-        
         let currentOpenContainer = null;
         let currentActiveHeader = null;
         
-        function toggleTheory(topic, header) {
-            const fileId = theoryFiles[topic].id;
-            const container = document.getElementById(`pdf-${topic}`);
-            const viewer = document.getElementById(`viewer-${topic}`);
+        // Загрузка данных из текстового файла
+        async function loadThemes() {
+            try {
+                const response = await fetch('oge_physics_theory_themes.txt');
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить файл с темами');
+                }
+                
+                const text = await response.text();
+                const lines = text.trim().split('\n');
+                
+                const theoryFiles = {};
+                const container = document.getElementById('theory-list-container');
+                container.innerHTML = ''; // Очищаем контейнер
+                
+                lines.forEach((line, index) => {
+                    // Пропускаем пустые строки
+                    if (!line.trim()) return;
+                    
+                    const [name, id] = line.split('|');
+                    if (name && id) {
+                        const topicKey = `topic${index + 1}`;
+                        theoryFiles[topicKey] = { 
+                            id: id.trim(), 
+                            name: name.trim() 
+                        };
+                        
+                        // Создаем элемент темы
+                        const topicElement = createTopicElement(topicKey, name.trim());
+                        container.appendChild(topicElement);
+                    }
+                });
+                
+                // Сохраняем theoryFiles в глобальную область видимости
+                window.theoryFiles = theoryFiles;
+                
+                // Если нет тем, показываем сообщение
+                if (lines.length === 0) {
+                    container.innerHTML = '<div class="error">Файл с темами пуст</div>';
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки тем:', error);
+                const container = document.getElementById('theory-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки тем. Пожалуйста, проверьте файл oge_physics_theory_themes.txt</div>`;
+            }
+        }
+        
+        // Создание HTML элемента для темы
+        function createTopicElement(topicKey, topicName) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'theory-item';
             
-            // Проверяем доступность файла
-            if (!fileId || fileId.startsWith('ID_')) {
-                alert(`Файл "${theoryFiles[topic].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'theory-header';
+            headerDiv.setAttribute('onclick', `toggleTheory('${topicKey}', this)`);
+            
+            headerDiv.innerHTML = `
+                <div class="theory-icon">📘</div>
+                <div class="theory-name">${topicName}</div>
+                <div class="expand-icon">▼</div>
+            `;
+            
+            const pdfContainer = document.createElement('div');
+            pdfContainer.className = 'pdf-container';
+            pdfContainer.id = `pdf-${topicKey}`;
+            
+            const pdfViewer = document.createElement('iframe');
+            pdfViewer.className = 'pdf-viewer';
+            pdfViewer.id = `viewer-${topicKey}`;
+            pdfViewer.src = '';
+            
+            pdfContainer.appendChild(pdfViewer);
+            itemDiv.appendChild(headerDiv);
+            itemDiv.appendChild(pdfContainer);
+            
+            return itemDiv;
+        }
+        
+        // Функция открытия/закрытия темы
+        function toggleTheory(topicKey, header) {
+            const fileData = window.theoryFiles[topicKey];
+            
+            if (!fileData) {
+                alert(`Данные для темы не найдены`);
                 return;
             }
             
+            if (!fileData.id || fileData.id.startsWith('ID_')) {
+                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле oge_physics_theory_themes.txt`);
+                return;
+            }
+            
+            const container = document.getElementById(`pdf-${topicKey}`);
+            const viewer = document.getElementById(`viewer-${topicKey}`);
+            
             // Если кликнули на ту же тему
             if (currentActiveHeader === header) {
-                // Закрываем
                 container.classList.remove('open');
                 header.classList.remove('active');
                 currentActiveHeader = null;
@@ -621,7 +326,7 @@
             }
             
             // Загружаем PDF и открываем новую тему
-            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview`;
             container.classList.add('open');
             header.classList.add('active');
             
@@ -633,6 +338,9 @@
                 container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 100);
         }
+        
+        // Загружаем темы при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadThemes);
     </script>
 </body>
 </html>
