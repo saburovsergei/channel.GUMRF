@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Физика ОГЭ | Теория</title>
     <style>
-        /* Стили остаются без изменений */
         * {
             margin: 0;
             padding: 0;
@@ -22,6 +21,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
         
         .header {
@@ -29,9 +29,10 @@
             border-radius: 20px 20px 0 0;
             padding: 15px 20px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
         }
         
         .nav-left {
@@ -57,7 +58,8 @@
         
         .nav-right {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
         
         .page-title {
@@ -78,6 +80,28 @@
             padding: 2px 10px;
             border-radius: 30px;
             font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
         }
         
         .content {
@@ -173,22 +197,21 @@
             font-size: 1.1em;
         }
         
-        .refresh-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 30px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .refresh-btn:hover {
-            background: #764ba2;
-            transform: scale(1.05);
+        @media (max-width: 768px) {
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .refresh-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
         }
         
         @media (max-width: 380px) {
@@ -204,6 +227,11 @@
             .theory-header {
                 padding: 10px 12px;
             }
+            
+            .refresh-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
+            }
         }
     </style>
 </head>
@@ -217,11 +245,13 @@
                 <div class="page-title">
                     Физика 📖 <span>теория</span>
                 </div>
+                <button class="refresh-btn" onclick="forceReloadThemes()">
+                    <span>🔄</span> Обновить
+                </button>
             </div>
         </div>
         
         <div class="content">
-            <button class="refresh-btn" onclick="forceReloadThemes()">🔄 Обновить темы</button>
             <div id="theory-list-container" class="theory-list">
                 <div class="loading">Загрузка тем...</div>
             </div>
@@ -303,6 +333,13 @@
         function forceReloadThemes() {
             currentCacheBuster = Date.now(); // Новый timestamp
             loadThemes(); // Перезагружаем
+            
+            // Визуальный эффект нажатия
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
         }
         
         // Создание HTML элемента для темы
