@@ -229,15 +229,15 @@
         
         <div class="content">
             <div class="examples-list">
-                <!-- Пример A -->
+                <!-- Пример A: Задание + Решение -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример A</div>
                         <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleA', this)">
+                            <button class="action-btn" onclick="togglePDF('exampleA', this, 'pdf-exampleA', 'viewer-exampleA')">
                                 <span class="btn-icon">📋</span> Задание
                             </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionA', this)">
+                            <button class="action-btn solution" onclick="togglePDF('solutionA', this, 'pdf-solutionA', 'viewer-solutionA')">
                                 <span class="btn-icon">✅</span> Решение
                             </button>
                         </div>
@@ -245,17 +245,20 @@
                     <div class="pdf-container" id="pdf-exampleA">
                         <iframe class="pdf-viewer" id="viewer-exampleA" src=""></iframe>
                     </div>
+                    <div class="pdf-container" id="pdf-solutionA">
+                        <iframe class="pdf-viewer" id="viewer-solutionA" src=""></iframe>
+                    </div>
                 </div>
                 
-                <!-- Пример B -->
+                <!-- Пример B: Задание + Решение -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример B</div>
                         <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleB', this)">
+                            <button class="action-btn" onclick="togglePDF('exampleB', this, 'pdf-exampleB', 'viewer-exampleB')">
                                 <span class="btn-icon">📋</span> Задание
                             </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionB', this)">
+                            <button class="action-btn solution" onclick="togglePDF('solutionB', this, 'pdf-solutionB', 'viewer-solutionB')">
                                 <span class="btn-icon">✅</span> Решение
                             </button>
                         </div>
@@ -263,17 +266,20 @@
                     <div class="pdf-container" id="pdf-exampleB">
                         <iframe class="pdf-viewer" id="viewer-exampleB" src=""></iframe>
                     </div>
+                    <div class="pdf-container" id="pdf-solutionB">
+                        <iframe class="pdf-viewer" id="viewer-solutionB" src=""></iframe>
+                    </div>
                 </div>
                 
-                <!-- Пример C -->
+                <!-- Пример C: Задание + Решение -->
                 <div class="example-item">
                     <div class="example-header">
                         <div class="example-name">Пример C</div>
                         <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleC', this)">
+                            <button class="action-btn" onclick="togglePDF('exampleC', this, 'pdf-exampleC', 'viewer-exampleC')">
                                 <span class="btn-icon">📋</span> Задание
                             </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionC', this)">
+                            <button class="action-btn solution" onclick="togglePDF('solutionC', this, 'pdf-solutionC', 'viewer-solutionC')">
                                 <span class="btn-icon">✅</span> Решение
                             </button>
                         </div>
@@ -281,72 +287,72 @@
                     <div class="pdf-container" id="pdf-exampleC">
                         <iframe class="pdf-viewer" id="viewer-exampleC" src=""></iframe>
                     </div>
+                    <div class="pdf-container" id="pdf-solutionC">
+                        <iframe class="pdf-viewer" id="viewer-solutionC" src=""></iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ С GOOGLE DRIVE !!!
+        // !!! ВАШИ ID ФАЙЛОВ (все 6 штук) !!!
         const files = {
-            // Задания (примеры)
+            // Задания
             exampleA: { id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs', name: 'Задание A' },
             exampleB: { id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv', name: 'Задание B' },
-            exampleC: { id: 'ID_ЗАДАНИЯ_C', name: 'Задание C' },
+            exampleC: { id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J', name: 'Задание C' },
             
             // Решения
-            solutionA: { id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv', name: 'Решение A' },
-            solutionB: { id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs', name: 'Решение B' },
-            solutionC: { id: 'ID_РЕШЕНИЯ_C', name: 'Решение C' }
+            solutionA: { id: '1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO', name: 'Решение A' },
+            solutionB: { id: '1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD', name: 'Решение B' },
+            solutionC: { id: '14enFT_KXbB0olde8tMkWubr-aH9pvQln', name: 'Решение C' }
         };
         
-        let currentOpenItem = null;
+        let currentOpenContainer = null;
         let currentActiveButton = null;
         
-        function togglePDF(fileKey, button) {
+        function togglePDF(fileKey, button, containerId, viewerId) {
             const fileId = files[fileKey].id;
-            const exampleId = fileKey.slice(0, -1); // exampleA -> example, solutionA -> solution
-            const container = document.getElementById(`pdf-${fileKey}`);
-            const viewer = document.getElementById(`viewer-${fileKey}`);
+            const container = document.getElementById(containerId);
+            const viewer = document.getElementById(viewerId);
             
             // Проверяем доступность файла
-            if (!fileId || fileId.startsWith('ID_')) {
-                alert(`Файл "${files[fileKey].name}" еще не добавлен. Пожалуйста, вставьте ID файла в код.`);
+            if (!fileId) {
+                alert(`Файл "${files[fileKey].name}" не найден.`);
                 return;
             }
             
             // Если кликнули на ту же кнопку, что уже активна
             if (currentActiveButton === button) {
-                // Закрываем просмотрщик
-                container.classList.remove('open');
+                // Закрываем этот контейнер
+                if (currentOpenContainer) {
+                    currentOpenContainer.classList.remove('open');
+                }
                 button.classList.remove('active');
                 currentActiveButton = null;
-                currentOpenItem = null;
+                currentOpenContainer = null;
                 return;
             }
             
-            // Если есть другой открытый элемент, закрываем его
-            if (currentOpenItem && currentOpenItem !== fileKey) {
-                const oldContainer = document.getElementById(`pdf-${currentOpenItem}`);
-                if (oldContainer) {
-                    oldContainer.classList.remove('open');
-                }
-                if (currentActiveButton) {
-                    currentActiveButton.classList.remove('active');
-                }
+            // Если есть другой открытый контейнер, закрываем его
+            if (currentOpenContainer && currentOpenContainer !== container) {
+                currentOpenContainer.classList.remove('open');
             }
             
-            // Загружаем PDF и открываем
-            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
-            container.classList.add('open');
-            
-            // Убираем активный класс с предыдущей кнопки и ставим на новую
+            // Убираем активный класс с предыдущей кнопки
             if (currentActiveButton) {
                 currentActiveButton.classList.remove('active');
             }
+            
+            // Загружаем PDF в просмотрщик
+            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            
+            // Открываем новый контейнер
+            container.classList.add('open');
             button.classList.add('active');
             
-            currentOpenItem = fileKey;
+            currentOpenContainer = container;
             currentActiveButton = button;
         }
     </script>
