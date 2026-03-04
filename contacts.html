@@ -121,7 +121,13 @@
     <div class="form-container">
         <h2>Обратная связь</h2>
         
-        <form id="contactForm">
+        <!-- ИСПРАВЛЕНО: action указывает на FormSubmit -->
+        <form action="https://formsubmit.co/sssssaaaaabbbbb@mail.ru" method="POST">
+            <!-- Отключаем капчу (можно убрать, если нужна защита) -->
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Страница, на которую перейдем после отправки -->
+            <input type="hidden" name="_next" value="https://saburovsergei.github.io/channel.GUMRF/thanks.html">
+            
             <div class="form-group">
                 <label for="name">Имя</label>
                 <input type="text" id="name" name="name" required>
@@ -144,61 +150,5 @@
         
         <a href="index.html" class="back-link">← Вернуться на главную</a>
     </div>
-
-    <script>
-        // ⚠️ ВАЖНО: Замените эти значения на свои!
-        const BOT_TOKEN = 'ВАШ_ТОКЕН_БОТА';  // Получить у @BotFather
-        const CHAT_ID = 'ВАШ_CHAT_ID';       // Получить у @userinfobot
-        
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            const statusDiv = document.getElementById('status');
-            
-            // Формируем сообщение
-            const text = `
-Новая заявка с сайта
-
-Имя: ${name}
-Email: ${email}
-Сообщение: ${message}
-            `;
-            
-            try {
-                const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: text
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.ok) {
-                    statusDiv.className = 'status success';
-                    statusDiv.textContent = 'Сообщение успешно отправлено!';
-                    this.reset();
-                } else {
-                    throw new Error('Ошибка отправки');
-                }
-            } catch (error) {
-                statusDiv.className = 'status error';
-                statusDiv.textContent = 'Ошибка при отправке. Попробуйте позже.';
-                console.error('Error:', error);
-            }
-            
-            // Скрываем сообщение через 5 секунд
-            setTimeout(() => {
-                statusDiv.style.display = 'none';
-            }, 5000);
-        });
-    </script>
 </body>
 </html>
