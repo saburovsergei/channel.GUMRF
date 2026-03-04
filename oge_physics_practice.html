@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Физика ОГЭ | Практика</title>
     <style>
-        /* Стили полностью копируем из theory, меняем только цвета на синие/зеленые для разнообразия */
         * {
             margin: 0;
             padding: 0;
@@ -84,7 +83,7 @@
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
             border-bottom: 3px solid #27ae60;
         }
@@ -95,7 +94,7 @@
             border: 2px solid #e0e0e0;
             border-radius: 15px;
             overflow: hidden;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .pdf-viewer {
@@ -104,35 +103,87 @@
             border: none;
         }
         
-        .practice-buttons {
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .example-pair {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .example-pair:hover {
+            border-color: #27ae60;
+            background: #f0f9f0;
+            transform: translateX(10px);
+        }
+        
+        .example-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            min-width: 100px;
+        }
+        
+        .example-links {
             display: flex;
             gap: 15px;
-            justify-content: center;
-            margin: 20px 0;
             flex-wrap: wrap;
         }
         
-        .practice-btn {
-            padding: 15px 30px;
+        .example-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 25px;
             background: white;
-            border: 2px solid #27ae60;
+            border: 2px solid #3498db;
             border-radius: 50px;
-            color: #27ae60;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
-        .practice-btn:hover {
-            background: #27ae60;
+        .example-link.solution {
+            border-color: #27ae60;
+            color: #27ae60;
+        }
+        
+        .example-link:hover {
+            background: #3498db;
             color: white;
             transform: translateY(-2px);
         }
         
-        .practice-btn.active {
+        .example-link.solution:hover {
             background: #27ae60;
             color: white;
+        }
+        
+        .example-link.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .example-link.solution.active {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .link-icon {
+            font-size: 1.2em;
         }
         
         @media (max-width: 768px) {
@@ -140,14 +191,20 @@
                 height: 500px;
             }
             
-            .practice-buttons {
+            .example-pair {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
+                gap: 10px;
             }
             
-            .practice-btn {
+            .example-links {
                 width: 100%;
-                max-width: 300px;
+                justify-content: space-between;
+            }
+            
+            .example-link {
+                flex: 1;
+                justify-content: center;
             }
         }
     </style>
@@ -166,43 +223,94 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Практические задания</div>
+            <div class="section-title">📚 Задачи с решениями</div>
             
+            <!-- Контейнер для предпросмотра PDF -->
             <div class="pdf-container">
                 <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
             </div>
             
-            <div class="practice-buttons">
-                <button class="practice-btn active" onclick="loadPDF('work1')">Работа №1</button>
-                <button class="practice-btn" onclick="loadPDF('work2')">Работа №2</button>
-                <button class="practice-btn" onclick="loadPDF('work3')">Работа №3</button>
-                <button class="practice-btn" onclick="loadPDF('work4')">Работа №4</button>
+            <!-- Список примеров с парными ссылками -->
+            <div class="examples-list">
+                <!-- Пример A -->
+                <div class="example-pair">
+                    <div class="example-name">Пример A</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('exampleA'); return false;">
+                            <span class="link-icon">📋</span> Задание
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solutionA'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример B -->
+                <div class="example-pair">
+                    <div class="example-name">Пример B</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('exampleB'); return false;">
+                            <span class="link-icon">📋</span> Задание
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solutionB'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Пример C -->
+                <div class="example-pair">
+                    <div class="example-name">Пример C</div>
+                    <div class="example-links">
+                        <a href="#" class="example-link" onclick="loadPDF('exampleC'); return false;">
+                            <span class="link-icon">📋</span> Задание
+                        </a>
+                        <a href="#" class="example-link solution" onclick="loadPDF('solutionC'); return false;">
+                            <span class="link-icon">✅</span> Решение
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Здесь нужно будет вставить ID ваших PDF файлов с практикой
-        const practiceFiles = {
-            work1: { id: 'ID_ФАЙЛА_РАБОТА1', name: 'Работа №1' },
-            work2: { id: 'ID_ФАЙЛА_РАБОТА2', name: 'Работа №2' },
-            work3: { id: 'ID_ФАЙЛА_РАБОТА3', name: 'Работа №3' },
-            work4: { id: 'ID_ФАЙЛА_РАБОТА4', name: 'Работа №4' }
+        // !!! ЗДЕСЬ ВСТАВЬТЕ ID ВАШИХ ФАЙЛОВ !!!
+        const files = {
+            // Задания (примеры)
+            exampleA: { id: 'ID_ЗАДАНИЯ_A', name: 'Задание A' },
+            exampleB: { id: 'ID_ЗАДАНИЯ_B', name: 'Задание B' },
+            exampleC: { id: 'ID_ЗАДАНИЯ_C', name: 'Задание C' },
+            
+            // Решения
+            solutionA: { id: 'ID_РЕШЕНИЯ_A', name: 'Решение A' },
+            solutionB: { id: 'ID_РЕШЕНИЯ_B', name: 'Решение B' },
+            solutionC: { id: 'ID_РЕШЕНИЯ_C', name: 'Решение C' }
         };
         
-        function loadPDF(work) {
-            const fileId = practiceFiles[work].id;
-            document.getElementById('pdfViewer').src = `https://drive.google.com/file/d/${fileId}/preview`;
+        function loadPDF(fileKey) {
+            const fileId = files[fileKey].id;
+            const viewer = document.getElementById('pdfViewer');
             
-            document.querySelectorAll('.practice-btn').forEach(btn => {
-                btn.classList.remove('active');
+            if (fileId && fileId !== 'ID_ЗАДАНИЯ_A' && !fileId.startsWith('ID_')) {
+                viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            } else {
+                alert('Файл еще не добавлен. Вставьте ID файла в код.');
+                return;
+            }
+            
+            // Подсвечиваем активную ссылку
+            document.querySelectorAll('.example-link').forEach(link => {
+                link.classList.remove('active');
             });
             event.target.classList.add('active');
         }
         
+        // Загружаем первый пример при открытии
         window.onload = function() {
-            if (practiceFiles.work1.id !== 'ID_ФАЙЛА_РАБОТА1') {
-                loadPDF('work1');
+            // Проверяем, есть ли реальные ID
+            if (files.exampleA.id !== 'ID_ЗАДАНИЯ_A') {
+                loadPDF('exampleA');
             }
         };
     </script>
