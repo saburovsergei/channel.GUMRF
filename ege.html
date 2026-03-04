@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ЕГЭ | Сайт преподавателя</title>
+    <title>ЕГЭ | Учебные материалы</title>
     <style>
         * {
             margin: 0;
@@ -89,7 +89,7 @@
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
             border-bottom: 3px solid #3498db;
         }
@@ -157,6 +157,13 @@
             text-decoration: none;
         }
         
+        @media (max-width: 768px) {
+            .materials-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
         @media (max-width: 600px) {
             .header {
                 flex-direction: column;
@@ -173,9 +180,12 @@
                 padding: 20px;
             }
             
-            .materials-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
+            .material-card {
+                padding: 25px 20px;
+            }
+            
+            .material-card h3 {
+                font-size: 1.3em;
             }
         }
     </style>
@@ -194,39 +204,39 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Учебные материалы</div>
+            <div class="section-title">📚 Учебные материалы для ЕГЭ</div>
             
             <div class="materials-grid">
-                <!-- Карточка 1: Профильная математика -->
+                <!-- Карточка: Математика (профиль) -->
                 <div class="material-card">
                     <div class="material-icon">📐</div>
                     <h3>Математика (профиль)</h3>
                     <p>Задания 2-й части, теория, варианты, разбор сложных задач</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
+                    <a href="ege_math_profile.html" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 2: Базовая математика -->
+                <!-- Карточка: Математика (база) -->
                 <div class="material-card">
                     <div class="material-icon">🧮</div>
                     <h3>Математика (база)</h3>
                     <p>Тренировочные варианты, разборы, теория вероятностей</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
+                    <a href="ege_math_base.html" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 3: Физика -->
+                <!-- Карточка: Физика -->
                 <div class="material-card">
                     <div class="material-icon">⚡</div>
                     <h3>Физика</h3>
                     <p>Сложные задачи, теория, формулы, подготовка к олимпиадам</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
+                    <a href="ege_physics.html" class="material-link">Открыть материалы →</a>
                 </div>
                 
-                <!-- Карточка 4: Информатика -->
+                <!-- Карточка: Информатика -->
                 <div class="material-card">
                     <div class="material-icon">💻</div>
                     <h3>Информатика</h3>
                     <p>Задания 25-27, алгоритмы, программирование на Python</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
+                    <a href="ege_informatics.html" class="material-link">Открыть материалы →</a>
                 </div>
             </div>
         </div>
