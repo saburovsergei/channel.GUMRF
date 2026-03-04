@@ -1,5 +1,5 @@
 Пример А: Кодирование|ID_ЗАДАНИЯ_1|ID_РЕШЕНИЯ_1
 Пример Б: Алгоритмы|ID_ЗАДАНИЯ_2|ID_РЕШЕНИЯ_2
 Пример В: Python|ID_ЗАДАНИЯ_3|ID_РЕШЕНИЯ_3
-Пример Г: Логика|ID_ЗАДАНИЯ_4|ID_РЕШЕНИЯ_4
-Пример Д: Файловая система|ID_ЗАДАНИЯ_5|ID_РЕШЕНИЯ_5
+Пример А|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+Пример Б|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
