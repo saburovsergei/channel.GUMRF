@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Математика ОГЭ | Материалы</title>
+    <title>Физика ОГЭ | Материалы</title>
     <style>
-        /* --- СТИЛИ (полностью скопированы из работающей страницы physics) --- */
+        /* --- СТИЛИ (аналогично странице математики) --- */
         * {
             margin: 0;
             padding: 0;
@@ -208,40 +208,40 @@
             </div>
             <div class="nav-right">
                 <div class="page-title">
-                    Математика 📐 <span>ОГЭ</span>
+                    Физика ⚡ <span>ОГЭ</span>
                 </div>
             </div>
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Математика - тренировочные работы</div>
+            <div class="section-title">📚 Физика - тренировочные работы</div>
             
             <!-- Контейнер для предпросмотра PDF -->
             <div class="pdf-container">
                 <iframe class="pdf-viewer" id="pdfViewer" src=""></iframe>
             </div>
             
-            <!-- Карточки для выбора файлов (ТРИ ШТУКИ) -->
+            <!-- Карточки для выбора файлов -->
             <div class="files-grid">
                 <!-- Карточка 1: Работа №1 -->
                 <div class="file-card active" onclick="loadFile('file1')" id="card1">
-                    <div class="file-icon">📘</div>
+                    <div class="file-icon">⚡</div>
                     <h3>Работа № 1</h3>
-                    <p>Тренировочная работа ОГЭ 2025</p>
+                    <p>Тренировочная работа по физике</p>
                 </div>
                 
                 <!-- Карточка 2: Работа №2 -->
                 <div class="file-card" onclick="loadFile('file2')" id="card2">
-                    <div class="file-icon">📗</div>
+                    <div class="file-icon">🔋</div>
                     <h3>Работа № 2</h3>
-                    <p>Тренировочная работа ОГЭ 2025</p>
+                    <p>Тренировочная работа по физике</p>
                 </div>
                 
                 <!-- Карточка 3: Работа №3 -->
                 <div class="file-card" onclick="loadFile('file3')" id="card3">
-                    <div class="file-icon">📙</div>
+                    <div class="file-icon">💡</div>
                     <h3>Работа № 3</h3>
-                    <p>Тренировочная работа ОГЭ 2025</p>
+                    <p>Тренировочная работа по физике</p>
                 </div>
             </div>
             
@@ -254,22 +254,22 @@
     </div>
 
     <script>
-        // !!! ВАШИ ФАЙЛЫ С GOOGLE DRIVE !!!
+        // !!! СЮДА ВСТАВЬТЕ ID ФАЙЛОВ ПОСЛЕ ТОГО, КАК СДЕЛАЕТЕ ИХ ПУБЛИЧНЫМИ !!!
         const files = {
             file1: {
-                id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv',  // Работа №1
-                name: 'Работа № 1 (ОГЭ 2025)',
-                color: '📘'
+                id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv',  // Замените на правильный ID
+                name: 'Физика - Работа №1',
+                icon: '⚡'
             },
             file2: {
-                id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs',  // Работа №2
-                name: 'Работа № 2 (ОГЭ 2025)',
-                color: '📗'
+                id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs',  // Замените на правильный ID
+                name: 'Физика - Работа №2',
+                icon: '🔋'
             },
             file3: {
-                id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J',  // Работа №3
-                name: 'Работа № 3 (ОГЭ 2025)',
-                color: '📙'
+                id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J',  // Замените на правильный ID
+                name: 'Физика - Работа №3',
+                icon: '💡'
             }
         };
         
