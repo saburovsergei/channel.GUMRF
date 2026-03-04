@@ -28,8 +28,8 @@
             border-radius: 20px 20px 0 0;
             padding: 15px 20px;
             display: flex;
-            flex-direction: column;
-            gap: 10px;
+            justify-content: space-between;
+            align-items: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
@@ -56,7 +56,8 @@
         
         .nav-right {
             display: flex;
-            justify-content: center;
+            align-items: center;
+            gap: 15px;
         }
         
         .page-title {
@@ -77,6 +78,28 @@
             padding: 2px 10px;
             border-radius: 30px;
             font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
         }
         
         .content {
@@ -179,8 +202,42 @@
             display: block;
         }
         
-        /* Для очень маленьких экранов */
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .refresh-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+        }
+        
         @media (max-width: 380px) {
+            .example-name {
+                font-size: 1.1em;
+            }
+            
             .action-btn {
                 font-size: 0.85em;
                 padding: 10px 3px;
@@ -190,8 +247,9 @@
                 font-size: 1em;
             }
             
-            .example-name {
-                font-size: 1.1em;
+            .refresh-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
             }
         }
     </style>
@@ -206,102 +264,177 @@
                 <div class="page-title">
                     Физика 🔬 <span>практика</span>
                 </div>
+                <button class="refresh-btn" onclick="forceReloadExamples()">
+                    <span>🔄</span> Обновить
+                </button>
             </div>
         </div>
         
         <div class="content">
-            <div class="examples-list">
-                <!-- Пример A -->
-                <div class="example-item">
-                    <div class="example-header">
-                        <div class="example-name">Пример A</div>
-                        <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleA', this, 'pdf-exampleA', 'viewer-exampleA')">
-                                <span class="btn-icon">📋</span> Задание
-                            </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionA', this, 'pdf-solutionA', 'viewer-solutionA')">
-                                <span class="btn-icon">✅</span> Решение
-                            </button>
-                        </div>
-                    </div>
-                    <div class="pdf-container" id="pdf-exampleA">
-                        <iframe class="pdf-viewer" id="viewer-exampleA" src=""></iframe>
-                    </div>
-                    <div class="pdf-container" id="pdf-solutionA">
-                        <iframe class="pdf-viewer" id="viewer-solutionA" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Пример B -->
-                <div class="example-item">
-                    <div class="example-header">
-                        <div class="example-name">Пример B</div>
-                        <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleB', this, 'pdf-exampleB', 'viewer-exampleB')">
-                                <span class="btn-icon">📋</span> Задание
-                            </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionB', this, 'pdf-solutionB', 'viewer-solutionB')">
-                                <span class="btn-icon">✅</span> Решение
-                            </button>
-                        </div>
-                    </div>
-                    <div class="pdf-container" id="pdf-exampleB">
-                        <iframe class="pdf-viewer" id="viewer-exampleB" src=""></iframe>
-                    </div>
-                    <div class="pdf-container" id="pdf-solutionB">
-                        <iframe class="pdf-viewer" id="viewer-solutionB" src=""></iframe>
-                    </div>
-                </div>
-                
-                <!-- Пример C -->
-                <div class="example-item">
-                    <div class="example-header">
-                        <div class="example-name">Пример C</div>
-                        <div class="example-buttons">
-                            <button class="action-btn" onclick="togglePDF('exampleC', this, 'pdf-exampleC', 'viewer-exampleC')">
-                                <span class="btn-icon">📋</span> Задание
-                            </button>
-                            <button class="action-btn solution" onclick="togglePDF('solutionC', this, 'pdf-solutionC', 'viewer-solutionC')">
-                                <span class="btn-icon">✅</span> Решение
-                            </button>
-                        </div>
-                    </div>
-                    <div class="pdf-container" id="pdf-exampleC">
-                        <iframe class="pdf-viewer" id="viewer-exampleC" src=""></iframe>
-                    </div>
-                    <div class="pdf-container" id="pdf-solutionC">
-                        <iframe class="pdf-viewer" id="viewer-solutionC" src=""></iframe>
-                    </div>
-                </div>
+            <div id="examples-list-container" class="examples-list">
+                <div class="loading">Загрузка примеров...</div>
             </div>
         </div>
     </div>
 
     <script>
-        // ВАШИ ID ФАЙЛОВ
-        const files = {
-            exampleA: { id: '1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs', name: 'Задание A' },
-            exampleB: { id: '19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv', name: 'Задание B' },
-            exampleC: { id: '18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J', name: 'Задание C' },
-            solutionA: { id: '1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO', name: 'Решение A' },
-            solutionB: { id: '1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD', name: 'Решение B' },
-            solutionC: { id: '14enFT_KXbB0olde8tMkWubr-aH9pvQln', name: 'Решение C' }
-        };
-        
         let currentOpenContainer = null;
         let currentActiveButton = null;
+        let currentCacheBuster = Date.now();
         
-        function togglePDF(fileKey, button, containerId, viewerId) {
-            const fileId = files[fileKey].id;
-            const container = document.getElementById(containerId);
-            const viewer = document.getElementById(viewerId);
+        // Загрузка данных из текстового файла
+        async function loadExamples() {
+            try {
+                const url = `oge_physics_practice_themes.txt?t=${currentCacheBuster}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить файл с примерами');
+                }
+                
+                const text = await response.text();
+                console.log('Загруженные данные практики:', text);
+                
+                const lines = text.trim().split('\n');
+                
+                const examplesData = {};
+                const container = document.getElementById('examples-list-container');
+                container.innerHTML = '';
+                
+                let hasValidLines = false;
+                
+                lines.forEach((line, index) => {
+                    if (!line.trim()) return;
+                    
+                    const [name, taskId, solutionId] = line.split('|');
+                    if (name && taskId && solutionId) {
+                        hasValidLines = true;
+                        const exampleKey = `example${index + 1}`;
+                        
+                        examplesData[`${exampleKey}_task`] = { 
+                            id: taskId.trim(), 
+                            name: `Задание ${name.trim()}` 
+                        };
+                        examplesData[`${exampleKey}_solution`] = { 
+                            id: solutionId.trim(), 
+                            name: `Решение ${name.trim()}` 
+                        };
+                        
+                        // Создаем элемент примера
+                        const exampleElement = createExampleElement(
+                            exampleKey, 
+                            name.trim(),
+                            taskId.trim(),
+                            solutionId.trim()
+                        );
+                        container.appendChild(exampleElement);
+                        
+                        console.log(`Добавлен пример: ${name.trim()}`);
+                    }
+                });
+                
+                // Сохраняем данные в глобальную область
+                window.examplesData = examplesData;
+                
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Файл с примерами пуст или имеет неверный формат</div>';
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки примеров:', error);
+                const container = document.getElementById('examples-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки примеров. Проверьте файл oge_physics_practice_themes.txt<br>${error.message}</div>`;
+            }
+        }
+        
+        // Принудительная перезагрузка
+        function forceReloadExamples() {
+            currentCacheBuster = Date.now();
+            loadExamples();
             
-            if (!fileId) {
-                alert(`Файл не найден`);
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Создание HTML элемента для примера
+        function createExampleElement(exampleKey, exampleName, taskId, solutionId) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'example-item';
+            
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'example-header';
+            
+            headerDiv.innerHTML = `
+                <div class="example-name">${exampleName}</div>
+                <div class="example-buttons">
+                    <button class="action-btn" onclick="togglePDF('${exampleKey}_task', 'pdf-${exampleKey}-task', 'viewer-${exampleKey}-task', this)">
+                        <span class="btn-icon">📋</span> Задание
+                    </button>
+                    <button class="action-btn solution" onclick="togglePDF('${exampleKey}_solution', 'pdf-${exampleKey}-solution', 'viewer-${exampleKey}-solution', this)">
+                        <span class="btn-icon">✅</span> Решение
+                    </button>
+                </div>
+            `;
+            
+            // Создаем два контейнера для PDF (задание и решение)
+            const pdfContainerTask = document.createElement('div');
+            pdfContainerTask.className = 'pdf-container';
+            pdfContainerTask.id = `pdf-${exampleKey}-task`;
+            
+            const pdfViewerTask = document.createElement('iframe');
+            pdfViewerTask.className = 'pdf-viewer';
+            pdfViewerTask.id = `viewer-${exampleKey}-task`;
+            pdfViewerTask.src = '';
+            
+            pdfContainerTask.appendChild(pdfViewerTask);
+            
+            const pdfContainerSolution = document.createElement('div');
+            pdfContainerSolution.className = 'pdf-container';
+            pdfContainerSolution.id = `pdf-${exampleKey}-solution`;
+            
+            const pdfViewerSolution = document.createElement('iframe');
+            pdfViewerSolution.className = 'pdf-viewer';
+            pdfViewerSolution.id = `viewer-${exampleKey}-solution`;
+            pdfViewerSolution.src = '';
+            
+            pdfContainerSolution.appendChild(pdfViewerSolution);
+            
+            itemDiv.appendChild(headerDiv);
+            itemDiv.appendChild(pdfContainerTask);
+            itemDiv.appendChild(pdfContainerSolution);
+            
+            return itemDiv;
+        }
+        
+        // Функция открытия/закрытия PDF
+        function togglePDF(fileKey, containerId, viewerId, button) {
+            const fileData = window.examplesData[fileKey];
+            
+            if (!fileData) {
+                alert(`Данные не найдены`);
                 return;
             }
             
-            // Если нажали на ту же кнопку
+            if (!fileData.id || fileData.id.startsWith('ID_')) {
+                alert(`Файл "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле oge_physics_practice_themes.txt`);
+                return;
+            }
+            
+            const container = document.getElementById(containerId);
+            const viewer = document.getElementById(viewerId);
+            
+            // Если кликнули на ту же кнопку
             if (currentActiveButton === button) {
                 if (currentOpenContainer) {
                     currentOpenContainer.classList.remove('open');
@@ -316,25 +449,33 @@
             if (currentOpenContainer) {
                 currentOpenContainer.classList.remove('open');
             }
-            
-            // Убираем активный класс с предыдущей кнопки
             if (currentActiveButton) {
                 currentActiveButton.classList.remove('active');
             }
             
             // Загружаем и открываем новый
-            viewer.src = `https://drive.google.com/file/d/${fileId}/preview`;
+            viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview`;
             container.classList.add('open');
             button.classList.add('active');
             
             currentOpenContainer = container;
             currentActiveButton = button;
             
-            // Плавно прокручиваем к открытому контейнеру
+            // Плавно прокручиваем
             setTimeout(() => {
                 container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 100);
         }
+        
+        // Загружаем при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadExamples);
+        
+        // При показе из кеша
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                forceReloadExamples();
+            }
+        });
     </script>
 </body>
 </html>
