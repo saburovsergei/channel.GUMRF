@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ОГЭ | Сайт преподавателя</title>
+    <title>ОГЭ | Учебные материалы</title>
     <style>
         * {
             margin: 0;
@@ -71,7 +71,7 @@
         }
         
         .page-title span {
-            background: #e74c3c;
+            background: #e74c3c; /* Красный для ОГЭ */
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -89,9 +89,9 @@
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #e74c3c;
+            border-bottom: 3px solid #e74c3c; /* Красный для ОГЭ */
         }
         
         .materials-grid {
@@ -109,10 +109,13 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
         
         .material-card:hover {
-            border-color: #e74c3c;
+            border-color: #e74c3c; /* Красный при наведении */
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(231, 76, 60, 0.15);
         }
@@ -132,30 +135,12 @@
         .material-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 20px;
+            margin-bottom: 0; /* Убираем отступ снизу */
             line-height: 1.5;
             flex-grow: 1;
         }
         
-        .material-link {
-            display: inline-block;
-            color: #27ae60;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 25px;
-            border: 2px solid #27ae60;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            align-self: center;
-            margin-top: auto;
-            background: white;
-        }
-        
-        .material-link:hover {
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-        }
+        /* Стили для .material-link удалены */
         
         @media (max-width: 600px) {
             .header {
@@ -197,29 +182,26 @@
             <div class="section-title">📚 Учебные материалы</div>
             
             <div class="materials-grid">
-                <!-- Карточка 1: Физика -->
-                <div class="material-card">
+                <!-- Карточка Физика -->
+                <a href="oge_physics.html" class="material-card">
                     <div class="material-icon">⚡</div>
                     <h3>Физика</h3>
                     <p>Лабораторные работы, теория, задачи, подготовка к экспериментальным заданиям</p>
-                    <a href="oge_physics.html" class="material-link">Открыть материалы →</a>
-                </div>
-                            
-                <!-- Карточка 2: Математика -->
-                <div class="material-card">
+                </a>
+                
+                <!-- Карточка Математика -->
+                <a href="oge_math.html" class="material-card">
                     <div class="material-icon">📐</div>
                     <h3>Математика</h3>
                     <p>Алгебра, геометрия, теория вероятностей, разбор заданий 2-й части</p>
-                    <a href="oge_math.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
-                <!-- Карточка 3: Информатика -->
-                <div class="material-card">
+                <!-- Карточка Информатика -->
+                <a href="oge_informatics.html" class="material-card">
                     <div class="material-icon">💻</div>
                     <h3>Информатика</h3>
                     <p>Программирование на Python, алгоритмы, задания по логике и работе с данными</p>
-                    <a href="oge_informatics.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
             </div>
         </div>
     </div>
