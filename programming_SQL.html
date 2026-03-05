@@ -1,1 +1,28 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>SQL | Программирование</title>
+    <!-- Подключаем общий шаблон -->
+    <link rel="stylesheet" href="programming_template.html">
+</head>
+<body>
+    <!-- Весь контент будет загружен из programming_template.html -->
+    <!-- Данные подгрузятся из programming_page_config.txt через programming_loader.js -->
+    
+    <script>
+        fetch('programming_template.html')
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки шаблона:', error);
+                document.body.innerHTML = '<div style="color:red; padding:20px;">Ошибка загрузки шаблона</div>';
+            });
+    </script>
+</body>
+</html>
