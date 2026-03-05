@@ -1,0 +1,42 @@
+# Конфигурация для страниц теории и практики программирования
+# Формат: [Язык] (ST, python, C, Csh, SQL)
+# name=Название языка для отображения
+# icon=Иконка языка
+# mainPage=Главная страница языка (куда ведет кнопка Назад)
+# theoryThemes=Файл с темами для теории
+# practiceThemes=Файл с темами для практики
+
+[ST]
+name=ST (Structured Text)
+icon=🏭
+mainPage=programming_ST.html
+theoryThemes=programming_ST_theory_themes.txt
+practiceThemes=programming_ST_practice_themes.txt
+
+[python]
+name=Python
+icon=🐍
+mainPage=programming_python.html
+theoryThemes=programming_python_theory_themes.txt
+practiceThemes=programming_python_practice_themes.txt
+
+[C]
+name=C (Си)
+icon=⚙️
+mainPage=programming_C.html
+theoryThemes=programming_C_theory_themes.txt
+practiceThemes=programming_C_practice_themes.txt
+
+[Csh]
+name=C# (Си Шарп)
+icon=🎯
+mainPage=programming_Csh.html
+theoryThemes=programming_Csh_theory_themes.txt
+practiceThemes=programming_Csh_practice_themes.txt
+
+[SQL]
+name=SQL
+icon=🗄️
+mainPage=programming_SQL.html
+theoryThemes=programming_SQL_theory_themes.txt
+practiceThemes=programming_SQL_practice_themes.txt
