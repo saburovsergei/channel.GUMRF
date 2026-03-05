@@ -112,6 +112,7 @@
             height: 100%;
             text-decoration: none;
             color: inherit;
+            cursor: pointer;
         }
         
         .discipline-card:hover {
@@ -135,28 +136,12 @@
         .discipline-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 20px;
+            margin-bottom: 0; /* Убираем отступ снизу, так как кнопки больше нет */
             line-height: 1.6;
             flex-grow: 1;
         }
         
-        .card-link {
-            display: inline-block;
-            color: #27ae60;
-            font-weight: 600;
-            padding: 8px 20px;
-            border: 2px solid #27ae60;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            align-self: center;
-            margin-top: auto;
-            background: white;
-        }
-        
-        .discipline-card:hover .card-link {
-            background: #27ae60;
-            color: white;
-        }
+        /* Убираем стили для .card-link, так как их больше нет */
         
         @media (max-width: 768px) {
             .disciplines-grid {
@@ -213,23 +198,20 @@
                     <div class="card-icon">📋</div>
                     <h3>Рабочие программы</h3>
                     <p>Учебные планы, программы дисциплин, календарные графики, методические рекомендации.</p>
-                    <span class="card-link">Перейти к материалам →</span>
                 </a>
                 
                 <!-- Карточка 2: Вопросы к экзаменам -->
                 <a href="gumrf_additional_Exam_Questions.html" class="discipline-card">
                     <div class="card-icon">❓</div>
                     <h3>Вопросы к экзаменам</h3>
-                    <p>Перечны вопросов, билеты, типовые задания, критерии оценки для подготовки.</p>
-                    <span class="card-link">Перейти к материалам →</span>
+                    <p>Перечни вопросов, билеты, типовые задания, критерии оценки для подготовки.</p>
                 </a>
                 
                 <!-- Карточка 3: Статьи -->
                 <a href="gumrf_additional_Articles.html" class="discipline-card">
                     <div class="card-icon">📰</div>
-                    <h3>Публикации</h3>
+                    <h3>Статьи</h3>
                     <p>Научные и методические публикации, полезные материалы по специальности.</p>
-                    <span class="card-link">Перейти к материалам →</span>
                 </a>
                 
                 <!-- Карточка 4: Источники информации -->
@@ -237,7 +219,6 @@
                     <div class="card-icon">🔗</div>
                     <h3>Источники информации</h3>
                     <p>Ссылки на полезные ресурсы, библиотеки, нормативные документы, базы данных.</p>
-                    <span class="card-link">Перейти к материалам →</span>
                 </a>
             </div>
         </div>
