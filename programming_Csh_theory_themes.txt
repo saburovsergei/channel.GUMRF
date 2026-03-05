@@ -1,0 +1,10 @@
+Введение в C# и .NET|ID_CSHARP_THEORY_1
+Типы данных и переменные|ID_CSHARP_THEORY_2
+Классы и объекты|ID_CSHARP_THEORY_3
+Наследование и полиморфизм|ID_CSHARP_THEORY_4
+Интерфейсы и абстрактные классы|ID_CSHARP_THEORY_5
+Коллекции: List, Dictionary|ID_CSHARP_THEORY_6
+Обработка исключений|ID_CSHARP_THEORY_7
+Делегаты и события|ID_CSHARP_THEORY_8
+LINQ и работа с данными|ID_CSHARP_THEORY_9
+Windows Forms и WPF|ID_CSHARP_THEORY_10
