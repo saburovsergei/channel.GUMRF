@@ -4,10 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Рабочие программы | Дополнительная информация</title>
-    <!-- Весь код будет взят из gumrf_additional_template.html -->
+    <script>
+        // Загружаем шаблон
+        fetch('gumrf_additional_template.html')
+            .then(response => response.text())
+            .then(html => {
+                // Вставляем шаблон в документ
+                document.open();
+                document.write(html);
+                document.close();
+                
+                // Меняем заголовок
+                document.title = 'Рабочие программы | Дополнительная информация';
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки шаблона:', error);
+                document.body.innerHTML = '<div style="color: red; padding: 20px;">Ошибка загрузки шаблона</div>';
+            });
+    </script>
 </head>
 <body>
-    <!-- Содержимое будет загружено скриптом из gumrf_additional_template.html -->
-    <!-- Файл с темами: gumrf_additional_Work_programs_themes.txt -->
+    <!-- Содержимое будет загружено из шаблона -->
 </body>
 </html>
