@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>%TITLE% | Дополнительная информация</title>
+    <title>%PAGE_TITLE% | Дополнительная информация</title>
     <style>
         * {
             margin: 0;
@@ -257,8 +257,8 @@
                 <a href="gumrf_additional.html" class="back-btn">← Назад</a>
             </div>
             <div class="nav-right">
-                <div class="page-title">
-                    %ICON% %PAGE_NAME% <span>ГУМРФ</span>
+                <div class="page-title" id="pageTitle">
+                    <!-- Заголовок загрузится из файла -->
                 </div>
                 <button class="refresh-btn" onclick="forceReloadThemes()">
                     <span>🔄</span> Обновить
@@ -268,27 +268,28 @@
         
         <div class="content">
             <div id="theory-list-container" class="theory-list">
-                <div class="loading">%LOADING_TEXT%</div>
+                <div class="loading" id="loadingMessage">Загрузка...</div>
             </div>
         </div>
     </div>
 
     <script>
-        // НАСТРОЙКИ ДЛЯ КАЖДОЙ СТРАНИЦЫ
-        const PAGE_CONFIG = {
-            themesFile: '%THEMES_FILE%',
-            loadingText: '%LOADING_TEXT%',
-            errorPrefix: '%ERROR_PREFIX%'
-        };
+        // Определяем имя конфигурационного файла из URL страницы
+        function getConfigFileName() {
+            const path = window.location.pathname;
+            const fileName = path.split('/').pop(); // получаем имя файла
+            return fileName.replace('.html', '_config.txt'); // gumrf_additional_Work_programs.html -> gumrf_additional_Work_programs_config.txt
+        }
         
         let currentOpenContainer = null;
         let currentActiveHeader = null;
         let currentTopicKey = null;
         let currentCacheBuster = Date.now();
         
-        async function loadThemes() {
+        async function loadPageConfig() {
             try {
-                const url = `${PAGE_CONFIG.themesFile}?t=${currentCacheBuster}`;
+                const configFile = getConfigFileName();
+                const url = `${configFile}?t=${currentCacheBuster}`;
                 
                 const response = await fetch(url, {
                     method: 'GET',
@@ -300,27 +301,37 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`Не удалось загрузить файл ${PAGE_CONFIG.themesFile}`);
+                    throw new Error(`Не удалось загрузить файл конфигурации ${configFile}`);
                 }
                 
                 const text = await response.text();
-                console.log('Загруженные данные:', text);
+                console.log('Загруженная конфигурация:', text);
                 
                 const lines = text.trim().split('\n');
                 
-                const theoryFiles = {};
+                // Первая строка - заголовок страницы
+                if (lines.length > 0) {
+                    const titleLine = lines[0].trim();
+                    if (titleLine) {
+                        document.getElementById('pageTitle').innerHTML = titleLine;
+                    }
+                }
+                
+                // Остальные строки - темы и ID файлов
                 const container = document.getElementById('theory-list-container');
                 container.innerHTML = '';
                 
                 let hasValidLines = false;
+                const theoryFiles = {};
                 
-                lines.forEach((line, index) => {
-                    if (!line.trim()) return;
+                for (let i = 1; i < lines.length; i++) {
+                    const line = lines[i].trim();
+                    if (!line) continue;
                     
                     const [name, id] = line.split('|');
                     if (name && id) {
                         hasValidLines = true;
-                        const topicKey = `topic${index + 1}`;
+                        const topicKey = `topic${i}`;
                         theoryFiles[topicKey] = { 
                             id: id.trim(), 
                             name: name.trim() 
@@ -331,7 +342,7 @@
                         
                         console.log(`Добавлена тема: ${name.trim()} с ID: ${id.trim()}`);
                     }
-                });
+                }
                 
                 window.theoryFiles = theoryFiles;
                 
@@ -340,15 +351,15 @@
                 }
                 
             } catch (error) {
-                console.error('Ошибка загрузки тем:', error);
+                console.error('Ошибка загрузки:', error);
                 const container = document.getElementById('theory-list-container');
-                container.innerHTML = `<div class="error">Ошибка загрузки. Проверьте файл ${PAGE_CONFIG.themesFile}<br>${error.message}</div>`;
+                container.innerHTML = `<div class="error">Ошибка загрузки. Проверьте файл конфигурации.<br>${error.message}</div>`;
             }
         }
         
         function forceReloadThemes() {
             currentCacheBuster = Date.now();
-            loadThemes();
+            loadPageConfig();
             
             const btn = event.currentTarget;
             btn.style.transform = 'scale(0.95)';
@@ -401,7 +412,7 @@
             }
             
             if (!fileData.id || fileData.id.startsWith('ID_')) {
-                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле ${PAGE_CONFIG.themesFile}`);
+                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле конфигурации.`);
                 return;
             }
             
@@ -438,7 +449,7 @@
             }, 100);
         }
         
-        document.addEventListener('DOMContentLoaded', loadThemes);
+        document.addEventListener('DOMContentLoaded', loadPageConfig);
         
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
