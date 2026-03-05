@@ -1,9 +1,5 @@
 📋 Рабочие программы <span>ГУМРФ</span>
-Рабочая программа ФОЭ|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
-Рабочая программа ТОЭ|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
-Рабочая программа Силовая электроника|1Tidpfn8IJcWJvH5YAq6onG87Fxl1xai3
-Рабочая программа Электроснабжение|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
-Рабочая программа МАТЛАБ|ID_ФАЙЛА_5
-Учебный план|ID_ФАЙЛА_6
-Календарный график|ID_ФАЙЛА_7
-Методические рекомендации|ID_ФАЙЛА_8
+ФОЭ|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+ТОЭ|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+Силовая электроника|1Tidpfn8IJcWJvH5YAq6onG87Fxl1xai3
+Электроснабжение и электробезопасность объектов водного транспорта»|1nGufdnXJlsfqz0MCVBJNosKVBe-qXUtM
