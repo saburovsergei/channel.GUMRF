@@ -71,7 +71,7 @@
         }
         
         .page-title span {
-            background: #3498db;
+            background: #3498db; /* Синий для ЕГЭ */
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -91,7 +91,7 @@
             color: #333;
             margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 3px solid #3498db; /* Синий для ЕГЭ */
         }
         
         .materials-grid {
@@ -109,10 +109,13 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
         
         .material-card:hover {
-            border-color: #3498db;
+            border-color: #3498db; /* Синий при наведении */
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(52, 152, 219, 0.15);
         }
@@ -132,30 +135,12 @@
         .material-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 25px;
+            margin-bottom: 0; /* Убираем отступ снизу */
             line-height: 1.6;
             flex-grow: 1;
         }
         
-        .material-link {
-            display: inline-block;
-            color: #27ae60;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 25px;
-            border: 2px solid #27ae60;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            align-self: center;
-            margin-top: auto;
-            background: white;
-        }
-        
-        .material-link:hover {
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-        }
+        /* Стили для .material-link удалены */
         
         @media (max-width: 768px) {
             .materials-grid {
@@ -208,36 +193,32 @@
             
             <div class="materials-grid">
                 <!-- Карточка: Математика (профиль) -->
-                <div class="material-card">
+                <a href="ege_math_profile.html" class="material-card">
                     <div class="material-icon">📐</div>
                     <h3>Математика (профиль)</h3>
                     <p>Задания 2-й части, теория, варианты, разбор сложных задач</p>
-                    <a href="ege_math_profile.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
                 <!-- Карточка: Математика (база) -->
-                <div class="material-card">
+                <a href="ege_math_base.html" class="material-card">
                     <div class="material-icon">🧮</div>
                     <h3>Математика (база)</h3>
                     <p>Тренировочные варианты, разборы, теория вероятностей</p>
-                    <a href="ege_math_base.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
                 <!-- Карточка: Физика -->
-                <div class="material-card">
+                <a href="ege_physics.html" class="material-card">
                     <div class="material-icon">⚡</div>
                     <h3>Физика</h3>
                     <p>Сложные задачи, теория, формулы, подготовка к олимпиадам</p>
-                    <a href="ege_physics.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
                 <!-- Карточка: Информатика -->
-                <div class="material-card">
+                <a href="ege_informatics.html" class="material-card">
                     <div class="material-icon">💻</div>
                     <h3>Информатика</h3>
                     <p>Задания 25-27, алгоритмы, программирование на Python</p>
-                    <a href="ege_informatics.html" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
             </div>
         </div>
     </div>
