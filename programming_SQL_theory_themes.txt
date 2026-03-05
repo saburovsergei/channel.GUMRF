@@ -1,0 +1,10 @@
+Введение в SQL и базы данных|ID_SQL_THEORY_1
+Основы SELECT запросов|ID_SQL_THEORY_2
+Фильтрация данных с WHERE|ID_SQL_THEORY_3
+Сортировка и группировка|ID_SQL_THEORY_4
+Агрегатные функции: COUNT, SUM, AVG|ID_SQL_THEORY_5
+JOIN: INNER, LEFT, RIGHT|ID_SQL_THEORY_6
+Подзапросы|ID_SQL_THEORY_7
+Создание и изменение таблиц|ID_SQL_THEORY_8
+Индексы и оптимизация|ID_SQL_THEORY_9
+Транзакции и целостность данных|ID_SQL_THEORY_10
