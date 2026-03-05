@@ -1,1 +1,10 @@
-
+Введение в Python|ID_PYTHON_THEORY_1
+Переменные и типы данных|ID_PYTHON_THEORY_2
+Строки и работа с ними|ID_PYTHON_THEORY_3
+Списки и кортежи|ID_PYTHON_THEORY_4
+Словари и множества|ID_PYTHON_THEORY_5
+Условные операторы|ID_PYTHON_THEORY_6
+Циклы for и while|ID_PYTHON_THEORY_7
+Функции и lambda-выражения|ID_PYTHON_THEORY_8
+Работа с файлами|ID_PYTHON_THEORY_9
+ООП в Python: классы и объекты|ID_PYTHON_THEORY_10
