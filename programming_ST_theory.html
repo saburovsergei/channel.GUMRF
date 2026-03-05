@@ -4,9 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>ST | Теория</title>
-    <link rel="stylesheet" href="programming_content_template.html">
 </head>
 <body>
-    <script src="programming_content_template.html"></script>
+    <script>
+        // Загружаем шаблон и вставляем его на страницу
+        fetch('programming_content_template.html')
+            .then(response => response.text())
+            .then(html => {
+                // Вставляем HTML в документ
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(error => {
+                console.error('Ошибка загрузки шаблона:', error);
+                document.body.innerHTML = '<div style="color: red; padding: 20px; text-align: center;">Ошибка загрузки шаблона. Пожалуйста, обновите страницу.</div>';
+            });
+    </script>
 </body>
 </html>
