@@ -1,1 +1,54 @@
+# Конфигурация для страниц языков программирования
+# Формат: [имя_файла.html]
+# name=Название языка
+# icon=Иконка для заголовка
+# sectionTitle=Заголовок раздела
+# theoryPage=Страница теории
+# theoryDesc=Описание теории
+# practicePage=Страница практики
+# practiceDesc=Описание практики
 
+[programming_ST.html]
+name=ST (Structured Text)
+icon=🏭
+sectionTitle=Промышленное программирование
+theoryPage=programming_ST_theory.html
+theoryDesc=Язык МЭК 61131-3, синтаксис, алгоритмы для ПЛК
+practicePage=programming_ST_practice.html
+practiceDesc=Примеры программ, задачи автоматизации
+
+[programming_python.html]
+name=Python
+icon=🐍
+sectionTitle=Язык программирования Python
+theoryPage=programming_python_theory.html
+theoryDesc=Основы синтаксиса, структуры данных, функции, ООП
+practicePage=programming_python_practice.html
+practiceDesc=Решение задач, работа с библиотеками
+
+[programming_C.html]
+name=C (Си)
+icon=⚙️
+sectionTitle=Язык программирования C
+theoryPage=programming_C_theory.html
+theoryDesc=Процедурное программирование, указатели, память
+practicePage=programming_C_practice.html
+practiceDesc=Задачи для микроконтроллеров, драйверы
+
+[programming_Csh.html]
+name=C# (Си Шарп)
+icon=🎯
+sectionTitle=Язык программирования C#
+theoryPage=programming_Csh_theory.html
+theoryDesc=ООП, .NET, Windows Forms, WPF
+practicePage=programming_Csh_practice.html
+practiceDesc=Создание приложений, учебные проекты
+
+[programming_SQL.html]
+name=SQL
+icon=🗄️
+sectionTitle=Язык запросов к базам данных
+theoryPage=programming_SQL_theory.html
+theoryDesc=SELECT, JOIN, агрегатные функции, проектирование БД
+practicePage=programming_SQL_practice.html
+practiceDesc=Оптимизация запросов, работа с данными
