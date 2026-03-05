@@ -1,1 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>%LANGUAGE% | Программирование</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+            transform: translateX(-5px);
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .page-title span {
+            background: #f39c12; /* Оранжевый для программирования */
+            color: white;
+            padding: 3px 12px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 30px;
+            margin-top: 2px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f39c12; /* Оранжевый */
+            text-align: center;
+            width: 100%;
+        }
+        
+        .nav-cards {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .nav-card {
+            flex: 1;
+            min-width: 250px;
+            padding: 50px 30px;
+            background: white;
+            border: 3px solid #e0e0e0;
+            border-radius: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-card:hover {
+            transform: translateY(-10px);
+            border-color: #f39c12; /* Оранжевый при наведении */
+            box-shadow: 0 20px 40px rgba(243, 156, 18, 0.2);
+        }
+        
+        .card-icon {
+            font-size: 5em;
+        }
+        
+        .card-title {
+            font-size: 2em;
+            font-weight: 600;
+            color: #f39c12; /* Оранжевый */
+        }
+        
+        .card-desc {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-cards {
+                gap: 20px;
+            }
+            
+            .nav-card {
+                min-width: 200px;
+                padding: 30px 20px;
+            }
+            
+            .card-icon {
+                font-size: 4em;
+            }
+            
+            .card-title {
+                font-size: 1.6em;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="programming.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title" id="pageTitle">
+                    <!-- Заголовок загрузится из конфига -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section-title" id="sectionTitle">
+                <!-- Название раздела загрузится из конфига -->
+            </div>
+            
+            <div class="nav-cards" id="navCards">
+                <!-- Карточки загрузятся из конфига -->
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Функция для получения имени файла конфигурации
+        function getConfigFileName() {
+            return 'programming_page_config.txt';
+        }
+        
+        // Функция для получения имени текущей страницы
+        function getCurrentPage() {
+            const path = window.location.pathname;
+            return path.split('/').pop(); // например, programming_ST.html
+        }
+        
+        async function loadPageConfig() {
+            try {
+                const configFile = getConfigFileName();
+                const url = `${configFile}?t=${Date.now()}`; // Добавляем timestamp для избежания кеширования
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Не удалось загрузить файл конфигурации ${configFile}`);
+                }
+                
+                const text = await response.text();
+                console.log('Загруженная конфигурация:', text);
+                
+                const currentPage = getCurrentPage();
+                let pageConfig = null;
+                
+                // Парсим конфигурационный файл
+                const lines = text.split('\n');
+                let currentSection = null;
+                
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line || line.startsWith('#')) continue; // Пропускаем пустые строки и комментарии
+                    
+                    if (line.startsWith('[') && line.endsWith(']')) {
+                        // Начало новой секции
+                        currentSection = line.substring(1, line.length - 1);
+                    } else if (currentSection === currentPage) {
+                        // Мы в нужной секции
+                        if (!pageConfig) pageConfig = {};
+                        
+                        const [key, value] = line.split('=').map(s => s.trim());
+                        if (key && value) {
+                            pageConfig[key] = value;
+                        }
+                    }
+                }
+                
+                if (!pageConfig) {
+                    throw new Error(`Конфигурация для страницы ${currentPage} не найдена`);
+                }
+                
+                console.log('Конфигурация для страницы:', pageConfig);
+                
+                // Заполняем заголовки
+                document.getElementById('pageTitle').innerHTML = `${pageConfig.icon || '💻'} ${pageConfig.name} <span>программирование</span>`;
+                document.getElementById('sectionTitle').innerHTML = `📚 ${pageConfig.sectionTitle || 'Выберите раздел'}`;
+                
+                // Создаем карточки
+                const navCards = document.getElementById('navCards');
+                navCards.innerHTML = '';
+                
+                // Карточка теории
+                if (pageConfig.theoryPage) {
+                    const theoryCard = document.createElement('a');
+                    theoryCard.href = pageConfig.theoryPage;
+                    theoryCard.className = 'nav-card';
+                    theoryCard.innerHTML = `
+                        <div class="card-icon">📖</div>
+                        <div class="card-title">ТЕОРИЯ</div>
+                        <div class="card-desc">${pageConfig.theoryDesc || 'Основы синтаксиса, структуры данных, функции'}</div>
+                    `;
+                    navCards.appendChild(theoryCard);
+                }
+                
+                // Карточка практики
+                if (pageConfig.practicePage) {
+                    const practiceCard = document.createElement('a');
+                    practiceCard.href = pageConfig.practicePage;
+                    practiceCard.className = 'nav-card';
+                    practiceCard.innerHTML = `
+                        <div class="card-icon">💻</div>
+                        <div class="card-title">ПРАКТИКА</div>
+                        <div class="card-desc">${pageConfig.practiceDesc || 'Примеры кода, задачи, лабораторные работы'}</div>
+                    `;
+                    navCards.appendChild(practiceCard);
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки конфигурации:', error);
+                document.getElementById('navCards').innerHTML = `<div class="error" style="text-align: center; padding: 30px; color: #e74c3c;">Ошибка загрузки конфигурации<br>${error.message}</div>`;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadPageConfig);
+    </script>
+</body>
+</html>
