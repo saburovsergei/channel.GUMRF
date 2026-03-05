@@ -274,11 +274,11 @@
     </div>
 
     <script>
-        // Определяем имя конфигурационного файла из URL страницы
-        function getConfigFileName() {
+        // Функция для получения имени файла с темами из URL страницы
+        function getThemesFileName() {
             const path = window.location.pathname;
-            const fileName = path.split('/').pop(); // получаем имя файла
-            return fileName.replace('.html', '_config.txt'); // gumrf_additional_Work_programs.html -> gumrf_additional_Work_programs_config.txt
+            const fileName = path.split('/').pop(); // получаем имя файла (например, gumrf_additional_Work_programs.html)
+            return fileName.replace('.html', '_themes.txt'); // заменяем .html на _themes.txt
         }
         
         let currentOpenContainer = null;
@@ -286,10 +286,12 @@
         let currentTopicKey = null;
         let currentCacheBuster = Date.now();
         
-        async function loadPageConfig() {
+        async function loadThemes() {
             try {
-                const configFile = getConfigFileName();
-                const url = `${configFile}?t=${currentCacheBuster}`;
+                const themesFile = getThemesFileName();
+                const url = `${themesFile}?t=${currentCacheBuster}`;
+                
+                console.log('Загрузка файла:', themesFile); // Отладка
                 
                 const response = await fetch(url, {
                     method: 'GET',
@@ -301,11 +303,11 @@
                 });
                 
                 if (!response.ok) {
-                    throw new Error(`Не удалось загрузить файл конфигурации ${configFile}`);
+                    throw new Error(`Не удалось загрузить файл ${themesFile}`);
                 }
                 
                 const text = await response.text();
-                console.log('Загруженная конфигурация:', text);
+                console.log('Загруженные данные:', text);
                 
                 const lines = text.trim().split('\n');
                 
@@ -353,13 +355,13 @@
             } catch (error) {
                 console.error('Ошибка загрузки:', error);
                 const container = document.getElementById('theory-list-container');
-                container.innerHTML = `<div class="error">Ошибка загрузки. Проверьте файл конфигурации.<br>${error.message}</div>`;
+                container.innerHTML = `<div class="error">Ошибка загрузки. Проверьте файл ${getThemesFileName()}<br>${error.message}</div>`;
             }
         }
         
         function forceReloadThemes() {
             currentCacheBuster = Date.now();
-            loadPageConfig();
+            loadThemes();
             
             const btn = event.currentTarget;
             btn.style.transform = 'scale(0.95)';
@@ -412,7 +414,7 @@
             }
             
             if (!fileData.id || fileData.id.startsWith('ID_')) {
-                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле конфигурации.`);
+                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле ${getThemesFileName()}`);
                 return;
             }
             
@@ -449,7 +451,7 @@
             }, 100);
         }
         
-        document.addEventListener('DOMContentLoaded', loadPageConfig);
+        document.addEventListener('DOMContentLoaded', loadThemes);
         
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
