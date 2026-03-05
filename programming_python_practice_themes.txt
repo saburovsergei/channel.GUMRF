@@ -1,1 +1,6 @@
-
+Лабораторная работа 1: Основы синтаксиса Python|ID_PYTHON_PRACTICE_1
+Лабораторная работа 2: Работа со списками и словарями|ID_PYTHON_PRACTICE_2
+Лабораторная работа 3: Функции и модули|ID_PYTHON_PRACTICE_3
+Лабораторная работа 4: Работа с файлами|ID_PYTHON_PRACTICE_4
+Лабораторная работа 5: Классы и ООП|ID_PYTHON_PRACTICE_5
+Лабораторная работа 6: Веб-скрапинг с BeautifulSoup|ID_PYTHON_PRACTICE_6
