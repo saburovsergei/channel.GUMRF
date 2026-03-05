@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Программирование | Сайт преподавателя</title>
+    <title>Программирование | Учебные материалы</title>
     <style>
-        /* --- Стили полностью скопированы из gumrf.html --- */
         * {
             margin: 0;
             padding: 0;
@@ -72,7 +71,7 @@
         }
         
         .page-title span {
-            background: #f39c12; /* Немного изменил цвет под тематику */
+            background: #f39c12; /* Оранжевый для программирования */
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -90,18 +89,18 @@
         .section-title {
             font-size: 1.5em;
             color: #333;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #f39c12; /* Цвет под тематику */
+            border-bottom: 3px solid #f39c12; /* Оранжевый */
         }
         
-        .materials-grid {
+        .languages-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 25px;
         }
         
-        .material-card {
+        .language-card {
             padding: 30px 25px;
             border: 2px solid #e0e0e0;
             border-radius: 15px;
@@ -110,56 +109,41 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
         
-        .material-card:hover {
-            border-color: #f39c12; /* Цвет под тематику */
+        .language-card:hover {
+            border-color: #f39c12; /* Оранжевый при наведении */
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(243, 156, 18, 0.15);
         }
         
-        .material-icon {
+        .card-icon {
             font-size: 3.5em;
             margin-bottom: 15px;
         }
         
-        .material-card h3 {
+        .language-card h3 {
             color: #333;
             margin-bottom: 15px;
             font-size: 1.5em;
             font-weight: 600;
         }
         
-        .material-card p {
+        .language-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 25px;
+            margin-bottom: 0; /* Убираем отступ */
             line-height: 1.6;
             flex-grow: 1;
         }
         
-        .material-link {
-            display: inline-block;
-            color: #27ae60;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 10px 25px;
-            border: 2px solid #27ae60;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            align-self: center;
-            margin-top: auto;
-            background: white;
-        }
-        
-        .material-link:hover {
-            background: #27ae60;
-            color: white;
-            text-decoration: none;
-        }
+        /* Стили для .material-link удалены */
         
         @media (max-width: 768px) {
-            .materials-grid {
+            .languages-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
@@ -181,11 +165,11 @@
                 padding: 20px;
             }
             
-            .material-card {
+            .language-card {
                 padding: 25px 20px;
             }
             
-            .material-card h3 {
+            .language-card h3 {
                 font-size: 1.3em;
             }
         }
@@ -205,40 +189,43 @@
         </div>
         
         <div class="content">
-            <div class="section-title">📚 Языки программирования и материалы</div>
+            <div class="section-title">📚 Языки программирования</div>
             
-            <div class="materials-grid">
+            <div class="languages-grid">
                 <!-- Карточка 1: ST (Structured Text) -->
-                <div class="material-card">
-                    <div class="material-icon">🏭</div>
+                <a href="programming_ST.html" class="language-card">
+                    <div class="card-icon">🏭</div>
                     <h3>ST (Structured Text)</h3>
                     <p>Язык программирования промышленных контроллеров (ПЛК) по стандарту МЭК 61131-3. Синтаксис, алгоритмы, примеры для задач автоматизации.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
                 <!-- Карточка 2: Python -->
-                <div class="material-card">
-                    <div class="material-icon">🐍</div>
+                <a href="programming_python.html" class="language-card">
+                    <div class="card-icon">🐍</div>
                     <h3>Python</h3>
                     <p>Основы синтаксиса, структуры данных, функции, ООП. Решение задач, работа с библиотеками, примеры для анализа данных и автоматизации.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
                 <!-- Карточка 3: C (Си) -->
-                <div class="material-card">
-                    <div class="material-icon">⚙️</div>
+                <a href="programming_C.html" class="language-card">
+                    <div class="card-icon">⚙️</div>
                     <h3>C (Си)</h3>
                     <p>Процедурное программирование, указатели, работа с памятью. Основы для микроконтроллеров, системного программирования и драйверов.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
                 
-                <!-- Карточка 4: C# -->
-                <div class="material-card">
-                    <div class="material-icon">🎯</div>
+                <!-- Карточка 4: C# (Си Шарп) -->
+                <a href="programming_Csh.html" class="language-card">
+                    <div class="card-icon">🎯</div>
                     <h3>C# (Си Шарп)</h3>
                     <p>Объектно-ориентированное программирование, .NET, Windows Forms, WPF. Примеры создания приложений, включая учебные и инженерные.</p>
-                    <a href="#" class="material-link">Открыть материалы →</a>
-                </div>
+                </a>
+                
+                <!-- Карточка 5: SQL (НОВАЯ) -->
+                <a href="programming_SQL.html" class="language-card">
+                    <div class="card-icon">🗄️</div>
+                    <h3>SQL</h3>
+                    <p>Язык структурированных запросов для работы с базами данных. SELECT, JOIN, агрегатные функции, проектирование БД, оптимизация запросов.</p>
+                </a>
             </div>
         </div>
     </div>
