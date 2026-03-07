@@ -71,7 +71,7 @@
         }
         
         .page-title span {
-            background: #9b59b6; /* Фиолетовый для ГУМРФ */
+            background: #9b59b6;
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -91,7 +91,7 @@
             color: #333;
             margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #9b59b6; /* Фиолетовый */
+            border-bottom: 3px solid #9b59b6;
             text-align: center;
         }
         
@@ -116,7 +116,7 @@
         }
         
         .discipline-card:hover {
-            border-color: #9b59b6; /* Фиолетовый */
+            border-color: #9b59b6;
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(155, 89, 182, 0.15);
         }
@@ -136,12 +136,10 @@
         .discipline-card p {
             color: #666;
             font-size: 0.95em;
-            margin-bottom: 0; /* Убираем отступ снизу, так как кнопки больше нет */
+            margin-bottom: 0;
             line-height: 1.6;
             flex-grow: 1;
         }
-        
-        /* Убираем стили для .card-link, так как их больше нет */
         
         @media (max-width: 768px) {
             .disciplines-grid {
@@ -219,6 +217,13 @@
                     <div class="card-icon">🔗</div>
                     <h3>Источники информации</h3>
                     <p>Ссылки на полезные ресурсы, библиотеки, нормативные документы, базы данных.</p>
+                </a>
+                
+                <!-- Новая карточка 5: Ссылки скачать -->
+                <a href="gumrf_additional_Download_Links.html" class="discipline-card">
+                    <div class="card-icon">⬇️</div>
+                    <h3>Ссылки скачать</h3>
+                    <p>Прямые ссылки для скачивания учебных пособий, методичек, лабораторных работ и других материалов.</p>
                 </a>
             </div>
         </div>
