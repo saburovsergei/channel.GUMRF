@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Ссылки для скачивания | ГУМРФ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 6px 16px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .page-title span {
+            background: #9b59b6;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 20px 15px;
+            margin-top: 2px;
+        }
+        
+        .download-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .download-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .download-item:hover {
+            border-color: #9b59b6;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.1);
+        }
+        
+        .download-link {
+            padding: 15px 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        
+        .download-link:hover {
+            background: #f3e8ff;
+        }
+        
+        .file-icon {
+            font-size: 2.2em;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .file-info {
+            flex: 1;
+        }
+        
+        .file-name {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .file-description {
+            font-size: 0.95em;
+            color: #666;
+            line-height: 1.4;
+        }
+        
+        .file-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 5px;
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .file-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .download-icon {
+            font-size: 1.5em;
+            color: #27ae60;
+            min-width: 40px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .download-link:hover .download-icon {
+            transform: translateY(3px);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
+        .info-note {
+            background: #e8f0fe;
+            border-left: 4px solid #9b59b6;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            color: #333;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .info-note .icon {
+            font-size: 1.5em;
+        }
+        
+        @media (max-width: 768px) {
+            .download-link {
+                flex-wrap: wrap;
+            }
+            
+            .file-info {
+                width: 100%;
+                order: 2;
+            }
+            
+            .file-icon {
+                order: 1;
+            }
+            
+            .download-icon {
+                order: 3;
+                width: 100%;
+                text-align: right;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="gumrf_additional.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    ⬇️ Ссылки скачать <span>ГУМРФ</span>
+                </div>
+                <button class="refresh-btn" onclick="location.reload()">
+                    <span>🔄</span> Обновить
+                </button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="info-note">
+                <span class="icon">ℹ️</span>
+                <span>Нажмите на любой файл, чтобы начать скачивание. Все материалы доступны в общем доступе.</span>
+            </div>
+            
+            <div id="download-list-container" class="download-list">
+                <div class="loading">Загрузка списка файлов...</div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Функция для загрузки данных из текстового файла
+        async function loadDownloadLinks() {
+            try {
+                const url = `gumrf_additional_Download_Links.txt?t=${Date.now()}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить список файлов');
+                }
+                
+                const text = await response.text();
+                console.log('Загруженные данные:', text);
+                
+                const lines = text.trim().split('\n');
+                
+                const container = document.getElementById('download-list-container');
+                container.innerHTML = '';
+                
+                let hasValidLines = false;
+                
+                lines.forEach((line, index) => {
+                    if (!line.trim() || line.startsWith('#')) return; // Пропускаем пустые строки и комментарии
+                    
+                    // Формат: Название файла | ID файла | Описание | Иконка | Размер | Тип
+                    const parts = line.split('|').map(s => s.trim());
+                    
+                    if (parts.length >= 2) {
+                        hasValidLines = true;
+                        const fileName = parts[0];
+                        const fileId = parts[1];
+                        const description = parts[2] || 'Учебный материал';
+                        const icon = parts[3] || '📄';
+                        const fileSize = parts[4] || '—';
+                        const fileType = parts[5] || 'PDF';
+                        
+                        const itemElement = createDownloadItem(fileName, fileId, description, icon, fileSize, fileType);
+                        container.appendChild(itemElement);
+                    }
+                });
+                
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Список файлов пуст или имеет неверный формат</div>';
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                const container = document.getElementById('download-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки списка файлов. Пожалуйста, проверьте файл gumrf_additional_Download_Links.txt<br>${error.message}</div>`;
+            }
+        }
+        
+        // Функция создания элемента для скачивания
+        function createDownloadItem(fileName, fileId, description, icon, fileSize, fileType) {
+            // Формируем прямую ссылку для скачивания с Google Drive
+            const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'download-item';
+            
+            const linkDiv = document.createElement('a');
+            linkDiv.className = 'download-link';
+            linkDiv.href = downloadUrl;
+            linkDiv.target = '_blank'; // Открываем в новой вкладке
+            linkDiv.rel = 'noopener noreferrer';
+            
+            // Определяем иконку в зависимости от типа файла
+            let typeIcon = '📄';
+            if (fileType.toLowerCase().includes('pdf')) typeIcon = '📕';
+            else if (fileType.toLowerCase().includes('doc')) typeIcon = '📘';
+            else if (fileType.toLowerCase().includes('xls')) typeIcon = '📊';
+            else if (fileType.toLowerCase().includes('ppt')) typeIcon = '📽️';
+            else if (fileType.toLowerCase().includes('zip') || fileType.toLowerCase().includes('rar')) typeIcon = '🗜️';
+            else if (fileType.toLowerCase().includes('jpg') || fileType.toLowerCase().includes('png')) typeIcon = '🖼️';
+            
+            linkDiv.innerHTML = `
+                <div class="file-icon">${icon}</div>
+                <div class="file-info">
+                    <div class="file-name">${fileName}</div>
+                    <div class="file-description">${description}</div>
+                    <div class="file-meta">
+                        <span>📏 ${fileSize}</span>
+                        <span>📋 ${fileType}</span>
+                        <span>🆔 ${fileId.substring(0, 8)}...</span>
+                    </div>
+                </div>
+                <div class="download-icon" title="Скачать файл">⬇️</div>
+            `;
+            
+            itemDiv.appendChild(linkDiv);
+            return itemDiv;
+        }
+        
+        // Загружаем список при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadDownloadLinks);
+        
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                loadDownloadLinks();
+            }
+        });
+    </script>
+</body>
+</html>
