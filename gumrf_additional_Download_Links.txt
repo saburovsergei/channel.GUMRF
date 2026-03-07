@@ -1,1 +1,9 @@
-
+Учебное пособие по ФОЭ|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv|Основы электроники, полупроводники, диоды, транзисторы|📕|2.5 МБ|PDF
+Методичка по ТОЭ|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs|Переходные процессы, расчеты цепей, электрические поля|📘|3.1 МБ|PDF
+Лабораторный практикум Силовая электроника|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J|Схемы, инверторы, преобразователи|📗|4.2 МБ|PDF
+Сборник задач по электроснабжению|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO|Задачи с решениями, варианты|📙|1.8 МБ|PDF
+Программирование в MATLAB|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD|Основы Simulink, примеры кода|📊|5.7 МБ|PDF
+Методические указания к курсовой работе|14enFT_KXbB0olde8tMkWubr-aH9pvQln|Требования, оформление, примеры|📋|1.2 МБ|DOCX
+Презентация лекций по ФОЭ|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv|Слайды к лекциям|📽️|8.3 МБ|PPTX
+Таблицы и справочные данные|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs|Справочник, формулы|📊|0.9 МБ|XLSX
+Архив с примерами программ|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J|Примеры кода на ST и MATLAB|🗜️|12.5 МБ|ZIP
