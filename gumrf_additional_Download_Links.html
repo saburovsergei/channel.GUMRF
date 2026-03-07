@@ -123,6 +123,11 @@
             overflow: hidden;
             border: 1px solid #e0e0e0;
             transition: all 0.3s ease;
+            counter-increment: item;
+        }
+        
+        .download-list {
+            counter-reset: item;
         }
         
         .download-item:hover {
@@ -142,53 +147,39 @@
             text-decoration: none;
             color: inherit;
             width: 100%;
+            position: relative;
         }
         
         .download-link:hover {
             background: #f3e8ff;
         }
         
-        .file-icon {
-            font-size: 2.2em;
+        .item-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #9b59b6;
             min-width: 50px;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .file-icon {
+            font-size: 2em;
+            min-width: 40px;
             text-align: center;
         }
         
-        .file-info {
-            flex: 1;
-        }
-        
         .file-name {
-            font-size: 1.2em;
-            font-weight: 600;
+            flex: 1;
+            font-size: 1.1em;
+            font-weight: 500;
             color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .file-description {
-            font-size: 0.95em;
-            color: #666;
-            line-height: 1.4;
-        }
-        
-        .file-meta {
-            display: flex;
-            gap: 15px;
-            margin-top: 5px;
-            font-size: 0.85em;
-            color: #888;
-        }
-        
-        .file-meta span {
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
         
         .download-icon {
-            font-size: 1.5em;
+            font-size: 1.3em;
             color: #27ae60;
-            min-width: 40px;
+            min-width: 30px;
             text-align: center;
             transition: transform 0.3s ease;
         }
@@ -211,41 +202,43 @@
             font-size: 1.1em;
         }
         
-        .info-note {
-            background: #e8f0fe;
-            border-left: 4px solid #9b59b6;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            color: #333;
-            line-height: 1.5;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .info-note .icon {
-            font-size: 1.5em;
-        }
-        
         @media (max-width: 768px) {
             .download-link {
                 flex-wrap: wrap;
             }
             
-            .file-info {
-                width: 100%;
-                order: 2;
+            .item-number {
+                min-width: 40px;
+                font-size: 1.3em;
             }
             
             .file-icon {
-                order: 1;
+                min-width: 35px;
             }
             
-            .download-icon {
-                order: 3;
-                width: 100%;
-                text-align: right;
+            .file-name {
+                width: calc(100% - 120px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .download-link {
+                gap: 10px;
+            }
+            
+            .item-number {
+                min-width: 30px;
+                font-size: 1.1em;
+            }
+            
+            .file-icon {
+                min-width: 30px;
+                font-size: 1.5em;
+            }
+            
+            .file-name {
+                font-size: 1em;
+                width: calc(100% - 90px);
             }
         }
     </style>
@@ -267,11 +260,6 @@
         </div>
         
         <div class="content">
-            <div class="info-note">
-                <span class="icon">ℹ️</span>
-                <span>Нажмите на любой файл, чтобы начать скачивание. Все материалы доступны в общем доступе.</span>
-            </div>
-            
             <div id="download-list-container" class="download-list">
                 <div class="loading">Загрузка списка файлов...</div>
             </div>
@@ -306,24 +294,22 @@
                 container.innerHTML = '';
                 
                 let hasValidLines = false;
+                let itemNumber = 1;
                 
-                lines.forEach((line, index) => {
+                lines.forEach((line) => {
                     if (!line.trim() || line.startsWith('#')) return; // Пропускаем пустые строки и комментарии
                     
-                    // Формат: Название файла | ID файла | Описание | Иконка | Размер | Тип
+                    // Формат: Название | ID файла
                     const parts = line.split('|').map(s => s.trim());
                     
                     if (parts.length >= 2) {
                         hasValidLines = true;
                         const fileName = parts[0];
                         const fileId = parts[1];
-                        const description = parts[2] || 'Учебный материал';
-                        const icon = parts[3] || '📄';
-                        const fileSize = parts[4] || '—';
-                        const fileType = parts[5] || 'PDF';
                         
-                        const itemElement = createDownloadItem(fileName, fileId, description, icon, fileSize, fileType);
+                        const itemElement = createDownloadItem(fileName, fileId, itemNumber);
                         container.appendChild(itemElement);
+                        itemNumber++;
                     }
                 });
                 
@@ -339,9 +325,19 @@
         }
         
         // Функция создания элемента для скачивания
-        function createDownloadItem(fileName, fileId, description, icon, fileSize, fileType) {
+        function createDownloadItem(fileName, fileId, number) {
             // Формируем прямую ссылку для скачивания с Google Drive
             const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            // Определяем иконку по расширению файла (если есть)
+            let icon = '📄';
+            const lowerName = fileName.toLowerCase();
+            if (lowerName.includes('pdf')) icon = '📕';
+            else if (lowerName.includes('doc')) icon = '📘';
+            else if (lowerName.includes('xls')) icon = '📊';
+            else if (lowerName.includes('ppt')) icon = '📽️';
+            else if (lowerName.includes('zip') || lowerName.includes('rar')) icon = '🗜️';
+            else if (lowerName.includes('jpg') || lowerName.includes('png')) icon = '🖼️';
             
             const itemDiv = document.createElement('div');
             itemDiv.className = 'download-item';
@@ -349,29 +345,13 @@
             const linkDiv = document.createElement('a');
             linkDiv.className = 'download-link';
             linkDiv.href = downloadUrl;
-            linkDiv.target = '_blank'; // Открываем в новой вкладке
+            linkDiv.target = '_blank';
             linkDiv.rel = 'noopener noreferrer';
             
-            // Определяем иконку в зависимости от типа файла
-            let typeIcon = '📄';
-            if (fileType.toLowerCase().includes('pdf')) typeIcon = '📕';
-            else if (fileType.toLowerCase().includes('doc')) typeIcon = '📘';
-            else if (fileType.toLowerCase().includes('xls')) typeIcon = '📊';
-            else if (fileType.toLowerCase().includes('ppt')) typeIcon = '📽️';
-            else if (fileType.toLowerCase().includes('zip') || fileType.toLowerCase().includes('rar')) typeIcon = '🗜️';
-            else if (fileType.toLowerCase().includes('jpg') || fileType.toLowerCase().includes('png')) typeIcon = '🖼️';
-            
             linkDiv.innerHTML = `
+                <div class="item-number">${number}.</div>
                 <div class="file-icon">${icon}</div>
-                <div class="file-info">
-                    <div class="file-name">${fileName}</div>
-                    <div class="file-description">${description}</div>
-                    <div class="file-meta">
-                        <span>📏 ${fileSize}</span>
-                        <span>📋 ${fileType}</span>
-                        <span>🆔 ${fileId.substring(0, 8)}...</span>
-                    </div>
-                </div>
+                <div class="file-name">${fileName}</div>
                 <div class="download-icon" title="Скачать файл">⬇️</div>
             `;
             
