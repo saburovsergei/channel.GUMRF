@@ -98,6 +98,44 @@
             border: none;
         }
         
+        .button-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: #9b59b6;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .action-button:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.3);
+        }
+        
+        .action-button.secondary {
+            background: #3498db;
+        }
+        
+        .action-button.secondary:hover {
+            background: #2980b9;
+        }
+        
         .loading {
             text-align: center;
             padding: 30px;
@@ -112,15 +150,26 @@
             font-size: 1.1em;
         }
         
-        .info-text {
-            text-align: center;
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
+        .info-box {
+            background: #f0f7ff;
+            border-left: 4px solid #9b59b6;
+            padding: 15px 20px;
+            margin: 20px 0;
             border-radius: 10px;
-            color: #666;
-            font-size: 0.95em;
-            border: 1px solid #e0e0e0;
+            color: #333;
+            line-height: 1.5;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .info-icon {
+            font-size: 1.8em;
+        }
+        
+        .info-text {
+            flex: 1;
         }
         
         @media (max-width: 768px) {
@@ -143,6 +192,20 @@
                 height: 50vh;
                 min-height: 350px;
             }
+            
+            .button-container {
+                flex-direction: column;
+            }
+            
+            .action-button {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .info-box {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -164,42 +227,86 @@
                 <div class="loading">Загрузка презентации...</div>
             </div>
             
-            <div class="info-text">
-                🔧 Если презентация не загружается, убедитесь что файл открыт в общем доступе
+            <div class="button-container" id="button-container" style="display: none;">
+                <!-- Кнопки появятся после загрузки ID -->
+            </div>
+            
+            <div id="info-box" class="info-box" style="display: none;">
+                <span class="info-icon">ℹ️</span>
+                <span class="info-text">В полноэкранном режиме используйте стрелки клавиатуры или кликайте мышью по краям экрана для переключения слайдов.</span>
             </div>
         </div>
     </div>
 
     <script>
-        // ID презентации из Google Drive (нужно заменить на реальный ID)
-        const PRESENTATION_ID = '1Fx3nPDXBq5qbfjswwgdxLM799shx6fTn'; // Сюда вставьте ID вашей презентации
-        #https://docs.google.com/presentation/d/1Fx3nPDXBq5qbfjswwgdxLM799shx6fTn/edit?usp=sharing&ouid=114898922089074890850&rtpof=true&sd=true
-        // Функция для загрузки презентации
-        async function loadPresentation() {
-            const container = document.getElementById('presentation-container');
-            
-            if (!PRESENTATION_ID || PRESENTATION_ID === 'ВАШ_ID_ПРЕЗЕНТАЦИИ') {
-                container.innerHTML = '<div class="error">❌ Не указан ID презентации. Пожалуйста, вставьте ID в код.</div>';
-                return;
+        async function loadPresentationId() {
+            try {
+                const response = await fetch('gumrf_foe_presentation.txt?t=' + Date.now());
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить файл с ID презентации');
+                }
+                
+                const text = await response.text();
+                
+                // Ищем первую непустую строку, не начинающуюся с #
+                const lines = text.split('\n');
+                let presentationId = null;
+                
+                for (let line of lines) {
+                    line = line.trim();
+                    if (line && !line.startsWith('#')) {
+                        presentationId = line;
+                        break;
+                    }
+                }
+                
+                if (!presentationId) {
+                    throw new Error('ID презентации не найден в файле');
+                }
+                
+                console.log('Загружен ID презентации:', presentationId);
+                
+                // Отображаем презентацию
+                const container = document.getElementById('presentation-container');
+                container.innerHTML = `
+                    <iframe 
+                        class="presentation-frame" 
+                        src="https://docs.google.com/presentation/d/e/${presentationId}/embed?start=false&loop=false&delayms=3000" 
+                        allowfullscreen="true" 
+                        mozallowfullscreen="true" 
+                        webkitallowfullscreen="true">
+                    </iframe>
+                `;
+                
+                // Показываем кнопки и информацию
+                document.getElementById('button-container').style.display = 'flex';
+                document.getElementById('info-box').style.display = 'flex';
+                
+                // Добавляем кнопки
+                const buttonContainer = document.getElementById('button-container');
+                buttonContainer.innerHTML = `
+                    <a href="https://docs.google.com/presentation/d/e/${presentationId}/pub?start=false&loop=false&delayms=3000" 
+                       class="action-button" 
+                       target="_blank">
+                        🖥️ Открыть в полноэкранном режиме
+                    </a>
+                    <a href="https://docs.google.com/presentation/d/${presentationId}/edit" 
+                       class="action-button secondary" 
+                       target="_blank">
+                        ✏️ Редактировать презентацию
+                    </a>
+                `;
+                
+            } catch (error) {
+                console.error('Ошибка:', error);
+                const container = document.getElementById('presentation-container');
+                container.innerHTML = `<div class="error">❌ Ошибка загрузки презентации<br>${error.message}</div>`;
             }
-            
-            // Формируем URL для встраивания
-            const embedUrl = `https://docs.google.com/presentation/d/e/${PRESENTATION_ID}/embed`;
-            
-            container.innerHTML = `
-                <iframe 
-                    class="presentation-frame" 
-                    src="${embedUrl}" 
-                    frameborder="0" 
-                    allowfullscreen="true" 
-                    mozallowfullscreen="true" 
-                    webkitallowfullscreen="true">
-                </iframe>
-            `;
         }
         
         // Загружаем презентацию при открытии страницы
-        document.addEventListener('DOMContentLoaded', loadPresentation);
+        document.addEventListener('DOMContentLoaded', loadPresentationId);
     </script>
 </body>
 </html>
