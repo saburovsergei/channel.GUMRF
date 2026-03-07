@@ -66,7 +66,7 @@
         }
         
         .page-title span {
-            background: #9b59b6; /* Фиолетовый для ГУМРФ */
+            background: #9b59b6;
             color: white;
             padding: 3px 12px;
             border-radius: 30px;
@@ -97,18 +97,19 @@
         
         .nav-cards {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
             flex-wrap: wrap;
-            max-width: 800px;
+            max-width: 1000px;
             width: 100%;
         }
         
         .nav-card {
             flex: 1;
             min-width: 250px;
-            padding: 50px 30px;
+            max-width: 300px;
+            padding: 40px 25px;
             background: white;
             border: 3px solid #e0e0e0;
             border-radius: 20px;
@@ -119,7 +120,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
         
         .nav-card:hover {
@@ -129,28 +130,28 @@
         }
         
         .card-icon {
-            font-size: 5em;
+            font-size: 4.5em;
         }
         
         .card-title {
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: 600;
             color: #9b59b6;
         }
         
         .card-desc {
-            font-size: 1.1em;
+            font-size: 1em;
             color: #666;
             line-height: 1.5;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .nav-cards {
                 gap: 20px;
             }
             
             .nav-card {
-                min-width: 200px;
+                min-width: 220px;
                 padding: 30px 20px;
             }
             
@@ -160,6 +161,18 @@
             
             .card-title {
                 font-size: 1.6em;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-cards {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-card {
+                max-width: 350px;
+                width: 100%;
             }
         }
         
@@ -185,7 +198,7 @@
     <div class="container">
         <div class="header">
             <div class="nav-left">
-                <a href="gumrf.html" class="back-btn">← Назад</a>
+                <a href="gumrf_foe.html" class="back-btn">← Назад</a>
             </div>
             <div class="nav-right">
                 <div class="page-title">
@@ -202,14 +215,21 @@
                 <a href="gumrf_foe_theory.html" class="nav-card">
                     <div class="card-icon">📖</div>
                     <div class="card-title">ТЕОРИЯ</div>
-                    <div class="card-desc">Полупроводники, диоды,<br>транзисторы, микросхемы</div>
+                    <div class="card-desc">Полупроводники, диоды, транзисторы, микросхемы</div>
                 </a>
                 
                 <!-- Карточка ПРАКТИКА -->
                 <a href="gumrf_foe_practice.html" class="nav-card">
                     <div class="card-icon">🔬</div>
                     <div class="card-title">ПРАКТИКА</div>
-                    <div class="card-desc">Лабораторные работы,<br>расчеты, схемы</div>
+                    <div class="card-desc">Лабораторные работы, расчеты, схемы</div>
+                </a>
+                
+                <!-- Новая карточка ПРЕЗЕНТАЦИЯ -->
+                <a href="gumrf_foe_presentation.html" class="nav-card">
+                    <div class="card-icon">📽️</div>
+                    <div class="card-title">ПРЕЗЕНТАЦИЯ</div>
+                    <div class="card-desc">Лекции в формате слайдов, наглядные материалы</div>
                 </a>
             </div>
         </div>
