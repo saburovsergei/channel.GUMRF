@@ -1,1 +1,4 @@
+# ID презентации для страницы gumrf_foe_presentation.html
+# Формат: просто ID презентации (одной строкой)
 
+2PACX-1vS_XW04UrNbTc0wJisDVVo2SIanBFE1roQWK1JVhX6ashplpkzzXJxhmHvNK3C9hw
