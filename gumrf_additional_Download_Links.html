@@ -123,11 +123,6 @@
             overflow: hidden;
             border: 1px solid #e0e0e0;
             transition: all 0.3s ease;
-            counter-increment: item;
-        }
-        
-        .download-list {
-            counter-reset: item;
         }
         
         .download-item:hover {
@@ -147,7 +142,6 @@
             text-decoration: none;
             color: inherit;
             width: 100%;
-            position: relative;
         }
         
         .download-link:hover {
@@ -155,37 +149,23 @@
         }
         
         .item-number {
-            font-size: 1.5em;
-            font-weight: 700;
+            font-size: 1.1em;
+            font-weight: 600;
             color: #9b59b6;
-            min-width: 50px;
-            text-align: center;
-            opacity: 0.7;
-        }
-        
-        .file-icon {
-            font-size: 2em;
             min-width: 40px;
-            text-align: center;
         }
         
         .file-name {
             flex: 1;
             font-size: 1.1em;
-            font-weight: 500;
             color: #333;
         }
         
         .download-icon {
-            font-size: 1.3em;
+            font-size: 1.2em;
             color: #27ae60;
             min-width: 30px;
             text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .download-link:hover .download-icon {
-            transform: translateY(3px);
         }
         
         .loading {
@@ -202,43 +182,24 @@
             font-size: 1.1em;
         }
         
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .download-link {
-                flex-wrap: wrap;
-            }
-            
-            .item-number {
-                min-width: 40px;
-                font-size: 1.3em;
-            }
-            
-            .file-icon {
-                min-width: 35px;
-            }
-            
-            .file-name {
-                width: calc(100% - 120px);
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .download-link {
+                padding: 12px 15px;
                 gap: 10px;
             }
             
             .item-number {
                 min-width: 30px;
-                font-size: 1.1em;
-            }
-            
-            .file-icon {
-                min-width: 30px;
-                font-size: 1.5em;
+                font-size: 1em;
             }
             
             .file-name {
                 font-size: 1em;
-                width: calc(100% - 90px);
+            }
+            
+            .download-icon {
+                font-size: 1.1em;
+                min-width: 25px;
             }
         }
     </style>
@@ -286,7 +247,6 @@
                 }
                 
                 const text = await response.text();
-                console.log('Загруженные данные:', text);
                 
                 const lines = text.trim().split('\n');
                 
@@ -297,9 +257,8 @@
                 let itemNumber = 1;
                 
                 lines.forEach((line) => {
-                    if (!line.trim() || line.startsWith('#')) return; // Пропускаем пустые строки и комментарии
+                    if (!line.trim() || line.startsWith('#')) return;
                     
-                    // Формат: Название | ID файла
                     const parts = line.split('|').map(s => s.trim());
                     
                     if (parts.length >= 2) {
@@ -326,18 +285,7 @@
         
         // Функция создания элемента для скачивания
         function createDownloadItem(fileName, fileId, number) {
-            // Формируем прямую ссылку для скачивания с Google Drive
             const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-            
-            // Определяем иконку по расширению файла (если есть)
-            let icon = '📄';
-            const lowerName = fileName.toLowerCase();
-            if (lowerName.includes('pdf')) icon = '📕';
-            else if (lowerName.includes('doc')) icon = '📘';
-            else if (lowerName.includes('xls')) icon = '📊';
-            else if (lowerName.includes('ppt')) icon = '📽️';
-            else if (lowerName.includes('zip') || lowerName.includes('rar')) icon = '🗜️';
-            else if (lowerName.includes('jpg') || lowerName.includes('png')) icon = '🖼️';
             
             const itemDiv = document.createElement('div');
             itemDiv.className = 'download-item';
@@ -349,17 +297,15 @@
             linkDiv.rel = 'noopener noreferrer';
             
             linkDiv.innerHTML = `
-                <div class="item-number">${number}.</div>
-                <div class="file-icon">${icon}</div>
-                <div class="file-name">${fileName}</div>
-                <div class="download-icon" title="Скачать файл">⬇️</div>
+                <span class="item-number">${number}.</span>
+                <span class="file-name">${fileName}</span>
+                <span class="download-icon">⬇️</span>
             `;
             
             itemDiv.appendChild(linkDiv);
             return itemDiv;
         }
         
-        // Загружаем список при загрузке страницы
         document.addEventListener('DOMContentLoaded', loadDownloadLinks);
         
         window.addEventListener('pageshow', function(event) {
