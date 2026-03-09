@@ -1,1 +1,379 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>АСУ ТП | Видеолекции</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px 20px 0 0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .nav-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        
+        .back-btn:hover {
+            background: #764ba2;
+        }
+        
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            padding: 6px 16px;
+            border-radius: 50px;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        .page-title span {
+            background: #f39c12;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.8em;
+        }
+        
+        .refresh-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .refresh-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        
+        .content {
+            background: white;
+            border-radius: 0 0 20px 20px;
+            padding: 20px 15px;
+            margin-top: 2px;
+        }
+        
+        .video-player-container {
+            width: 100%;
+            margin-bottom: 30px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        
+        .video-player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .video-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        .video-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .video-item:hover {
+            border-color: #f39c12;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(243, 156, 18, 0.1);
+        }
+        
+        .video-link {
+            padding: 15px 20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+        }
+        
+        .video-link:hover {
+            background: #fff3e0;
+        }
+        
+        .item-number {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #f39c12;
+            min-width: 40px;
+        }
+        
+        .video-title {
+            flex: 1;
+            font-size: 1.1em;
+            color: #333;
+        }
+        
+        .play-icon {
+            font-size: 1.2em;
+            color: #f39c12;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 30px;
+            color: #e74c3c;
+            font-size: 1.1em;
+        }
+        
+        @media (max-width: 600px) {
+            .video-link {
+                padding: 12px 15px;
+                gap: 10px;
+            }
+            
+            .item-number {
+                min-width: 30px;
+                font-size: 1em;
+            }
+            
+            .video-title {
+                font-size: 1em;
+            }
+            
+            .play-icon {
+                font-size: 1.1em;
+                min-width: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-left">
+                <a href="programming.html" class="back-btn">← Назад</a>
+            </div>
+            <div class="nav-right">
+                <div class="page-title">
+                    🏭⚙️ АСУ ТП <span>видеолекции</span>
+                </div>
+                <button class="refresh-btn" onclick="location.reload()">
+                    <span>🔄</span> Обновить
+                </button>
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Видеоплеер -->
+            <div class="video-player-container" id="videoPlayerContainer">
+                <iframe class="video-player" id="videoPlayer" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            
+            <!-- Список видео -->
+            <div id="video-list-container" class="video-list">
+                <div class="loading">Загрузка списка видео...</div>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        let currentVideoId = null;
+        
+        async function loadVideoList() {
+            try {
+                const url = `programming_ASU_themes.txt?t=${Date.now()}`;
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache, no-store, must-revalidate',
+                        'Pragma': 'no-cache',
+                        'Expires': '0'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить список видео');
+                }
+                
+                const text = await response.text();
+                
+                const lines = text.trim().split('\n');
+                
+                const container = document.getElementById('video-list-container');
+                container.innerHTML = '';
+                
+                let hasValidLines = false;
+                let videoNumber = 1;
+                
+                lines.forEach((line) => {
+                    if (!line.trim() || line.startsWith('#')) return;
+                    
+                    const parts = line.split('|').map(s => s.trim());
+                    
+                    if (parts.length >= 2) {
+                        hasValidLines = true;
+                        const videoTitle = parts[0];
+                        const videoId = parts[1];
+                        
+                        const itemElement = createVideoItem(videoTitle, videoId, videoNumber);
+                        container.appendChild(itemElement);
+                        videoNumber++;
+                    }
+                });
+                
+                if (!hasValidLines) {
+                    container.innerHTML = '<div class="error">Список видео пуст или имеет неверный формат</div>';
+                }
+                
+                // Автоматически загружаем первое видео
+                if (hasValidLines && lines.length > 0) {
+                    const firstLine = lines[0];
+                    const firstParts = firstLine.split('|').map(s => s.trim());
+                    if (firstParts.length >= 2) {
+                        loadVideo(firstParts[1]);
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Ошибка загрузки:', error);
+                const container = document.getElementById('video-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки списка видео. Проверьте файл programming_ASU_themes.txt<br>${error.message}</div>`;
+            }
+        }
+        
+        function createVideoItem(videoTitle, videoId, number) {
+            const itemDiv = document.createElement('div');
+            itemDiv.className = 'video-item';
+            
+            const linkDiv = document.createElement('a');
+            linkDiv.className = 'video-link';
+            linkDiv.href = '#';
+            linkDiv.onclick = (e) => {
+                e.preventDefault();
+                loadVideo(videoId);
+                return false;
+            };
+            
+            linkDiv.innerHTML = `
+                <span class="item-number">${number}.</span>
+                <span class="video-title">${videoTitle}</span>
+                <span class="play-icon">▶️</span>
+            `;
+            
+            itemDiv.appendChild(linkDiv);
+            return itemDiv;
+        }
+        
+        function loadVideo(videoId) {
+            // Сохраняем текущее видео
+            currentVideoId = videoId;
+            
+            // Обновляем плеер
+            const videoPlayer = document.getElementById('videoPlayer');
+            
+            // Формируем ссылку для встраивания видео с Google Drive
+            // Используем формат для видео с поддержкой звука
+            videoPlayer.src = `https://drive.google.com/file/d/${videoId}/preview`;
+            
+            // Подсвечиваем активное видео в списке
+            document.querySelectorAll('.video-item').forEach(item => {
+                item.style.borderColor = '#e0e0e0';
+            });
+            
+            // Находим и подсвечиваем выбранный элемент
+            const items = document.querySelectorAll('.video-link');
+            for (let item of items) {
+                if (item.querySelector('.video-title').textContent.includes(videoId)) {
+                    item.closest('.video-item').style.borderColor = '#f39c12';
+                    break;
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', loadVideoList);
+        
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                loadVideoList();
+            }
+        });
+    </script>
+</body>
+</html>
