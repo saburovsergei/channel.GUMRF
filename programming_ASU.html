@@ -150,6 +150,11 @@
             box-shadow: 0 10px 25px rgba(243, 156, 18, 0.1);
         }
         
+        .video-item.active {
+            border-color: #f39c12;
+            background: #fff3e0;
+        }
+        
         .video-link {
             padding: 15px 20px;
             background: white;
@@ -161,6 +166,9 @@
             text-decoration: none;
             color: inherit;
             width: 100%;
+            border: none;
+            background: transparent;
+            text-align: left;
         }
         
         .video-link:hover {
@@ -254,6 +262,7 @@
 
     <script>
         let currentVideoId = null;
+        let videoItems = [];
         
         async function loadVideoList() {
             try {
@@ -273,6 +282,7 @@
                 }
                 
                 const text = await response.text();
+                console.log('Загруженные данные:', text);
                 
                 const lines = text.trim().split('\n');
                 
@@ -294,6 +304,7 @@
                         
                         const itemElement = createVideoItem(videoTitle, videoId, videoNumber);
                         container.appendChild(itemElement);
+                        videoItems.push({ id: videoId, element: itemElement });
                         videoNumber++;
                     }
                 });
@@ -322,14 +333,9 @@
             const itemDiv = document.createElement('div');
             itemDiv.className = 'video-item';
             
-            const linkDiv = document.createElement('a');
+            const linkDiv = document.createElement('button');
             linkDiv.className = 'video-link';
-            linkDiv.href = '#';
-            linkDiv.onclick = (e) => {
-                e.preventDefault();
-                loadVideo(videoId);
-                return false;
-            };
+            linkDiv.onclick = () => loadVideo(videoId);
             
             linkDiv.innerHTML = `
                 <span class="item-number">${number}.</span>
@@ -342,31 +348,38 @@
         }
         
         function loadVideo(videoId) {
+            console.log('Загрузка видео с ID:', videoId);
+            
             // Сохраняем текущее видео
             currentVideoId = videoId;
             
-            // Обновляем плеер
+            // Обновляем плеер - используем правильный формат для видео
             const videoPlayer = document.getElementById('videoPlayer');
             
             // Формируем ссылку для встраивания видео с Google Drive
-            // Используем формат для видео с поддержкой звука
-            videoPlayer.src = `https://drive.google.com/file/d/${videoId}/preview`;
+            // Для видео нужен специальный формат
+            const embedUrl = `https://drive.google.com/file/d/${videoId}/preview`;
+            
+            console.log('URL плеера:', embedUrl);
+            videoPlayer.src = embedUrl;
             
             // Подсвечиваем активное видео в списке
             document.querySelectorAll('.video-item').forEach(item => {
-                item.style.borderColor = '#e0e0e0';
+                item.classList.remove('active');
             });
             
             // Находим и подсвечиваем выбранный элемент
-            const items = document.querySelectorAll('.video-link');
+            const items = document.querySelectorAll('.video-item');
             for (let item of items) {
-                if (item.querySelector('.video-title').textContent.includes(videoId)) {
-                    item.closest('.video-item').style.borderColor = '#f39c12';
+                const button = item.querySelector('.video-link');
+                if (button && button.innerHTML.includes(videoId)) {
+                    item.classList.add('active');
                     break;
                 }
             }
         }
         
+        // Загружаем список при загрузке страницы
         document.addEventListener('DOMContentLoaded', loadVideoList);
         
         window.addEventListener('pageshow', function(event) {
