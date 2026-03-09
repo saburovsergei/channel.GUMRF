@@ -15,13 +15,13 @@
 
 
 
-ГОСТ 2.105-95 ЕСКД. Общие требования к текстовым документам|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
-ГОСТ 2.104-2006 ЕСКД. Основные надписи|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs
-ГОСТ 2.301-68 ЕСКД. Форматы|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
-ГОСТ 2.302-68 ЕСКД. Масштабы|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
-ГОСТ 2.303-68 ЕСКД. Линии|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
-ГОСТ 2.304-81 ЕСКД. Шрифты чертежные|14enFT_KXbB0olde8tMkWubr-aH9pvQln
-ГОСТ 2.305-2008 ЕСКД. Изображения - виды, разрезы, сечения|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
-ГОСТ 2.306-68 ЕСКД. Обозначения графических материалов|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs
-ГОСТ 2.307-2011 ЕСКД. Нанесение размеров и предельных отклонений|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
-ГОСТ 2.308-2011 ЕСКД. Указание допусков формы и расположения поверхностей|1nLP1v3VCzaWj3NEEhhVY3MyzI
+# ГОСТ 2.105-95 ЕСКД. Общие требования к текстовым документам|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
+# ГОСТ 2.104-2006 ЕСКД. Основные надписи|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs
+# ГОСТ 2.301-68 ЕСКД. Форматы|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
+# ГОСТ 2.302-68 ЕСКД. Масштабы|1nLP1v3VCzaWj3NEEhhVY3MyzIcsevnoO
+# ГОСТ 2.303-68 ЕСКД. Линии|1LZpvWKo4CeZpdy4S_zUjeP8JHAzc6FmD
+# ГОСТ 2.304-81 ЕСКД. Шрифты чертежные|14enFT_KXbB0olde8tMkWubr-aH9pvQln
+# ГОСТ 2.305-2008 ЕСКД. Изображения - виды, разрезы, сечения|19QOCPFsZgNtxRxESmtKgsi3gOKmPWNUv
+# ГОСТ 2.306-68 ЕСКД. Обозначения графических материалов|1p91Yi0Dh8_19QIuwfs6niz9qV1Vs7gNs
+# ГОСТ 2.307-2011 ЕСКД. Нанесение размеров и предельных отклонений|18a_sA3qhksjKvZ1BlItlqdQjnAHF3K5J
+# ГОСТ 2.308-2011 ЕСКД. Указание допусков формы и расположения поверхностей|1nLP1v3VCzaWj3NEEhhVY3MyzI
