@@ -2,7 +2,7 @@
 # Формат: Название видео | ID файла на Google Drive
 
 Введение в АСУ ТП|1abc123def456ghi789
-SCADA-системы: основы|2def456ghi789jkl012
+SCADA-системы: основы| 1NeKJ-YnRXF_v9JcdwJQSAkvCRZGzbfDM
 Промышленные контроллеры (ПЛК)|3ghi789jkl012mno345
 Датчики в автоматизации|4jkl012mno345pqr678
 Исполнительные механизмы|5mno345pqr678stu901
