@@ -109,7 +109,7 @@
             margin-top: 2px;
         }
         
-        .gost-list {
+        .theory-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
@@ -117,55 +117,78 @@
             margin: 0 auto;
         }
         
-        .gost-item {
+        .theory-item {
             background: #f8f9fa;
             border-radius: 10px;
             overflow: hidden;
             border: 1px solid #e0e0e0;
-            transition: all 0.3s ease;
         }
         
-        .gost-item:hover {
-            border-color: #9b59b6;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.1);
-        }
-        
-        .gost-link {
-            padding: 15px 20px;
+        .theory-header {
+            padding: 12px 15px;
             background: white;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
         }
         
-        .gost-link:hover {
+        .theory-header:hover {
             background: #f3e8ff;
         }
         
-        .item-number {
-            font-size: 1.1em;
-            font-weight: 600;
+        .expand-icon {
+            font-size: 1.2em;
             color: #9b59b6;
-            min-width: 40px;
+            transition: transform 0.3s ease;
+            min-width: 20px;
+            text-align: center;
         }
         
-        .gost-name {
+        .theory-name {
             flex: 1;
             font-size: 1.1em;
+            font-weight: 500;
             color: #333;
         }
         
-        .download-icon {
-            font-size: 1.2em;
-            color: #27ae60;
-            min-width: 30px;
-            text-align: center;
+        .theory-header.active .expand-icon {
+            transform: rotate(90deg);
+        }
+        
+        .pdf-container {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            background: #f8f9fa;
+        }
+        
+        .pdf-container.open {
+            max-height: 85vh;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .pdf-wrapper {
+            width: 100%;
+            height: 85vh;
+            overflow: auto;
+            -webkit-overflow-scrolling: touch;
+            position: relative;
+            background: #f0f0f0;
+        }
+        
+        .pdf-viewer {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-perspective: 1000;
+            perspective: 1000;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
         }
         
         .loading {
@@ -182,24 +205,47 @@
             font-size: 1.1em;
         }
         
-        @media (max-width: 600px) {
-            .gost-link {
-                padding: 12px 15px;
+        @media (max-width: 768px) {
+            .header {
+                flex-wrap: wrap;
                 gap: 10px;
             }
             
-            .item-number {
-                min-width: 30px;
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .refresh-btn {
+                padding: 6px 12px;
+                font-size: 0.85em;
+            }
+            
+            .pdf-container.open {
+                max-height: 80vh;
+            }
+            
+            .pdf-wrapper {
+                height: 80vh;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .theory-name {
                 font-size: 1em;
             }
             
-            .gost-name {
-                font-size: 1em;
+            .theory-header {
+                padding: 10px 12px;
             }
             
-            .download-icon {
-                font-size: 1.1em;
-                min-width: 25px;
+            .refresh-btn {
+                padding: 5px 10px;
+                font-size: 0.8em;
+            }
+            
+            .expand-icon {
+                font-size: 1em;
             }
         }
     </style>
@@ -214,23 +260,28 @@
                 <div class="page-title">
                     📏 ГОСТы <span>ГУМРФ</span>
                 </div>
-                <button class="refresh-btn" onclick="location.reload()">
+                <button class="refresh-btn" onclick="forceReloadThemes()">
                     <span>🔄</span> Обновить
                 </button>
             </div>
         </div>
         
         <div class="content">
-            <div id="gost-list-container" class="gost-list">
-                <div class="loading">Загрузка списка ГОСТов...</div>
+            <div id="theory-list-container" class="theory-list">
+                <div class="loading">Загрузка ГОСТов...</div>
             </div>
         </div>
     </div>
 
     <script>
+        let currentOpenContainer = null;
+        let currentActiveHeader = null;
+        let currentTopicKey = null;
+        let currentCacheBuster = Date.now();
+        
         async function loadGostList() {
             try {
-                const url = `gumrf_additional_GOST.txt?t=${Date.now()}`;
+                const url = `gumrf_additional_GOST.txt?t=${currentCacheBuster}`;
                 
                 const response = await fetch(url, {
                     method: 'GET',
@@ -246,69 +297,145 @@
                 }
                 
                 const text = await response.text();
+                console.log('Загруженные данные:', text);
                 
                 const lines = text.trim().split('\n');
                 
-                const container = document.getElementById('gost-list-container');
+                const gostFiles = {};
+                const container = document.getElementById('theory-list-container');
                 container.innerHTML = '';
                 
                 let hasValidLines = false;
-                let itemNumber = 1;
                 
-                lines.forEach((line) => {
+                lines.forEach((line, index) => {
                     if (!line.trim() || line.startsWith('#')) return;
                     
-                    const parts = line.split('|').map(s => s.trim());
-                    
-                    if (parts.length >= 2) {
+                    const [name, id] = line.split('|').map(s => s.trim());
+                    if (name && id) {
                         hasValidLines = true;
-                        const gostName = parts[0];
-                        const fileId = parts[1];
+                        const topicKey = `gost${index + 1}`;
+                        gostFiles[topicKey] = { 
+                            id: id, 
+                            name: name 
+                        };
                         
-                        const itemElement = createGostItem(gostName, fileId, itemNumber);
-                        container.appendChild(itemElement);
-                        itemNumber++;
+                        const topicElement = createGostElement(topicKey, name);
+                        container.appendChild(topicElement);
+                        
+                        console.log(`Добавлен ГОСТ: ${name} с ID: ${id}`);
                     }
                 });
                 
+                window.gostFiles = gostFiles;
+                
                 if (!hasValidLines) {
-                    container.innerHTML = '<div class="error">Список ГОСТов пуст или имеет неверный формат</div>';
+                    container.innerHTML = '<div class="error">Файл со списком ГОСТов пуст или имеет неверный формат</div>';
                 }
                 
             } catch (error) {
                 console.error('Ошибка загрузки:', error);
-                const container = document.getElementById('gost-list-container');
-                container.innerHTML = `<div class="error">Ошибка загрузки списка ГОСТов. Пожалуйста, проверьте файл gumrf_additional_GOST.txt<br>${error.message}</div>`;
+                const container = document.getElementById('theory-list-container');
+                container.innerHTML = `<div class="error">Ошибка загрузки списка ГОСТов. Проверьте файл gumrf_additional_GOST.txt<br>${error.message}</div>`;
             }
         }
         
-        function createGostItem(gostName, fileId, number) {
-            const downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+        function forceReloadThemes() {
+            currentCacheBuster = Date.now();
+            loadGostList();
             
+            const btn = event.currentTarget;
+            btn.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                btn.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        function createGostElement(topicKey, gostName) {
             const itemDiv = document.createElement('div');
-            itemDiv.className = 'gost-item';
+            itemDiv.className = 'theory-item';
             
-            const linkDiv = document.createElement('a');
-            linkDiv.className = 'gost-link';
-            linkDiv.href = downloadUrl;
-            linkDiv.target = '_blank';
-            linkDiv.rel = 'noopener noreferrer';
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'theory-header';
+            headerDiv.setAttribute('onclick', `toggleGost('${topicKey}', this)`);
             
-            linkDiv.innerHTML = `
-                <span class="item-number">${number}.</span>
-                <span class="gost-name">${gostName}</span>
-                <span class="download-icon">⬇️</span>
+            headerDiv.innerHTML = `
+                <div class="expand-icon">▶</div>
+                <div class="theory-name">${gostName}</div>
             `;
             
-            itemDiv.appendChild(linkDiv);
+            const pdfContainer = document.createElement('div');
+            pdfContainer.className = 'pdf-container';
+            pdfContainer.id = `pdf-${topicKey}`;
+            
+            const pdfWrapper = document.createElement('div');
+            pdfWrapper.className = 'pdf-wrapper';
+            
+            const pdfViewer = document.createElement('iframe');
+            pdfViewer.className = 'pdf-viewer';
+            pdfViewer.id = `viewer-${topicKey}`;
+            pdfViewer.src = '';
+            pdfViewer.setAttribute('seamless', 'seamless');
+            pdfViewer.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-forms allow-popups allow-top-navigation');
+            
+            pdfWrapper.appendChild(pdfViewer);
+            pdfContainer.appendChild(pdfWrapper);
+            itemDiv.appendChild(headerDiv);
+            itemDiv.appendChild(pdfContainer);
+            
             return itemDiv;
+        }
+        
+        function toggleGost(topicKey, header) {
+            const fileData = window.gostFiles[topicKey];
+            
+            if (!fileData) {
+                alert(`Данные для ГОСТа не найдены`);
+                return;
+            }
+            
+            if (!fileData.id || fileData.id.startsWith('ID_')) {
+                alert(`Файл для "${fileData.name}" еще не добавлен. Пожалуйста, укажите ID в файле gumrf_additional_GOST.txt`);
+                return;
+            }
+            
+            const container = document.getElementById(`pdf-${topicKey}`);
+            const viewer = document.getElementById(`viewer-${topicKey}`);
+            
+            if (currentActiveHeader === header && currentTopicKey === topicKey) {
+                container.classList.remove('open');
+                header.classList.remove('active');
+                currentActiveHeader = null;
+                currentOpenContainer = null;
+                currentTopicKey = null;
+                return;
+            }
+            
+            if (currentOpenContainer && currentTopicKey !== topicKey) {
+                currentOpenContainer.classList.remove('open');
+                if (currentActiveHeader) {
+                    currentActiveHeader.classList.remove('active');
+                }
+            }
+            
+            viewer.src = `https://drive.google.com/file/d/${fileData.id}/preview?rm=minimal&embedded=true`;
+            
+            container.classList.add('open');
+            header.classList.add('active');
+            
+            currentOpenContainer = container;
+            currentActiveHeader = header;
+            currentTopicKey = topicKey;
+            
+            setTimeout(() => {
+                container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
         }
         
         document.addEventListener('DOMContentLoaded', loadGostList);
         
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
-                loadGostList();
+                forceReloadThemes();
             }
         });
     </script>
